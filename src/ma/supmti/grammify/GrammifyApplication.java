@@ -1,11 +1,9 @@
 package ma.supmti.grammify;
 
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
 
-import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+
+import ma.supmti.grammify.ui.MainFrame;
 
 
 /**
@@ -20,14 +18,8 @@ import javax.swing.JFrame;
 public class GrammifyApplication {
 	public static void main(String[] args) {
 		
-		// Interface's frame configuration
-		JFrame appFrame = new JFrame(Constants.APP_NAME);
-		appFrame.setIconImage(Constants.img);
-		appFrame.setSize(Constants.FRAME_WIDTH, Constants.FRAME_HEIGHT);
-		appFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		appFrame.setLocationRelativeTo(null);
-		appFrame.setVisible(true);
-		
+		// Run UI
+		SwingUtilities.invokeLater(MainFrame::new);
 
 	}
 
