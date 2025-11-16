@@ -5,7 +5,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 /**
- * jsj
+ * A useful menu bar at the top contains file management items,
+ * text editing items, and more...
  * 
  * @author Akram BELBEKRI
  * 
