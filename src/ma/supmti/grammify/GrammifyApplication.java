@@ -3,6 +3,7 @@ package ma.supmti.grammify;
 
 import javax.swing.SwingUtilities;
 
+import ma.supmti.grammify.grammar.Word;
 import ma.supmti.grammify.ui.MainFrame;
 
 
@@ -18,6 +19,9 @@ import ma.supmti.grammify.ui.MainFrame;
 public class GrammifyApplication {
 	public static void main(String[] args) {
 		
+		// Load dictionary
+		Word.init();
+				
 		// Run UI
 		SwingUtilities.invokeLater(MainFrame::new);
 

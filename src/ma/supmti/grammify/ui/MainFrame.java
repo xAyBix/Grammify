@@ -3,6 +3,7 @@ package ma.supmti.grammify.ui;
 import javax.swing.JFrame;
 
 import ma.supmti.grammify.Constants;
+import ma.supmti.grammify.grammar.Word;
 
 
 /**
@@ -14,7 +15,7 @@ import ma.supmti.grammify.Constants;
  */
 public class MainFrame extends JFrame {
 	public MainFrame() {
-
+		
 		// Interface's frame configuration
 		setTitle(Constants.APP_NAME);
 		setIconImage(Constants.img);
