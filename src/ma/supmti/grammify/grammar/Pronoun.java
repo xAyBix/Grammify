@@ -1,7 +1,7 @@
 package ma.supmti.grammify.grammar;
 
 /**
- * 
+ * Contains the logic of pronouns
  * 
  * 
  * 
