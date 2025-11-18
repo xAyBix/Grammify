@@ -16,6 +16,7 @@ import java.util.List;
 public class Verb1 extends Verb{
 	public static String[] simplePresent = {"e", "es", "e", "ons", "ez", "ent"};
 	public static String[] pastParticipal = {"é", "és", "ée", "ées"};
+	public static String presentParticipal = "ant";
 	private String radical;
 	// Indicates which auxiliaries the verb uses when conjugates
 	private List<Auxiliary> auxiliaries;
