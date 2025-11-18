@@ -8,6 +8,7 @@ import ma.supmti.grammify.ui.MainFrame;
 
 
 /**
+ * Contains main method (Startup of the application)
  * 
  * 
  * @author Akram BELBEKRI
