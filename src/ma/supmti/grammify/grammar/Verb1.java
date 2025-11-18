@@ -15,15 +15,18 @@ import java.util.List;
  */
 public class Verb1 extends Verb{
 	public static String[] simplePresent = {"e", "es", "e", "ons", "ez", "ent"};
-	public static String pastParticipal = "é";
+	public static String[] pastParticipal = {"é", "és", "ée", "ées"};
 	private String radical;
 	// Indicates which auxiliaries the verb uses when conjugates
 	private List<Auxiliary> auxiliaries;
+	// Indicates if the verb can be written as "Je me suis <verb>"
+	private boolean pronominal;
 	
-	public Verb1(String text, List<Auxiliary> auxiliaries) {
+	public Verb1(String text, List<Auxiliary> auxiliaries, boolean pronominal) {
 		super(text, null);
 		
 		this.auxiliaries = auxiliaries;
+		this.pronominal = pronominal;
 		
 		if (text.endsWith("er")) {
 			this.radical = text.substring(0, text.length()-2);
@@ -54,8 +57,21 @@ public class Verb1 extends Verb{
 				}
 			}
 		}
-		words.add(new Verb(radical + pastParticipal, this));
+		for (String pp : pastParticipal)
+		 words.add(new Verb(radical + pp, this));
 	}
+
+	
+	
+	public boolean isPronominal() {
+		return pronominal;
+	}
+
+	public void setPronominal(boolean pronominal) {
+		this.pronominal = pronominal;
+	}
+
+
 
 	public String getRadical() {
 		return radical;

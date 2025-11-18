@@ -73,22 +73,72 @@ public class Word {
 		words.addAll(Arrays.asList(Auxiliary.getEtre().getPresentParticipal()));
 		
 		// 1st group verbs
-		words.add(new Verb1("manger", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()})));
-		words.add(new Verb1("balayer", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()})));
-		words.add(new Verb1("acheter", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()})));
-		words.add(new Verb1("commancer", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()})));
-		words.add(new Verb1("actualiser", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()})));
-		words.add(new Verb1("ramasser", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()})));
-		words.add(new Verb1("contacter", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()})));
+		words.add(new Verb1("penser", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), false));
+		words.add(new Verb1("manger", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), false));
+		words.add(new Verb1("chercher", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), false));
+		words.add(new Verb1("crier", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), false));
+		words.add(new Verb1("danser", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), false));
+		words.add(new Verb1("balayer", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), false));
+		words.add(new Verb1("acheter", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), false));
+		words.add(new Verb1("commancer", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), false));
+		words.add(new Verb1("actualiser", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), false));
+		words.add(new Verb1("ramasser", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), false));
+		words.add(new Verb1("contacter", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), false));
+		words.add(new Verb1("marcher", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), false));
+		words.add(new Verb1("travailler", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), false));
+		words.add(new Verb1("tousser", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), false));
+		words.add(new Verb1("éternuer", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), false));
+		words.add(new Verb1("pleurer", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), false));
+		words.add(new Verb1("neiger", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), false));
+		words.add(new Verb1("grêler", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), false));
+		words.add(new Verb1("venter", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), false));
+		words.add(new Verb1("geler", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), false));
+		words.add(new Verb1("exister", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), false));
+		words.add(new Verb1("régner", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), false));
+		words.add(new Verb1("sembler", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), false));
+		words.add(new Verb1("étudier", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), false));
+		words.add(new Verb1("cuisiner", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), false));
+		words.add(new Verb1("aimer", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), false));
+		words.add(new Verb1("adorer", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), false));
+		words.add(new Verb1("habiter", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), false));
+		words.add(new Verb1("détester", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), false));
+		words.add(new Verb1("rêver", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), false));
+		words.add(new Verb1("nager", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), false));
 		
-		words.add(new Verb1("arrêter", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir(), Auxiliary.getEtre()})));
-		words.add(new Verb1("noyer", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir(), Auxiliary.getEtre()})));
-		words.add(new Verb1("abandonner", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir(), Auxiliary.getEtre()})));
-		words.add(new Verb1("abonner", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir(), Auxiliary.getEtre()})));
-		words.add(new Verb1("adapter", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir(), Auxiliary.getEtre()})));
-		words.add(new Verb1("aimer", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir(), Auxiliary.getEtre()})));
-		words.add(new Verb1("aider", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir(), Auxiliary.getEtre()})));
-		words.add(new Verb1("coucher", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir(), Auxiliary.getEtre()})));
+		words.add(new Verb1("arrêter", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), true));
+		words.add(new Verb1("parler", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), true));
+		words.add(new Verb1("écouter", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), true));
+		words.add(new Verb1("jouer", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), true));
+		words.add(new Verb1("trouver", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), true));
+		words.add(new Verb1("regarder", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), true));
+		words.add(new Verb1("donner", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), true));
+		words.add(new Verb1("laver", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), true));
+		words.add(new Verb1("nettoyer", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), true));
+		words.add(new Verb1("organiser", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), true));
+		words.add(new Verb1("noyer", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), true));
+		words.add(new Verb1("abandonner", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), true));
+		words.add(new Verb1("abonner", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), true));
+		words.add(new Verb1("adapter", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), true));
+		words.add(new Verb1("aider", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), true));
+		words.add(new Verb1("coucher", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), true));
+		words.add(new Verb1("lever", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), true));
+		words.add(new Verb1("réveiller", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), true));
+		words.add(new Verb1("habiller", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), true));
+		words.add(new Verb1("déshabiller", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), true));
+		words.add(new Verb1("brosser", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), true));
+		words.add(new Verb1("rappeler", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), true));
+		words.add(new Verb1("promener", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), true));
+		words.add(new Verb1("dépêcher", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), true));
+		words.add(new Verb1("reposer", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), true));
+		words.add(new Verb1("fâcher", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), true));
+		words.add(new Verb1("tromper", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), true));
+		words.add(new Verb1("intéresser", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), true));
+		words.add(new Verb1("marier", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), true));
+		words.add(new Verb1("amuser", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), true));
+		words.add(new Verb1("préparer", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), true));
+		
+		words.add(new Verb1("arriver", Arrays.asList(new Auxiliary[] {Auxiliary.getEtre()}), false));
+		
 	}
 	
 	// Finding a word saved by the text
