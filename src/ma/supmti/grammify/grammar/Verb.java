@@ -12,10 +12,23 @@ package ma.supmti.grammify.grammar;
  * @since 2025-11-17 03:11
  */
 public class Verb extends Word{
-
-	public Verb(String text) {
+	private Verb infinitive;
+	public Verb(String text, Verb infinitive) {
 		super(text, PartOfSpeech.VERB);
+		if(infinitive == null) {
+			this.infinitive = this;
+		}else {
+			this.infinitive = infinitive;
+		}
 	}
+	
+	public Verb getInfinitive() {
+		return infinitive;
+	}
+	public void setInfinitive(Verb infinitive) {
+		this.infinitive = infinitive;
+	}
+	
 	
 
 }
