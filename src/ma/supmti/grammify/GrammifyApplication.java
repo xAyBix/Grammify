@@ -22,7 +22,7 @@ public class GrammifyApplication {
 		
 		// Load dictionary
 		Word.init();
-		System.out.println("Nombre de mots ajoutes au dictionnaire: " + Word.words.size());
+		System.out.println("Nombre des mots ajoutes au dictionnaire: " + Word.words.size());
 				
 		// Run UI
 		SwingUtilities.invokeLater(MainFrame::new);

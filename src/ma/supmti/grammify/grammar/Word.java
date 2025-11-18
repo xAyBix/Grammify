@@ -29,36 +29,33 @@ public class Word {
 	// A method that initialize words
 	public static final void init () {
 		// Pronouns
-		words.add(new Pronoun("je", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX));
-		words.add(new Pronoun("j'", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX));
-		words.add(new Pronoun("tu", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX));
-		words.add(new Pronoun("il", GrammaticalNumber.SINGULAR, GrammaticalGender.MASCULINE));
-		words.add(new Pronoun("elle", GrammaticalNumber.SINGULAR, GrammaticalGender.FEMININE));
-		words.add(new Pronoun("nous", GrammaticalNumber.PLURAL, GrammaticalGender.UNISEX));
-		words.add(new Pronoun("vous", GrammaticalNumber.PLURAL, GrammaticalGender.UNISEX));
-		words.add(new Pronoun("ils", GrammaticalNumber.PLURAL, GrammaticalGender.MASCULINE));
-		words.add(new Pronoun("elles", GrammaticalNumber.PLURAL, GrammaticalGender.FEMININE));
-		words.add(new Pronoun("me", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX));
-		words.add(new Pronoun("m'", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX));
-		words.add(new Pronoun("te", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX));
-		words.add(new Pronoun("t'", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX));
-		words.add(new Pronoun("se", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX));
-		words.add(new Pronoun("s'", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX));
-		words.add(new Pronoun("mon", GrammaticalNumber.SINGULAR, GrammaticalGender.MASCULINE));
-		words.add(new Pronoun("ma", GrammaticalNumber.SINGULAR, GrammaticalGender.FEMININE));
-		words.add(new Pronoun("ton", GrammaticalNumber.SINGULAR, GrammaticalGender.MASCULINE));
-		words.add(new Pronoun("ta", GrammaticalNumber.SINGULAR, GrammaticalGender.FEMININE));
-		words.add(new Pronoun("son", GrammaticalNumber.SINGULAR, GrammaticalGender.MASCULINE));
-		words.add(new Pronoun("sa", GrammaticalNumber.SINGULAR, GrammaticalGender.FEMININE));
-		words.add(new Pronoun("notre", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX));
-		words.add(new Pronoun("votre", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX));
-		words.add(new Pronoun("leur", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX));
-		words.add(new Pronoun("mes", GrammaticalNumber.PLURAL, GrammaticalGender.UNISEX));
-		words.add(new Pronoun("tes", GrammaticalNumber.PLURAL, GrammaticalGender.UNISEX));
-		words.add(new Pronoun("ses", GrammaticalNumber.PLURAL, GrammaticalGender.UNISEX));
-		words.add(new Pronoun("nos", GrammaticalNumber.PLURAL, GrammaticalGender.UNISEX));
-		words.add(new Pronoun("vos", GrammaticalNumber.PLURAL, GrammaticalGender.UNISEX));
-		words.add(new Pronoun("leurs", GrammaticalNumber.PLURAL, GrammaticalGender.UNISEX));
+		words.add(new Pronoun("je", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, "j"));
+		words.add(new Pronoun("tu", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, null));
+		words.add(new Pronoun("il", GrammaticalNumber.SINGULAR, GrammaticalGender.MASCULINE, null));
+		words.add(new Pronoun("elle", GrammaticalNumber.SINGULAR, GrammaticalGender.FEMININE, null));
+		words.add(new Pronoun("on", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, null));
+		words.add(new Pronoun("nous", GrammaticalNumber.PLURAL, GrammaticalGender.UNISEX, null));
+		words.add(new Pronoun("vous", GrammaticalNumber.PLURAL, GrammaticalGender.UNISEX, null));
+		words.add(new Pronoun("ils", GrammaticalNumber.PLURAL, GrammaticalGender.MASCULINE, null));
+		words.add(new Pronoun("elles", GrammaticalNumber.PLURAL, GrammaticalGender.FEMININE, null));
+		words.add(new Pronoun("me", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, "m"));
+		words.add(new Pronoun("te", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, "t"));
+		words.add(new Pronoun("se", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, "s"));
+		words.add(new Pronoun("mon", GrammaticalNumber.SINGULAR, GrammaticalGender.MASCULINE, null));
+		words.add(new Pronoun("ma", GrammaticalNumber.SINGULAR, GrammaticalGender.FEMININE, null));
+		words.add(new Pronoun("ton", GrammaticalNumber.SINGULAR, GrammaticalGender.MASCULINE, null));
+		words.add(new Pronoun("ta", GrammaticalNumber.SINGULAR, GrammaticalGender.FEMININE, null));
+		words.add(new Pronoun("son", GrammaticalNumber.SINGULAR, GrammaticalGender.MASCULINE, null));
+		words.add(new Pronoun("sa", GrammaticalNumber.SINGULAR, GrammaticalGender.FEMININE, null));
+		words.add(new Pronoun("notre", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, null));
+		words.add(new Pronoun("votre", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, null));
+		words.add(new Pronoun("leur", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, null));
+		words.add(new Pronoun("mes", GrammaticalNumber.PLURAL, GrammaticalGender.UNISEX, null));
+		words.add(new Pronoun("tes", GrammaticalNumber.PLURAL, GrammaticalGender.UNISEX, null));
+		words.add(new Pronoun("ses", GrammaticalNumber.PLURAL, GrammaticalGender.UNISEX, null));
+		words.add(new Pronoun("nos", GrammaticalNumber.PLURAL, GrammaticalGender.UNISEX, null));
+		words.add(new Pronoun("vos", GrammaticalNumber.PLURAL, GrammaticalGender.UNISEX, null));
+		words.add(new Pronoun("leurs", GrammaticalNumber.PLURAL, GrammaticalGender.UNISEX, null));
 		
 		// Auxiliaries (already initialized in Auxialiary class)
 		// Saving Avoir to words
@@ -118,6 +115,9 @@ public class Word {
 		words.add(new Verb1("noyer", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), true));
 		words.add(new Verb1("abandonner", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), true));
 		words.add(new Verb1("abonner", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), true));
+		words.add(new Verb1("annoncer", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), true));
+		words.add(new Verb1("déclarer", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), true));
+		words.add(new Verb1("présenter", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), true));
 		words.add(new Verb1("adapter", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), true));
 		words.add(new Verb1("aider", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), true));
 		words.add(new Verb1("coucher", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), true));
