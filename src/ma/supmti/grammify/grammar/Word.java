@@ -47,8 +47,8 @@ public class Word {
 		words.add(new Pronoun("ta", GrammaticalNumber.SINGULAR, GrammaticalGender.FEMININE, null));
 		words.add(new Pronoun("son", GrammaticalNumber.SINGULAR, GrammaticalGender.MASCULINE, null));
 		words.add(new Pronoun("sa", GrammaticalNumber.SINGULAR, GrammaticalGender.FEMININE, null));
-		words.add(new Pronoun("notre", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, null));
-		words.add(new Pronoun("votre", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, null));
+		words.add(new Pronoun("nôtre", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, null));
+		words.add(new Pronoun("vôtre", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, null));
 		words.add(new Pronoun("leur", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, null));
 		words.add(new Pronoun("mes", GrammaticalNumber.PLURAL, GrammaticalGender.UNISEX, null));
 		words.add(new Pronoun("tes", GrammaticalNumber.PLURAL, GrammaticalGender.UNISEX, null));
@@ -61,11 +61,17 @@ public class Word {
 		// Saving Avoir to words
 		words.add(Auxiliary.getAvoir());
 		words.addAll(Arrays.asList(Auxiliary.getAvoir().getSimplePresent()));
+		words.addAll(Arrays.asList(Auxiliary.getAvoir().getImparfait()));
+		words.addAll(Arrays.asList(Auxiliary.getAvoir().getFutur()));
+		words.addAll(Arrays.asList(Auxiliary.getAvoir().getSimplePast()));
 		words.addAll(Arrays.asList(Auxiliary.getAvoir().getPastParticipal()));
 		words.addAll(Arrays.asList(Auxiliary.getAvoir().getPresentParticipal()));
 		// Saving Etre to words
 		words.add(Auxiliary.getEtre());
 		words.addAll(Arrays.asList(Auxiliary.getEtre().getSimplePresent()));
+		words.addAll(Arrays.asList(Auxiliary.getEtre().getImparfait()));
+		words.addAll(Arrays.asList(Auxiliary.getEtre().getFutur()));
+		words.addAll(Arrays.asList(Auxiliary.getEtre().getSimplePast()));
 		words.addAll(Arrays.asList(Auxiliary.getEtre().getPastParticipal()));
 		words.addAll(Arrays.asList(Auxiliary.getEtre().getPresentParticipal()));
 		
