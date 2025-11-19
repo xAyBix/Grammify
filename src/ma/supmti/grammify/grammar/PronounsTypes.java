@@ -1,6 +1,6 @@
 package ma.supmti.grammify.grammar;
 
-public enum PronounsType {
+public enum PronounsTypes {
 	PERSONAL,
 	POSSESSIVE,
 	DEMONSTRATIVE,
