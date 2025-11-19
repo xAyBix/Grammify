@@ -1,5 +1,8 @@
 package ma.supmti.grammify.grammar;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 
  * 
@@ -12,7 +15,12 @@ package ma.supmti.grammify.grammar;
  * @since 2025-11-17 03:11
  */
 public class Verb extends Word{
+	// Stores all verbs
+	public static List<Verb> verbs = new ArrayList<Verb>();
+	
 	private Verb infinitive;
+	
+	// Constructor
 	public Verb(String text, Verb infinitive) {
 		super(text, PartOfSpeech.VERB);
 		if(infinitive == null) {

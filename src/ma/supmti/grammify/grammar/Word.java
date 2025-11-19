@@ -29,33 +29,59 @@ public class Word {
 	// A method that initialize words
 	public static final void init () {
 		// Pronouns
-		words.add(new Pronoun("je", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, "j"));
-		words.add(new Pronoun("tu", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, null));
-		words.add(new Pronoun("il", GrammaticalNumber.SINGULAR, GrammaticalGender.MASCULINE, null));
-		words.add(new Pronoun("elle", GrammaticalNumber.SINGULAR, GrammaticalGender.FEMININE, null));
-		words.add(new Pronoun("on", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, null));
-		words.add(new Pronoun("nous", GrammaticalNumber.PLURAL, GrammaticalGender.UNISEX, null));
-		words.add(new Pronoun("vous", GrammaticalNumber.PLURAL, GrammaticalGender.UNISEX, null));
-		words.add(new Pronoun("ils", GrammaticalNumber.PLURAL, GrammaticalGender.MASCULINE, null));
-		words.add(new Pronoun("elles", GrammaticalNumber.PLURAL, GrammaticalGender.FEMININE, null));
-		words.add(new Pronoun("me", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, "m"));
-		words.add(new Pronoun("te", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, "t"));
-		words.add(new Pronoun("se", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, "s"));
-		words.add(new Pronoun("mon", GrammaticalNumber.SINGULAR, GrammaticalGender.MASCULINE, null));
-		words.add(new Pronoun("ma", GrammaticalNumber.SINGULAR, GrammaticalGender.FEMININE, null));
-		words.add(new Pronoun("ton", GrammaticalNumber.SINGULAR, GrammaticalGender.MASCULINE, null));
-		words.add(new Pronoun("ta", GrammaticalNumber.SINGULAR, GrammaticalGender.FEMININE, null));
-		words.add(new Pronoun("son", GrammaticalNumber.SINGULAR, GrammaticalGender.MASCULINE, null));
-		words.add(new Pronoun("sa", GrammaticalNumber.SINGULAR, GrammaticalGender.FEMININE, null));
-		words.add(new Pronoun("nôtre", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, null));
-		words.add(new Pronoun("vôtre", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, null));
-		words.add(new Pronoun("leur", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, null));
-		words.add(new Pronoun("mes", GrammaticalNumber.PLURAL, GrammaticalGender.UNISEX, null));
-		words.add(new Pronoun("tes", GrammaticalNumber.PLURAL, GrammaticalGender.UNISEX, null));
-		words.add(new Pronoun("ses", GrammaticalNumber.PLURAL, GrammaticalGender.UNISEX, null));
-		words.add(new Pronoun("nos", GrammaticalNumber.PLURAL, GrammaticalGender.UNISEX, null));
-		words.add(new Pronoun("vos", GrammaticalNumber.PLURAL, GrammaticalGender.UNISEX, null));
-		words.add(new Pronoun("leurs", GrammaticalNumber.PLURAL, GrammaticalGender.UNISEX, null));
+		words.add(new Pronoun("je", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, PronounsTypes.PERSONAL, "j"));
+		words.add(new Pronoun("tu", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, PronounsTypes.PERSONAL, null));
+		words.add(new Pronoun("il", GrammaticalNumber.SINGULAR, GrammaticalGender.MASCULINE, PronounsTypes.PERSONAL, null));
+		words.add(new Pronoun("elle", GrammaticalNumber.SINGULAR, GrammaticalGender.FEMININE, Arrays.asList(new PronounsTypes[] {PronounsTypes.PERSONAL, PronounsTypes.STRESSED}), null));
+		words.add(new Pronoun("on", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, PronounsTypes.PERSONAL, null));
+		words.add(new Pronoun("nous", GrammaticalNumber.PLURAL, GrammaticalGender.UNISEX, Arrays.asList(new PronounsTypes[] {PronounsTypes.PERSONAL, PronounsTypes.REFLEXIVE, PronounsTypes.STRESSED}), null));
+		words.add(new Pronoun("vous", GrammaticalNumber.PLURAL, GrammaticalGender.UNISEX, Arrays.asList(new PronounsTypes[] {PronounsTypes.PERSONAL, PronounsTypes.REFLEXIVE, PronounsTypes.STRESSED}), null));
+		words.add(new Pronoun("ils", GrammaticalNumber.PLURAL, GrammaticalGender.MASCULINE, PronounsTypes.PERSONAL, null));
+		words.add(new Pronoun("elles", GrammaticalNumber.PLURAL, GrammaticalGender.FEMININE, Arrays.asList(new PronounsTypes[] {PronounsTypes.PERSONAL, PronounsTypes.STRESSED}), null));
+		words.add(new Pronoun("me", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, PronounsTypes.REFLEXIVE, "m"));
+		words.add(new Pronoun("te", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, PronounsTypes.REFLEXIVE, "t"));
+		words.add(new Pronoun("se", GrammaticalNumber.BOTH, GrammaticalGender.UNISEX, PronounsTypes.REFLEXIVE, "s"));
+		words.add(new Pronoun("mien", GrammaticalNumber.SINGULAR, GrammaticalGender.MASCULINE, PronounsTypes.POSSESSIVE, null));
+		words.add(new Pronoun("mienne", GrammaticalNumber.SINGULAR, GrammaticalGender.FEMININE, PronounsTypes.POSSESSIVE, null));
+		words.add(new Pronoun("miens", GrammaticalNumber.PLURAL, GrammaticalGender.MASCULINE, PronounsTypes.POSSESSIVE, null));
+		words.add(new Pronoun("miennes", GrammaticalNumber.PLURAL, GrammaticalGender.FEMININE, PronounsTypes.POSSESSIVE, null));
+		words.add(new Pronoun("tien", GrammaticalNumber.SINGULAR, GrammaticalGender.MASCULINE, PronounsTypes.POSSESSIVE, null));
+		words.add(new Pronoun("tienne", GrammaticalNumber.SINGULAR, GrammaticalGender.FEMININE, PronounsTypes.POSSESSIVE, null));
+		words.add(new Pronoun("tiens", GrammaticalNumber.PLURAL, GrammaticalGender.MASCULINE, PronounsTypes.POSSESSIVE, null));
+		words.add(new Pronoun("tiennes", GrammaticalNumber.PLURAL, GrammaticalGender.FEMININE, PronounsTypes.POSSESSIVE, null));
+		words.add(new Pronoun("sien", GrammaticalNumber.SINGULAR, GrammaticalGender.MASCULINE, PronounsTypes.POSSESSIVE, null));
+		words.add(new Pronoun("sienne", GrammaticalNumber.SINGULAR, GrammaticalGender.FEMININE, PronounsTypes.POSSESSIVE, null));
+		words.add(new Pronoun("siens", GrammaticalNumber.PLURAL, GrammaticalGender.MASCULINE, PronounsTypes.POSSESSIVE, null));
+		words.add(new Pronoun("siennes", GrammaticalNumber.PLURAL, GrammaticalGender.FEMININE, PronounsTypes.POSSESSIVE, null));
+		words.add(new Pronoun("nôtre", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, PronounsTypes.POSSESSIVE, null));
+		words.add(new Pronoun("nôtres", GrammaticalNumber.PLURAL, GrammaticalGender.UNISEX, PronounsTypes.POSSESSIVE, null));
+		words.add(new Pronoun("vôtre", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, PronounsTypes.POSSESSIVE, null));
+		words.add(new Pronoun("vôtres", GrammaticalNumber.PLURAL, GrammaticalGender.UNISEX, PronounsTypes.POSSESSIVE, null));
+		words.add(new Pronoun("leur", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, PronounsTypes.POSSESSIVE, null));
+		words.add(new Pronoun("leurs", GrammaticalNumber.PLURAL, GrammaticalGender.UNISEX, PronounsTypes.POSSESSIVE, null));
+		words.add(new Pronoun("celui", GrammaticalNumber.SINGULAR, GrammaticalGender.MASCULINE, PronounsTypes.DEMONSTRATIVE, null));
+		words.add(new Pronoun("celle", GrammaticalNumber.SINGULAR, GrammaticalGender.FEMININE, PronounsTypes.DEMONSTRATIVE, null));
+		words.add(new Pronoun("ceux", GrammaticalNumber.PLURAL, GrammaticalGender.MASCULINE, PronounsTypes.DEMONSTRATIVE, null));
+		words.add(new Pronoun("celles", GrammaticalNumber.PLURAL, GrammaticalGender.FEMININE, PronounsTypes.DEMONSTRATIVE, null));
+		words.add(new Pronoun("ceci", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, PronounsTypes.DEMONSTRATIVE, null));
+		words.add(new Pronoun("cela", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, PronounsTypes.DEMONSTRATIVE, null));
+		words.add(new Pronoun("ça", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, PronounsTypes.DEMONSTRATIVE, null));
+		words.add(new Pronoun("y", GrammaticalNumber.BOTH, GrammaticalGender.UNISEX, PronounsTypes.ADVERBIAL, null));
+		words.add(new Pronoun("qui", GrammaticalNumber.BOTH, GrammaticalGender.UNISEX, Arrays.asList(new PronounsTypes[] {PronounsTypes.RELATIVE, PronounsTypes.INTERROGATIVE}), null));
+		words.add(new Pronoun("que", GrammaticalNumber.BOTH, GrammaticalGender.UNISEX, Arrays.asList(new PronounsTypes[] {PronounsTypes.RELATIVE, PronounsTypes.INTERROGATIVE}), null));
+		words.add(new Pronoun("dont", GrammaticalNumber.BOTH, GrammaticalGender.UNISEX, PronounsTypes.RELATIVE, null));
+		words.add(new Pronoun("où", GrammaticalNumber.BOTH, GrammaticalGender.UNISEX, PronounsTypes.RELATIVE, null));
+		words.add(new Pronoun("quoi", GrammaticalNumber.BOTH, GrammaticalGender.UNISEX, PronounsTypes.INTERROGATIVE, null));
+		words.add(new Pronoun("lequel", GrammaticalNumber.SINGULAR, GrammaticalGender.MASCULINE, PronounsTypes.INTERROGATIVE, null));
+		words.add(new Pronoun("lesquels", GrammaticalNumber.PLURAL, GrammaticalGender.MASCULINE, PronounsTypes.INTERROGATIVE, null));
+		words.add(new Pronoun("laquelle", GrammaticalNumber.SINGULAR, GrammaticalGender.FEMININE, PronounsTypes.INTERROGATIVE, null));
+		words.add(new Pronoun("lesquelles", GrammaticalNumber.PLURAL, GrammaticalGender.FEMININE, PronounsTypes.INTERROGATIVE, null));
+		words.add(new Pronoun("moi", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, PronounsTypes.STRESSED, null));
+		words.add(new Pronoun("toi", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, PronounsTypes.STRESSED, null));
+		words.add(new Pronoun("lui", GrammaticalNumber.SINGULAR, GrammaticalGender.MASCULINE, PronounsTypes.STRESSED, null));
+		words.add(new Pronoun("eux", GrammaticalNumber.PLURAL, GrammaticalGender.MASCULINE, PronounsTypes.STRESSED, null));
+		
+		// Adjectifs
 		
 		// Auxiliaries (already initialized in Auxialiary class)
 		// Saving Avoir to words

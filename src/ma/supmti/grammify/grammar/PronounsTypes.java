@@ -7,7 +7,7 @@ public enum PronounsTypes {
 	RELATIVE,
 	INTERROGATIVE,
 	INDIFINITE,
-	REFLEXIVE,
+	REFLEXIVE, // me, te, se...
 	ADVERBIAL,
 	STRESSED
 }
