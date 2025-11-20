@@ -2,12 +2,11 @@ package ma.supmti.grammify.io;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 
 /**
- * 
+ * Contains all the methods that help manipulating files
  * 
  * 
  * 
@@ -18,15 +17,15 @@ import java.io.FileWriter;
 public final class FileManager {
 
     public static String open(String path) {
-        String text = "";
+        StringBuilder text = new StringBuilder();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(path));
             String line;
             while ((line = reader.readLine()) != null) {
-                text += line;
+                text.append(line);
             }
             reader.close();
-            return text;
+            return text.toString();
         } catch (Exception e) {
         }
         return null;

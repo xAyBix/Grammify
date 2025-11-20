@@ -29,5 +29,7 @@ public class MainFrame extends JFrame {
 		
 		// Add A Menu Bar at top
 		setJMenuBar(new MenuBar());
+		
 	}
+	
 }
