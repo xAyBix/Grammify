@@ -3,10 +3,10 @@ package ma.supmti.grammify.ui;
 import javax.swing.JFrame;
 
 import ma.supmti.grammify.Constants;
-import ma.supmti.grammify.grammar.Word;
 
 
 /**
+ * The main frame that contains the GUI components
  * 
  * 
  * @author Akram BELBEKRI
@@ -14,6 +14,9 @@ import ma.supmti.grammify.grammar.Word;
  * @since 2025-11-16 22:15
  */
 public class MainFrame extends JFrame {
+	
+	private static final long serialVersionUID = 3816958299287539260L;
+
 	public MainFrame() {
 		
 		// Interface's frame configuration

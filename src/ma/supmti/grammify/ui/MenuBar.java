@@ -14,6 +14,8 @@ import javax.swing.JMenuItem;
  */
 public class MenuBar extends JMenuBar{
 	
+	private static final long serialVersionUID = 981151431268931065L;
+	
 	public MenuBar () {
 		add(buildFileMenu());
 		add(buildEditMenu());

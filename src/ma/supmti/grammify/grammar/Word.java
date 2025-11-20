@@ -102,6 +102,7 @@ public class Word {
 		words.addAll(Arrays.asList(Auxiliary.getEtre().getPresentParticipal()));
 		
 		// 1st group verbs
+		words.add(new Verb1("causer", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), false));
 		words.add(new Verb1("penser", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), false));
 		words.add(new Verb1("manger", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), false));
 		words.add(new Verb1("chercher", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), false));
@@ -170,6 +171,52 @@ public class Word {
 		words.add(new Verb1("préparer", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), true));
 		
 		words.add(new Verb1("arriver", Arrays.asList(new Auxiliary[] {Auxiliary.getEtre()}), false));
+		
+		// 2nd group verbs
+		words.add(new Verb1("applaudir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb1("avertir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb1("bâtir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb1("bénir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb1("blanchir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb1("bondir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb1("choisir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb1("définir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb1("désobéir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb1("démolir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb1("dépérir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb1("embellir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb1("envahir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb1("établir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb1("fleurir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb1("franchir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb1("grandir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb1("grossir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb1("haïr", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb1("investir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb1("jaillir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb1("maigrir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb1("mincir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb1("noircir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb1("nourrir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb1("obéir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb1("pâlir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb1("punir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb1("réagir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb1("réfléchir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb1("réjouir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb1("remplir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb1("réussir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb1("rôtir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb1("rougir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb1("saisir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb1("vieillir", Arrays.asList(Auxiliary.getAvoir()), false));
+		
+		words.add(new Verb1("agir", Arrays.asList(Auxiliary.getAvoir()), true));
+		words.add(new Verb1("finir", Arrays.asList(Auxiliary.getAvoir()), true));
+		words.add(new Verb1("guérir", Arrays.asList(Auxiliary.getAvoir()), true));
+		words.add(new Verb1("ralentir", Arrays.asList(Auxiliary.getAvoir()), true));
+		words.add(new Verb1("salir", Arrays.asList(Auxiliary.getAvoir()), true));
+		words.add(new Verb1("trahir", Arrays.asList(Auxiliary.getAvoir()), true));
 		
 	}
 	

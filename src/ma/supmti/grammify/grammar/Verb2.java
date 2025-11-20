@@ -48,9 +48,29 @@ public class Verb2 extends Verb {
 		futur = new Verb[FUTUR_SUFFIXES.length];
 		simplePast = new Verb[SIMPLE_PAST_SUFFIXES.length];
 		pastParticipals = new Verb[PAST_PARTICIPAL_SUFFIXES.length];
-		
+
 		if (text.endsWith("ir")) {
-			this.radical = text.substring(0, text.length()-2);
+			this.radical = text.substring(0, text.length() - 2);
+		}
+		// Initializing simple present, imparfait, futur and simple past
+		if (radical != null) {
+			for (int i = 0; i < SIMPLE_PRESENT_SUFFIXES.length; i++) {
+				simplePresent[i] = new Verb(radical + SIMPLE_PRESENT_SUFFIXES[i], this);
+				imparfait[i] = new Verb(radical + IMPARFAIT_SUFFIXES[i], this);
+				futur[i] = new Verb(radical + FUTUR_SUFFIXES[i], this);
+				simplePast[i] = new Verb(radical + SIMPLE_PAST_SUFFIXES[i], this);
+
+				words.add(simplePresent[i]);
+				words.add(imparfait[i]);
+				words.add(futur[i]);
+				words.add(simplePast[i]);
+			}
+		}
+
+		// Initializing past participal
+		for (int i = 0; i < PAST_PARTICIPAL_SUFFIXES.length; i++) {
+			pastParticipals[i] = new Verb(radical + PAST_PARTICIPAL_SUFFIXES[i], this);
+			words.add(pastParticipals[i]);
 		}
 
 	}
@@ -126,7 +146,5 @@ public class Verb2 extends Verb {
 	public void setPronominal(boolean pronominal) {
 		this.pronominal = pronominal;
 	}
-	
-	
 
 }
