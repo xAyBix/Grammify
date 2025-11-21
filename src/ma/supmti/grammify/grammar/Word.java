@@ -223,7 +223,7 @@ public class Word {
 		
 	}
 	
-	// Finding a word saved by the text
+	// Finding a word saved by text
 	public static Word findByText (String text) {
 		for(Word word : words) {
 			if (word.getText().equals(text))
