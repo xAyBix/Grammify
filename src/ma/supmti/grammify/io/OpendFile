@@ -1,0 +1,6 @@
+public final class  OpendFile{
+    public static File file;
+    public static String path;
+    public static String name;
+    public static String initialText;
+}
