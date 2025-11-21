@@ -30,6 +30,11 @@ public class Verb extends Word{
 		}
 	}
 	
+	// Checks if the verb is infinitive
+	public boolean isInfinitive() {
+		return infinitive == null;
+	}
+	
 	public Verb getInfinitive() {
 		return infinitive;
 	}

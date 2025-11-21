@@ -218,6 +218,9 @@ public class Word {
 		words.add(new Verb1("salir", Arrays.asList(Auxiliary.getAvoir()), true));
 		words.add(new Verb1("trahir", Arrays.asList(Auxiliary.getAvoir()), true));
 		
+		
+		// 3rd group verbs
+		
 	}
 	
 	// Finding a word saved by the text

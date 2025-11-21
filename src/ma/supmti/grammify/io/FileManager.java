@@ -2,8 +2,10 @@ package ma.supmti.grammify.io;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * Contains all the methods that help manipulating files
@@ -16,28 +18,55 @@ import java.io.FileWriter;
  */
 public final class FileManager {
 
-    public static String open(String path) {
+    public static String openFile(String path) {
         StringBuilder text = new StringBuilder();
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(path));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                text.append(line);
-            }
-            reader.close();
-            return text.toString();
-        } catch (Exception e) {
+        	File file = new File (path);
+        	// Check if {file} points to an existing readable file instead of null
+        	if (file != null && file.exists() && file.isFile() && file.canRead()) {
+        		BufferedReader reader = new BufferedReader(new FileReader(file));
+        		String line;
+        		// Reading the first line
+        		if ((line = reader.readLine()) != null) {
+        			text.append(line);
+        		}
+        		// Reading the rest of the file
+        		while ((line = reader.readLine()) != null) {
+        			text.append("\n");
+        			text.append(line);
+        		}
+        		
+        		reader.close();
+
+        		return text.toString();
+        	}else {
+        		throw new IOException("Unable to open the file:\n\"" + path + "\n");
+        	}
+        } catch (IOException e) {
+        	e.printStackTrace();
         }
         return null;
     }
 
-    public static void save(String text, String path) {
+    public static void saveFile(String text, String path) {
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(path));
-            writer.write(text);
-            writer.close();
-        } catch (Exception e) {
+        	File file = new File (path);
+        	if (file != null) {
+        		// Creating the file if it does not exist
+        		if (!file.exists()) {
+        			file.createNewFile();
+        		}
+        		// Writing into the file
+        		if (file.exists() && file.canWrite()) {
+        			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+        			writer.write(text);
+        			writer.close();
+        		}else {
+        			throw new IOException("Unable to save the file:\n\"" + path + "\"");
+        		}
+        	}
+        } catch (IOException e) {
+        	e.printStackTrace();
         }
-
     }
 }

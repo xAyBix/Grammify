@@ -3,7 +3,7 @@ package ma.supmti.grammify.grammar;
 import java.util.List;
 
 /**
- * First Group verbs that end with "ir" and have a simple conjugation. For
+ * Second Group verbs that end with "ir" and have a simple conjugation. For
  * example: "finir", "réfléchir"...
  * 
  * 
