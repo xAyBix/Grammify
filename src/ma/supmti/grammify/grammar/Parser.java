@@ -41,7 +41,7 @@ public final class Parser {
 	 * A method that check converts each String to Word if it was in the dictionary
 	 * {Word.words}
 	 * 
-	 * @param pureTokens is a list of Strings from a text that were tokenized
+	 * @return Map that contains word, state (founded | not founded | ignored), index.
 	 * 
 	 * 
 	 * 

@@ -1,0 +1,14 @@
+package ma.supmti.grammify.grammar;
+
+public enum PunctuationTypes {
+	PERIOD,
+	COMMA,
+	QUESTION_MARK,
+	EXCLAMATION_POINT,
+	APOSTROPHE,
+	COLON,
+	ELLIPSIS,
+	QUOTATION_MARK,
+	LEFT_PARENTHESE,
+	RIGHT_PARENTHESE,
+}

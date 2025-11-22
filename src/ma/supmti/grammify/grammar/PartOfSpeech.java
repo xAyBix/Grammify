@@ -11,5 +11,6 @@ public enum PartOfSpeech {
 	ARTICLE,
 	INTERJECTION,
 	QUESTION_TOOLS,
+	PUNCTUATION
 	
 }

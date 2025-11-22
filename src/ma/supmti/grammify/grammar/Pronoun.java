@@ -19,18 +19,18 @@ public class Pronoun extends Word{
 	public static List<Pronoun> pronouns = new ArrayList<Pronoun>();
 	private GrammaticalNumber grammaticalNumber;
 	private GrammaticalGender grammaticalGender;
-	private List<PronounsTypes> pronounType;
+	private List<PronounTypes> pronounType;
 	// Elided version. ex: je -> j'
 	private Pronoun elision;
 	// Reference to full version if elided
 	private Pronoun full;
 	
 	// Constructor for full versions
-	public Pronoun(String text, GrammaticalNumber grammaticalNumber, GrammaticalGender grammaticalGender, PronounsTypes pronounType, String elision) {
+	public Pronoun(String text, GrammaticalNumber grammaticalNumber, GrammaticalGender grammaticalGender, PronounTypes pronounType, String elision) {
 		super(text, PartOfSpeech.PRONOUN);
 		this.grammaticalNumber = grammaticalNumber;
 		this.grammaticalGender = grammaticalGender;
-		this.pronounType = new ArrayList<PronounsTypes>(Arrays.asList(new PronounsTypes[] {pronounType}));
+		this.pronounType = new ArrayList<PronounTypes>(Arrays.asList(new PronounTypes[] {pronounType}));
 		if (elision != null) {
 			this.elision = new Pronoun (elision, grammaticalNumber, grammaticalGender, pronounType, null, this);
 			words.add(this.elision);
@@ -40,22 +40,22 @@ public class Pronoun extends Word{
 		
 	}
 	// Constructor for elided versions
-	public Pronoun(String text, GrammaticalNumber grammaticalNumber, GrammaticalGender grammaticalGender, PronounsTypes pronounType, String elision, Pronoun full) {
+	public Pronoun(String text, GrammaticalNumber grammaticalNumber, GrammaticalGender grammaticalGender, PronounTypes pronounType, String elision, Pronoun full) {
 		super(text, PartOfSpeech.PRONOUN);
 		this.grammaticalNumber = grammaticalNumber;
 		this.grammaticalGender = grammaticalGender;
-		this.pronounType = new ArrayList<PronounsTypes>(Arrays.asList(new PronounsTypes[] {pronounType}));
+		this.pronounType = new ArrayList<PronounTypes>(Arrays.asList(new PronounTypes[] {pronounType}));
 		this.elision = null;
 		this.full = full;
 		words.add(this.full);
 		pronouns.add(this);
 	}
 	// Constructor for full versions
-		public Pronoun(String text, GrammaticalNumber grammaticalNumber, GrammaticalGender grammaticalGender, List<PronounsTypes> pronounType, String elision) {
+		public Pronoun(String text, GrammaticalNumber grammaticalNumber, GrammaticalGender grammaticalGender, List<PronounTypes> pronounType, String elision) {
 			super(text, PartOfSpeech.PRONOUN);
 			this.grammaticalNumber = grammaticalNumber;
 			this.grammaticalGender = grammaticalGender;
-			this.pronounType = new ArrayList<PronounsTypes>(pronounType);
+			this.pronounType = new ArrayList<PronounTypes>(pronounType);
 			if (elision != null) {
 				this.elision = new Pronoun (elision, grammaticalNumber, grammaticalGender, pronounType, null, this);
 				words.add(this.elision);
@@ -65,11 +65,11 @@ public class Pronoun extends Word{
 			
 		}
 		// Constructor for elided versions
-		public Pronoun(String text, GrammaticalNumber grammaticalNumber, GrammaticalGender grammaticalGender, List<PronounsTypes> pronounType, String elision, Pronoun full) {
+		public Pronoun(String text, GrammaticalNumber grammaticalNumber, GrammaticalGender grammaticalGender, List<PronounTypes> pronounType, String elision, Pronoun full) {
 			super(text, PartOfSpeech.PRONOUN);
 			this.grammaticalNumber = grammaticalNumber;
 			this.grammaticalGender = grammaticalGender;
-			this.pronounType = new ArrayList<PronounsTypes>(pronounType);
+			this.pronounType = new ArrayList<PronounTypes>(pronounType);
 			this.elision = null;
 			this.full = full;
 			words.add(this.full);
@@ -132,11 +132,11 @@ public class Pronoun extends Word{
 		this.full = full;
 	}
 	
-	public List<PronounsTypes> getPronounType() {
+	public List<PronounTypes> getPronounType() {
 		return pronounType;
 	}
 	
-	public void setPronounType(List<PronounsTypes> pronounType) {
+	public void setPronounType(List<PronounTypes> pronounType) {
 		this.pronounType = pronounType;
 	}
 	
