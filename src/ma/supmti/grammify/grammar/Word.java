@@ -224,12 +224,13 @@ public class Word {
 	}
 	
 	// Finding a word saved by text
-	public static Word findByText (String text) {
+	public static List<Word> findByText (String text) {
+		List<Word> wordsFound = new ArrayList<>();
 		for(Word word : words) {
 			if (word.getText().equals(text))
-				return word;
+				wordsFound.add(word);
 		}
-		return null;
+		return wordsFound;
 	}
 	
 	public String getText() {

@@ -12,6 +12,9 @@ import java.io.File;
  * @since 2025-11-21 11:27
  */
 public final class OpenedFile {
+	// A private constructor to avoid instantiation
+	private OpenedFile () {}
+	
 	public static File file;
 	public static String name;
 	public static String path;

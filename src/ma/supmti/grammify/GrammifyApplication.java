@@ -2,7 +2,6 @@ package ma.supmti.grammify;
 
 
 import javax.swing.SwingUtilities;
-
 import ma.supmti.grammify.grammar.Word;
 import ma.supmti.grammify.ui.MainFrame;
 
@@ -18,14 +17,28 @@ import ma.supmti.grammify.ui.MainFrame;
  * @since 2025-11-15 22:30
  */
 public class GrammifyApplication {
+	
+	public static MainFrame mainFrame;
+	
 	public static void main(String[] args) {
 		
 		// Load dictionary
 		Word.init();
 		System.out.println("Nombre des mots ajoutes au dictionnaire: " + Word.words.size());
+		
 				
 		// Run UI
-		SwingUtilities.invokeLater(MainFrame::new);
+		
+		SwingUtilities.invokeLater(new Runnable() {
+		    @Override
+		    public void run() {
+		    	mainFrame = new MainFrame();
+		    }
+		});
+		
+		//Debugging
+		
+		//FileManager.saveFile("hi");
 
 	}
 
