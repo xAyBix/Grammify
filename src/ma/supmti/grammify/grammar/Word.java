@@ -28,6 +28,20 @@ public class Word {
 
 	// A method that initialize words
 	public static final void init () {
+		//Punctuations
+		words.add(new Punctuation(".", PunctuationTypes.PERIOD));
+		words.add(new Punctuation(",", PunctuationTypes.COMMA));
+		words.add(new Punctuation("?", PunctuationTypes.QUESTION_MARK));
+		words.add(new Punctuation("!", PunctuationTypes.EXCLAMATION_POINT));
+		words.add(new Punctuation("(", PunctuationTypes.LEFT_PARENTHESE));
+		words.add(new Punctuation(")", PunctuationTypes.RIGHT_PARENTHESE));
+		words.add(new Punctuation("'", PunctuationTypes.APOSTROPHE));
+		words.add(new Punctuation("...", PunctuationTypes.ELLIPSIS));
+		words.add(new Punctuation("-", PunctuationTypes.HYPHEN));
+		words.add(new Punctuation(":", PunctuationTypes.COLON));
+		words.add(new Punctuation("\"", PunctuationTypes.QUOTATION_MARK));
+		words.add(new Punctuation(" ", PunctuationTypes.WHITE_SPACE));
+		
 		// Pronouns
 		words.add(new Pronoun("je", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, PronounTypes.PERSONAL, "j"));
 		words.add(new Pronoun("tu", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, PronounTypes.PERSONAL, null));

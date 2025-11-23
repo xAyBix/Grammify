@@ -21,6 +21,7 @@ public class Punctuation extends Word{
 	public Punctuation(String text, PunctuationTypes punctuationTypes) {
 		super(text, PartOfSpeech.PUNCTUATION);
 		this.punctuationTypes = punctuationTypes;
+		punctuations.add(this);
 	}
 
 	public PunctuationTypes getPunctuationTypes() {
