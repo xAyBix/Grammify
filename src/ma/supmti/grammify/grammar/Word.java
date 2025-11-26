@@ -41,6 +41,7 @@ public class Word {
 		words.add(new Punctuation(":", PunctuationTypes.COLON));
 		words.add(new Punctuation("\"", PunctuationTypes.QUOTATION_MARK));
 		words.add(new Punctuation(" ", PunctuationTypes.WHITE_SPACE));
+		words.add(new Punctuation(System.lineSeparator(), PunctuationTypes.NEW_LINE));
 		
 		// Pronouns
 		words.add(new Pronoun("je", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, PronounTypes.PERSONAL, "j"));

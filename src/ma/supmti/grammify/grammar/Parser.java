@@ -2,9 +2,10 @@ package ma.supmti.grammify.grammar;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.regex.Pattern;
+
+import ma.supmti.grammify.utils.WordMap;
 
 /**
  * A token parser that converts strings into words
@@ -47,31 +48,23 @@ public final class Parser {
 	 * 
 	 * 
 	 */
-	public static Map<List<Word>, Map<String, Integer>> parse() {
-		Map<List<Word>, Map<String, Integer>> parsedTokens = new HashMap<>();
+	public static List<WordMap> parse() {
+		List<WordMap> parsedTokens = new ArrayList<>();
 		String currentToken;
 
 		if (pureTokens.isEmpty())
 			return null;
 		while (true) {
 			currentToken = peek();
-			if (currentToken.equals(currentToken.toUpperCase())) { // Ignored token because it's written entirely in upper case 
-				parsedTokens.put(Arrays.asList(new Word[] {new Word(currentToken, null)}),
-						new HashMap<String, Integer>(Map.of(
-								"ignored", currentIndex
-								)));
+			if ((Pattern.compile("[a-zA-ZÀ-ÿ]").matcher(currentToken).find() || Pattern.compile("[0-9]+").matcher(currentToken).find()) &&
+					currentToken.equals(currentToken.toUpperCase())) { // Ignored token because it's written entirely in upper case 
+				parsedTokens.add(new WordMap(currentIndex, "ignored", Arrays.asList(new Word[] {new Word(currentToken, null)})));
 			} else {
 				List<Word> wordsFounded = Word.findByText(currentToken);
 				if (wordsFounded.isEmpty()) { // No Equivalent found in the dictionary
-					parsedTokens.put(Arrays.asList(new Word[] {new Word(currentToken, null)}),
-							new HashMap<String, Integer>(Map.of(
-									"not founded", currentIndex
-									)));
+					parsedTokens.add(new WordMap(currentIndex, "not founded", Arrays.asList(new Word[] {new Word(currentToken, null)})));
 				} else { // Token exists in dictionary
-					parsedTokens.put(wordsFounded,
-							new HashMap<String, Integer>(Map.of(
-									"founded", currentIndex
-									)));
+					parsedTokens.add(new WordMap(currentIndex,"founded",wordsFounded));
 				}
 			}
 

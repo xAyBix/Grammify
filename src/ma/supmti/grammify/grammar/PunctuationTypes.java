@@ -12,5 +12,6 @@ public enum PunctuationTypes {
 	LEFT_PARENTHESE,
 	RIGHT_PARENTHESE,
 	HYPHEN,
-	WHITE_SPACE
+	WHITE_SPACE,
+	NEW_LINE
 }
