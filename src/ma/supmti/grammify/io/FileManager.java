@@ -1,14 +1,12 @@
 package ma.supmti.grammify.io;
 
+import java.awt.FileDialog;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
-import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileSystemView;
 
 import ma.supmti.grammify.GrammifyApplication;
 
@@ -28,20 +26,19 @@ public final class FileManager {
 	public static String openFile() {
 		StringBuilder text = new StringBuilder();
 		try {
-			JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView());
+			FileDialog fileDialog = new FileDialog(GrammifyApplication.mainFrame, "Open File", FileDialog.LOAD);
+			fileDialog.setVisible(true);
+			
+			String directory = fileDialog.getDirectory();
+	        String fileName = fileDialog.getFile();
+			
 			File file;
-			int returnValue = fileChooser.showOpenDialog(GrammifyApplication.mainFrame);
-
-			if (returnValue == JFileChooser.APPROVE_OPTION) {
-				fileChooser.setDialogTitle("Open File");
-				fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
-				fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-				file = fileChooser.getSelectedFile();
-				
+			if ((directory != null && !directory.isEmpty()) && (fileName != null && !fileName.isEmpty())) {
+				file = new File(directory, fileName);
 			}else {
 				throw new IOException("Unable to open the file");
 			}
-			file = fileChooser.getSelectedFile();
+
 			// Check if {file} points to an existing readable file instead of null
 			if (file != null && file.exists() && file.isFile() && file.canRead()) {
 				BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -77,28 +74,41 @@ public final class FileManager {
 			File file = OpenedFile.file;
 			if (file == null || !file.exists()) {
 				// Creating the file if it does not exist
-				JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView());
+				FileDialog fileDialog = new FileDialog(GrammifyApplication.mainFrame, "Save File", FileDialog.SAVE);
+				fileDialog.setFile(OpenedFile.name);
+				fileDialog.setVisible(true);
 				if (OpenedFile.path == null || OpenedFile.path.isEmpty()) {
-					int returnValue = fileChooser.showSaveDialog(GrammifyApplication.mainFrame);
-					if (returnValue == JFileChooser.APPROVE_OPTION) {
-						fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-						fileChooser.setDialogTitle("Select File");
-						fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
-						file = fileChooser.getSelectedFile();
-						
+					String directory = fileDialog.getDirectory();
+			        String fileName = fileDialog.getFile();
+			        
+			        if ((directory != null && !directory.isEmpty()) && (fileName != null && !fileName.isEmpty())) {
+						OpenedFile.file = new File(directory, fileName);
+						OpenedFile.initialText = "";
+						OpenedFile.name = fileName;
+						OpenedFile.path = OpenedFile.file.getAbsolutePath();
+						file = OpenedFile.file;
+					}else {
+						throw new IOException("Unable to save the file");
 					}
+			        
 				}else {
 					throw new IOException("Unable to save the file");
 				}
-				file.createNewFile();
+				
+				if (!file.exists())
+					file.createNewFile();
 			}
 			if (file != null) {
 				// Writing into the file
 				if (file.exists() && file.canWrite()) {
-					BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-					writer.write(text);
-					OpenedFile.initialText = text;
-					writer.close();
+					if (!OpenedFile.initialText.equals(text)) {
+						BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+						writer.write(text);
+						OpenedFile.initialText = text;
+						writer.close();
+					} else { // Debugging
+						System.out.println("already saved !!");
+					}
 				} else {
 					throw new IOException("Unable to save the file:\n\"" + OpenedFile.path + "\"");
 				}

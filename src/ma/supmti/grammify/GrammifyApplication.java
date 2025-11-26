@@ -2,9 +2,6 @@ package ma.supmti.grammify;
 
 
 import javax.swing.SwingUtilities;
-
-import ma.supmti.grammify.grammar.Parser;
-import ma.supmti.grammify.grammar.Tokenizer;
 import ma.supmti.grammify.grammar.Word;
 import ma.supmti.grammify.ui.MainFrame;
 
@@ -39,11 +36,11 @@ public class GrammifyApplication {
 		    }
 		});
 		
-		//Debugging
+		// Debugging
 //		Parser.pureTokens = Tokenizer.tokenize("\"j'étudie la biologie, et non la geologie en 2025.\" \r\n-Yor");
 //		System.out.println(Parser.parse());
-		
-		//FileManager.saveFile("hi");
+//		System.out.println(FileManager.openFile());
+//		FileManager.saveFile("hi");
 
 	}
 
