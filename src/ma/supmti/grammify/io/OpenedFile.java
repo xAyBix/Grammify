@@ -1,6 +1,8 @@
 package ma.supmti.grammify.io;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Contains all currently opened file infos needed
@@ -19,4 +21,6 @@ public final class OpenedFile {
 	public static String name;
 	public static String path;
 	public static String initialText;
+	
+	public static List<ma.supmti.grammify.grammar.detection.Error> errors = new ArrayList<>();
 }

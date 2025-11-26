@@ -1,10 +1,11 @@
-package ma.supmti.grammify.grammar;
+package ma.supmti.grammify.grammar.detection;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import ma.supmti.grammify.grammar.Word;
 import ma.supmti.grammify.utils.WordMap;
 
 /**

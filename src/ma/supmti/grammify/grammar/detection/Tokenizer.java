@@ -1,10 +1,12 @@
-package ma.supmti.grammify.grammar;
+package ma.supmti.grammify.grammar.detection;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import ma.supmti.grammify.grammar.Pronoun;
 
 /**
  * Contains methods that convert a text to tokens
@@ -28,7 +30,7 @@ public final class Tokenizer {
 				"[a-zA-ZÀ-ÿ]+|" + // Words
 				"[0-9]+(?:\\.[0-9]+)?|" + // Numbers
 				"[-.,!?;:\"\']|" + // Punctuation
-				"\\s+|" + // SPACES as tokens
+				"\\s|" + // SPACES as tokens
 				"\\n+"
 		);
 		Matcher matcher = pattern.matcher(text);

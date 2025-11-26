@@ -2,8 +2,8 @@ package ma.supmti.grammify.utils;
 
 import java.util.List;
 
-import ma.supmti.grammify.grammar.Parser;
 import ma.supmti.grammify.grammar.Word;
+import ma.supmti.grammify.grammar.detection.Parser;
 
 /**
  * Contains words parsed from {@link Parser}
