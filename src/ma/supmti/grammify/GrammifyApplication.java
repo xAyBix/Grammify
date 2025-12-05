@@ -37,7 +37,7 @@ public class GrammifyApplication {
 		});
 		
 		// Debugging
-//		Parser.pureTokens = Tokenizer.tokenize("\"j'étudie  la biologie, et non la geologie en 2025.\" \r\n-Yor");
+//		Parser.pureTokens = Tokenizer.tokenize("j'étudie  la biologie, et non la geologie en 2025.");
 //		System.out.println(Parser.parse());
 //		ErrorsDetector.init(Parser.parse());
 //		System.out.println(FileManager.openFile());

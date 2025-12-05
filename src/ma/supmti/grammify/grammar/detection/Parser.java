@@ -31,7 +31,7 @@ public final class Parser {
 
 	// Helper methods to itterate {pureTokens}
 	private static String peek() {
-		return pureTokens.get(currentIndex);
+		return pureTokens.get(currentIndex).toLowerCase();
 	}
 
 	private static void advance() {
@@ -70,8 +70,10 @@ public final class Parser {
 			}
 
 			advance();
-			if (currentIndex == pureTokens.size())
+			if (currentIndex == pureTokens.size()) {
+				currentIndex = 0;
 				break;
+			}
 		}
 		return parsedTokens;
 	}
