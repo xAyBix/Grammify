@@ -4,6 +4,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import ma.supmti.grammify.io.FileManager;
+
 /**
  * A useful menu bar at the top contains file management items,
  * text editing items, and more...
@@ -26,11 +28,33 @@ public class MenuBar extends JMenuBar{
 	// Menu Items
 	private JMenu buildFileMenu () {
 		JMenu file = new JMenu("File");
-		file.add(new JMenuItem("New"));
-		file.add(new JMenuItem("Open"));
-		file.add(new JMenuItem("Save"));
+		JMenuItem newItem = new JMenuItem("New");
+		JMenuItem openItem = new JMenuItem("Open");
+		JMenuItem saveItem = new JMenuItem("Save");
+		JMenuItem exitItem = new JMenuItem("Exit");
+		
+		newItem.addActionListener(e -> {
+			// TODO Open an empty text aria
+		});
+		openItem.addActionListener(e -> {
+			String text = FileManager.openFile();
+			// TODO Put the text to Text Aria
+			System.out.println(text);
+		});
+		saveItem.addActionListener(e -> {
+			String text = ""; // TODO Extract the text from the text aria
+			FileManager.saveFile(text);
+		});
+		exitItem.addActionListener(e -> {
+			// TODO Open a dialog window that ask user to save if not saved
+			System.exit(0);
+		});
+		
+		file.add(newItem);
+		file.add(openItem);
+		file.add(saveItem);
 		file.addSeparator();
-		file.add(new JMenuItem("Exit"));
+		file.add(exitItem);
 		return file;
 	}
 	private JMenu buildEditMenu () {
