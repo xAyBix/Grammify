@@ -1,8 +1,18 @@
 package ma.supmti.grammify.ui;
 
+
+import java.awt.BorderLayout;
+import java.awt.Graphics;
+import java.awt.Point;
+
 import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.event.ChangeListener;
+import javax.swing.text.Caret;
+import javax.swing.text.JTextComponent;
 
 import ma.supmti.grammify.Constants;
+
 
 
 /**
@@ -16,7 +26,10 @@ import ma.supmti.grammify.Constants;
 public class MainFrame extends JFrame {
 	
 	private static final long serialVersionUID = 3816958299287539260L;
-
+	public static JScrollPane mainScrollPane;
+	public static CustomTextArea textArea;
+	private static Caret defaultCaret;
+	
 	public MainFrame() {
 		
 		// Interface's frame configuration
@@ -30,6 +43,83 @@ public class MainFrame extends JFrame {
 		// Add A Menu Bar at top
 		setJMenuBar(new MenuBar());
 		
+		// Add Text Area
+		textArea = new CustomTextArea();
+		mainScrollPane = new JScrollPane(textArea);
+		textArea.setEditable(false);
+		defaultCaret = textArea.getCaret();
+		Caret invisibleCaret = new Caret () {
+			@Override
+			public void install(JTextComponent c) {}
+
+			@Override
+			public void deinstall(JTextComponent c) {}
+
+			@Override
+			public void paint(Graphics g) {}
+
+			@Override
+			public void addChangeListener(ChangeListener l) {}
+
+			@Override
+			public void removeChangeListener(ChangeListener l) {}
+
+			@Override
+			public boolean isVisible() {
+				return false;
+			}
+
+			@Override
+			public void setVisible(boolean v) {}
+
+			@Override
+			public boolean isSelectionVisible() {
+				return false;
+			}
+
+			@Override
+			public void setSelectionVisible(boolean v) {}
+
+			@Override
+			public void setMagicCaretPosition(Point p) {}
+
+			@Override
+			public Point getMagicCaretPosition() {
+				return null;
+			}
+
+			@Override
+			public void setBlinkRate(int rate) {}
+
+			@Override
+			public int getBlinkRate() {
+				return 0;
+			}
+
+			@Override
+			public int getDot() {
+				return 0;
+			}
+
+			@Override
+			public int getMark() {
+				return 0;
+			}
+
+			@Override
+			public void setDot(int dot) {}
+
+			@Override
+			public void moveDot(int dot) {}};
+		textArea.setCaret(invisibleCaret);
+		add(mainScrollPane, BorderLayout.CENTER);
+		
+		
 	}
+	
+	public static void showCaret () {
+		textArea.setCaret(defaultCaret);
+	}
+	
 	
 }

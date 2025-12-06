@@ -34,15 +34,15 @@ public class MenuBar extends JMenuBar{
 		JMenuItem exitItem = new JMenuItem("Exit");
 		
 		newItem.addActionListener(e -> {
-			// TODO Open an empty text aria
+			// TODO Open an empty text area
 		});
 		openItem.addActionListener(e -> {
-			String text = FileManager.openFile();
-			// TODO Put the text to Text Aria
-			System.out.println(text);
+			FileManager.openFile();
+			// TODO Put the text to Text Area
+			
 		});
 		saveItem.addActionListener(e -> {
-			String text = ""; // TODO Extract the text from the text aria
+			String text = ""; // TODO Extract the text from the text area
 			FileManager.saveFile(text);
 		});
 		exitItem.addActionListener(e -> {

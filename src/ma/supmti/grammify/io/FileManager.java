@@ -8,7 +8,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import ma.supmti.grammify.Constants;
 import ma.supmti.grammify.GrammifyApplication;
+import ma.supmti.grammify.ui.CustomTextArea;
+import ma.supmti.grammify.ui.MainFrame;
 
 /**
  * Contains all the methods that help manipulating files
@@ -52,13 +55,23 @@ public final class FileManager {
 					text.append("\n");
 					text.append(line);
 				}
+				MainFrame.textArea.setEditable(true);
+				MainFrame.textArea.setText(text.toString());
+				MainFrame.showCaret();
+				
+				GrammifyApplication.mainFrame.setTitle(Constants.APP_NAME + " - " + file.getName());
+				
 				OpenedFile.file = file;
 				OpenedFile.name = file.getName();
 				OpenedFile.path = file.getAbsolutePath();
 				OpenedFile.initialText = text.toString();
+				
+				CustomTextArea.init();
+				
 
 				reader.close();
-
+				
+				
 				return text.toString();
 			} else {
 				throw new IOException("Unable to open the file:\n\"" + OpenedFile.path + "\n");
