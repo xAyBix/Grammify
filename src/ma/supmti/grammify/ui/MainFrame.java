@@ -48,6 +48,17 @@ public class MainFrame extends JFrame {
 		mainScrollPane = new JScrollPane(textArea);
 		textArea.setEditable(false);
 		defaultCaret = textArea.getCaret();
+		hideCaret();
+		add(mainScrollPane, BorderLayout.CENTER);
+		
+		
+	}
+	
+	public static void showCaret () {
+		textArea.setCaret(defaultCaret);
+	}
+	
+	public static void hideCaret () {
 		Caret invisibleCaret = new Caret () {
 			@Override
 			public void install(JTextComponent c) {}
@@ -112,13 +123,6 @@ public class MainFrame extends JFrame {
 			@Override
 			public void moveDot(int dot) {}};
 		textArea.setCaret(invisibleCaret);
-		add(mainScrollPane, BorderLayout.CENTER);
-		
-		
-	}
-	
-	public static void showCaret () {
-		textArea.setCaret(defaultCaret);
 	}
 	
 	

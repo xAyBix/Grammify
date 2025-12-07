@@ -42,8 +42,7 @@ public class MenuBar extends JMenuBar{
 			
 		});
 		saveItem.addActionListener(e -> {
-			String text = ""; // TODO Extract the text from the text area
-			FileManager.saveFile(text);
+			FileManager.saveFile();
 		});
 		exitItem.addActionListener(e -> {
 			// TODO Open a dialog window that ask user to save if not saved

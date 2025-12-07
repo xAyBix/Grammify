@@ -31,10 +31,11 @@ public final class ErrorsDetector {
 	private static ExecutorService executorService;
 
 	// Starts a thread that searches constantly for errors in user inputs
-	public static void init (List<WordMap> words) {
+	public static void init () {
 		executorService = Executors.newFixedThreadPool(1);
 		executorService.submit(() -> {
 			while (true) {
+				List<WordMap> words = Parser.parse();
 				System.err.println("Loop entered");
 				OpenedFile.errors.clear();
 				// Errors Methods

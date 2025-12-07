@@ -1,5 +1,6 @@
 package ma.supmti.grammify.ui;
 
+import java.awt.Font;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -7,6 +8,9 @@ import javax.swing.JTextPane;
 
 import ma.supmti.grammify.Constants;
 import ma.supmti.grammify.GrammifyApplication;
+import ma.supmti.grammify.grammar.detection.ErrorsDetector;
+import ma.supmti.grammify.grammar.detection.Parser;
+import ma.supmti.grammify.grammar.detection.Tokenizer;
 import ma.supmti.grammify.io.OpenedFile;
 
 
@@ -25,13 +29,23 @@ public class CustomTextArea extends JTextPane {
 	public CustomTextArea () {
 		super();
 		setEditable(true);
+		setFont(new Font("Monospaced", 0, 16) );
 	}
 	
 	// Checks if there are changes in text
 	public static void init () {
 		ExecutorService es = Executors.newFixedThreadPool(1);
 		es.submit((Runnable) () -> {
+			String textAreaCurrentText = "";
+			boolean index = false;
 			while (true) {
+				textAreaCurrentText = MainFrame.textArea.getText();
+				Parser.pureTokens = Tokenizer.tokenize(textAreaCurrentText);
+				if (!index) {
+					index = !index;
+					ErrorsDetector.init();
+				}
+				
 				if (!OpenedFile.initialText.equals(MainFrame.textArea.getText())) {
 					GrammifyApplication.mainFrame.setTitle(Constants.APP_NAME + " - *" + OpenedFile.name);
 				}else {
