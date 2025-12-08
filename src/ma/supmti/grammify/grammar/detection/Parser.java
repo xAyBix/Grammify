@@ -31,7 +31,7 @@ public final class Parser {
 
 	// Helper methods to itterate {pureTokens}
 	private static String peek() {
-		return pureTokens.get(currentIndex).toLowerCase();
+		return pureTokens.get(currentIndex);
 	}
 
 	private static void advance() {
@@ -57,15 +57,15 @@ public final class Parser {
 			return null;
 		while (true) {
 			currentToken = peek();
-			if ((Pattern.compile("[a-zA-ZÀ-ÿ]").matcher(currentToken).find() || Pattern.compile("[0-9]+").matcher(currentToken).find()) &&
+			if ((Pattern.compile("[a-zA-ZÀ-ÿ]+").matcher(currentToken).find() || Pattern.compile("[0-9]+").matcher(currentToken).find()) &&
 					currentToken.equals(currentToken.toUpperCase())) { // Ignored token because it's written entirely in upper case 
-				parsedTokens.add(new WordMap(currentIndex, "ignored", Arrays.asList(new Word[] {new Word(currentToken, null)})));
+				parsedTokens.add(new WordMap(currentIndex, currentToken, "ignored", Arrays.asList(new Word[] {new Word(currentToken, null)})));
 			} else {
 				List<Word> wordsFounded = Word.findByText(currentToken);
 				if (wordsFounded.isEmpty()) { // No Equivalent found in the dictionary
-					parsedTokens.add(new WordMap(currentIndex, "not founded", Arrays.asList(new Word[] {new Word(currentToken, null)})));
+					parsedTokens.add(new WordMap(currentIndex, currentToken, "not founded", Arrays.asList(new Word[] {new Word(currentToken, null)})));
 				} else { // Token exists in dictionary
-					parsedTokens.add(new WordMap(currentIndex,"founded",wordsFounded));
+					parsedTokens.add(new WordMap(currentIndex, currentToken, "founded", wordsFounded));
 				}
 			}
 

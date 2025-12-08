@@ -20,11 +20,13 @@ import ma.supmti.grammify.grammar.detection.Parser;
 public final class WordMap {
 	
 	private int index;
+	private String text;
 	private String state;
 	private List<Word> words;
 	
-	public WordMap (int index, String state, List<Word> words) {
+	public WordMap (int index, String text, String state, List<Word> words) {
 		this.index = index;
+		this.text = text;
 		this.state = state;
 		this.words = words;
 	}
@@ -63,6 +65,15 @@ public final class WordMap {
 	public void setWords(List<Word> words) {
 		this.words = words;
 	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+	
 	
 
 }

@@ -40,6 +40,7 @@ public class CustomTextArea extends JTextPane {
 			boolean index = false;
 			while (true) {
 				textAreaCurrentText = MainFrame.textArea.getText();
+				System.err.println(textAreaCurrentText);
 				Parser.pureTokens = Tokenizer.tokenize(textAreaCurrentText);
 				if (!index) {
 					index = !index;

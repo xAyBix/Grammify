@@ -21,7 +21,7 @@ public class Word {
 	private String text;
 	private PartOfSpeech partOfSpeech;
 	public Word (String text, PartOfSpeech partOfSpeech) {
-		this.text = text;
+		this.text = text.toLowerCase();
 		this.partOfSpeech = partOfSpeech;
 	}
 
@@ -241,8 +241,9 @@ public class Word {
 	// Finding a word saved by text
 	public static List<Word> findByText (String text) {
 		List<Word> wordsFound = new ArrayList<>();
+		String lowerText = text.toLowerCase();
 		for(Word word : words) {
-			if (word.getText().equals(text))
+			if (word.getText().equals(lowerText))
 				wordsFound.add(word);
 		}
 		return wordsFound;
