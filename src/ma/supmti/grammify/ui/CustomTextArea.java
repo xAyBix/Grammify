@@ -13,7 +13,6 @@ import ma.supmti.grammify.grammar.detection.Parser;
 import ma.supmti.grammify.grammar.detection.Tokenizer;
 import ma.supmti.grammify.io.OpenedFile;
 
-
 /**
  * A custom text area
  * 
@@ -23,19 +22,25 @@ import ma.supmti.grammify.io.OpenedFile;
  * @since 2025-12-06 02:31
  */
 public class CustomTextArea extends JTextPane {
-	
-	private static final long serialVersionUID = -690400514247574287L;
 
-	public CustomTextArea () {
+	private static final long serialVersionUID = -690400514247574287L;
+	private static ExecutorService executorService;
+
+	public CustomTextArea() {
 		super();
 		setEditable(true);
-		setFont(new Font("Monospaced", 0, 16) );
+		setFont(new Font("Monospaced", 0, 16));
 	}
-	
+
 	// Checks if there are changes in text
-	public static void init () {
-		ExecutorService es = Executors.newFixedThreadPool(1);
-		es.submit((Runnable) () -> {
+	public static void init() {
+		System.err.println("init");
+		if (executorService != null) {
+			executorService.shutdown();
+		}
+		
+		executorService = Executors.newFixedThreadPool(1);
+		executorService.submit((Runnable) () -> {
 			String textAreaCurrentText = "";
 			boolean index = false;
 			while (true) {
@@ -46,13 +51,13 @@ public class CustomTextArea extends JTextPane {
 					index = !index;
 					ErrorsDetector.init();
 				}
-				
+
 				if (!OpenedFile.initialText.equals(MainFrame.textArea.getText())) {
 					GrammifyApplication.mainFrame.setTitle(Constants.APP_NAME + " - *" + OpenedFile.name);
-				}else {
+				} else {
 					GrammifyApplication.mainFrame.setTitle(Constants.APP_NAME + " - " + OpenedFile.name);
 				}
-				
+
 				try {
 					Thread.sleep(300);
 				} catch (InterruptedException e) {
@@ -60,5 +65,10 @@ public class CustomTextArea extends JTextPane {
 				}
 			}
 		});
+	}
+
+	// Shutdown the executor
+	public static void shutdown() {
+		executorService.shutdown();
 	}
 }

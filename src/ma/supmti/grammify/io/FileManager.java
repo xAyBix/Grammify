@@ -1,12 +1,17 @@
 package ma.supmti.grammify.io;
 
 import java.awt.FileDialog;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import ma.supmti.grammify.Constants;
 import ma.supmti.grammify.GrammifyApplication;
@@ -25,6 +30,43 @@ import ma.supmti.grammify.ui.MainFrame;
 public final class FileManager {
 	// A private constructor to avoid instantiation
 	private FileManager() {
+	}
+	
+	// 
+	public static void newFile() {
+		// Setting the close operation
+		openConfirmationDialog ();
+		
+		// Check if a file is already opened
+		if (openedFileAlreadyCheck()) {
+			int result = JOptionPane.showConfirmDialog(GrammifyApplication.mainFrame, "You have unsaved changes. Do you want to save?",
+					"Unsaved Changes", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+			if (result == JOptionPane.YES_OPTION) {
+				saveFile();
+			}else if (result == JOptionPane.NO_OPTION) {
+				// Don't save
+			}else {
+				return;
+			}
+		}
+		
+		String fileName = "untitled.txt";
+		MainFrame.textArea.setEditable(true);
+		MainFrame.textArea.setText("");
+		MainFrame.showCaret();
+
+		// Changing the window title
+		GrammifyApplication.mainFrame.setTitle(Constants.APP_NAME + " - " + fileName);
+
+		// Saving false infos for later
+		OpenedFile.file = new File("");
+		OpenedFile.name = fileName;
+		OpenedFile.path = "";
+		OpenedFile.initialText = "";
+
+		// Initialize Text Area functionalities (Check for unsaved, etc...)
+		CustomTextArea.init();
+		
 	}
 
 	// Method that opens a file
@@ -55,10 +97,26 @@ public final class FileManager {
 				if ((line = reader.readLine()) != null) {
 					text.append(line);
 				}
+				
 				// Reading the rest of the file
 				while ((line = reader.readLine()) != null) {
 					text.append("\n");
 					text.append(line);
+				}
+				
+				reader.close();
+				
+				// Check if a file is already opened
+				if (openedFileAlreadyCheck()) {
+					int result = JOptionPane.showConfirmDialog(GrammifyApplication.mainFrame, "You have unsaved changes. Do you want to save?",
+							"Unsaved Changes", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+					if (result == JOptionPane.YES_OPTION) {
+						saveFile();
+					}else if (result == JOptionPane.NO_OPTION) {
+						// Don't save
+					}else {
+						return null;
+					}
 				}
 
 				// Setting up the Text Area
@@ -77,8 +135,6 @@ public final class FileManager {
 
 				// Initialize Text Area functionalities (Check for unsaved, etc...)
 				CustomTextArea.init();
-
-				reader.close();
 
 				return text.toString();
 			} else {
@@ -151,4 +207,34 @@ public final class FileManager {
 			}
 		}
 	}
+	
+	// Method that checks if a file is already opened
+	public static boolean openedFileAlreadyCheck () {
+		return OpenedFile.file !=null;
+	}
+	
+	// Method that opens a confirmation dialog
+	public static void openConfirmationDialog () {
+		// Setting the close operation
+		GrammifyApplication.mainFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		
+		// Open the confirmation dialog
+		GrammifyApplication.mainFrame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				int result = JOptionPane.showConfirmDialog(GrammifyApplication.mainFrame, "You have unsaved changes. Do you want to save?",
+						"Unsaved Changes", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+				if (result == JOptionPane.YES_OPTION) {
+					saveFile();
+					GrammifyApplication.mainFrame.dispose();
+					System.exit(0);
+				}else if (result == JOptionPane.NO_OPTION) {
+					GrammifyApplication.mainFrame.dispose();
+					System.exit(0);
+				}
+			}
+		});
+	}
+	
+	
 }

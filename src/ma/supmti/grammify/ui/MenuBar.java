@@ -3,7 +3,9 @@ package ma.supmti.grammify.ui;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
+import ma.supmti.grammify.GrammifyApplication;
 import ma.supmti.grammify.io.FileManager;
 
 /**
@@ -34,18 +36,28 @@ public class MenuBar extends JMenuBar{
 		JMenuItem exitItem = new JMenuItem("Exit");
 		
 		newItem.addActionListener(e -> {
-			// TODO Open an empty text area
+			FileManager.newFile();
 		});
 		openItem.addActionListener(e -> {
 			FileManager.openFile();
-			// TODO Put the text to Text Area
-			
 		});
 		saveItem.addActionListener(e -> {
 			FileManager.saveFile();
 		});
 		exitItem.addActionListener(e -> {
 			// TODO Open a dialog window that ask user to save if not saved
+			if (FileManager.openedFileAlreadyCheck()) {
+				int result = JOptionPane.showConfirmDialog(GrammifyApplication.mainFrame, "You have unsaved changes. Do you want to save?",
+						"Unsaved Changes", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+				if (result == JOptionPane.YES_OPTION) {
+					FileManager.saveFile();
+				}else if (result == JOptionPane.NO_OPTION) {
+					// Don't save
+				}else {
+					return;
+				}
+			}
+			GrammifyApplication.mainFrame.dispose();
 			System.exit(0);
 		});
 		

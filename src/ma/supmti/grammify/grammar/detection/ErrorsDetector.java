@@ -32,6 +32,10 @@ public final class ErrorsDetector {
 
 	// Starts a thread that searches constantly for errors in user inputs
 	public static void init() {
+		if (executorService != null) {
+			shutdown();
+		}
+		
 		executorService = Executors.newFixedThreadPool(1);
 		executorService.submit(() -> {
 			while (true) {
@@ -53,7 +57,7 @@ public final class ErrorsDetector {
 				// System.err.println("test");
 
 				try {
-					Thread.sleep(2500); // Set to 1500 when debugging and 500 when not
+					Thread.sleep(500); // Set to 1500 when debugging and 500 when not
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
