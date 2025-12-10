@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 
 import ma.supmti.grammify.grammar.Word;
 import ma.supmti.grammify.io.OpenedFile;
+import ma.supmti.grammify.utils.Error;
 import ma.supmti.grammify.utils.WordMap;
 
 /**

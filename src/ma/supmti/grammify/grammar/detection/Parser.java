@@ -54,7 +54,7 @@ public final class Parser {
 		String currentToken;
 
 		if (pureTokens.isEmpty())
-			return null;
+			return parsedTokens; // null earlier
 		while (true) {
 			currentToken = peek();
 			if ((Pattern.compile("[a-zA-ZÀ-ÿ]+").matcher(currentToken).find() || Pattern.compile("[0-9]+").matcher(currentToken).find()) &&

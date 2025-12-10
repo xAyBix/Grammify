@@ -1,10 +1,13 @@
 package ma.supmti.grammify.ui;
 
+import java.awt.Color;
+
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
+import ma.supmti.grammify.Constants;
 import ma.supmti.grammify.GrammifyApplication;
 import ma.supmti.grammify.io.FileManager;
 
@@ -25,6 +28,10 @@ public class MenuBar extends JMenuBar{
 		add(buildEditMenu());
 		add(buildSettingsMenu());
 		add(buildHelpMenu());
+		
+		setBackground(Constants.mainColor);
+		setForeground(Color.WHITE);
+		
 	}
 	
 	// Menu Items
@@ -34,6 +41,10 @@ public class MenuBar extends JMenuBar{
 		JMenuItem openItem = new JMenuItem("Open");
 		JMenuItem saveItem = new JMenuItem("Save");
 		JMenuItem exitItem = new JMenuItem("Exit");
+		
+		file.setBackground(Constants.mainColor);
+		file.setForeground(Color.WHITE);
+		file.setFont(Constants.secondaryFont);
 		
 		newItem.addActionListener(e -> {
 			FileManager.newFile();
@@ -45,7 +56,6 @@ public class MenuBar extends JMenuBar{
 			FileManager.saveFile();
 		});
 		exitItem.addActionListener(e -> {
-			// TODO Open a dialog window that ask user to save if not saved
 			if (FileManager.openedFileAlreadyCheck()) {
 				int result = JOptionPane.showConfirmDialog(GrammifyApplication.mainFrame, "You have unsaved changes. Do you want to save?",
 						"Unsaved Changes", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
@@ -76,15 +86,28 @@ public class MenuBar extends JMenuBar{
 		edit.add(new JMenuItem("Cut"));
 		edit.add(new JMenuItem("Copy"));
 		edit.add(new JMenuItem("Paste"));
+		
+		edit.setBackground(Constants.mainColor);
+		edit.setForeground(Color.WHITE);
+		edit.setFont(Constants.secondaryFont);
 		return edit;
 	}
 	private JMenuItem buildSettingsMenu () {
 		JMenuItem settings = new JMenuItem("Settings");
+		
+		settings.setBackground(Constants.mainColor);
+		settings.setForeground(Color.WHITE);
+		settings.setFont(Constants.secondaryFont);
 		return settings;
 	}
 	private JMenu buildHelpMenu () {
 		JMenu help = new JMenu("Help");
 		help.add(new JMenuItem("About"));
+		
+		help.setBackground(Constants.mainColor);
+		help.setForeground(Color.WHITE);
+		help.setFont(Constants.secondaryFont);
+		
 		return help;
 	}
 

@@ -1,9 +1,8 @@
-package ma.supmti.grammify.grammar.detection;
+package ma.supmti.grammify.utils;
 
 import java.util.List;
 
 import ma.supmti.grammify.grammar.Word;
-import ma.supmti.grammify.utils.WordMap;
 
 /**
  * 

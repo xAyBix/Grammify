@@ -1,6 +1,8 @@
 package ma.supmti.grammify;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.File;
@@ -39,6 +41,14 @@ public final class Constants {
 	
 	// Application icon
 	public static final Image img = getImage();
+	
+	// Colors
+	public static final Color mainColor = new Color(0x303030);
+	public static final Color secondaryColor = new Color(0x1F2022);
+	
+	// Font
+	public static final Font mainFont = new Font("Monospaced", 1, 20);
+	public static final Font secondaryFont = new Font("Monospaced", 1, 16);
 
 	// Application icon helper method
 	private static Image getImage () {

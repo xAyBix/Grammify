@@ -31,42 +31,45 @@ public final class FileManager {
 	// A private constructor to avoid instantiation
 	private FileManager() {
 	}
-	
-	// 
+
+	//
 	public static void newFile() {
 		// Setting the close operation
-		openConfirmationDialog ();
-		
+		openConfirmationDialog();
+
 		// Check if a file is already opened
-		if (openedFileAlreadyCheck()) {
-			int result = JOptionPane.showConfirmDialog(GrammifyApplication.mainFrame, "You have unsaved changes. Do you want to save?",
-					"Unsaved Changes", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
-			if (result == JOptionPane.YES_OPTION) {
-				saveFile();
-			}else if (result == JOptionPane.NO_OPTION) {
-				// Don't save
-			}else {
-				return;
+		if (openedFileAlreadyCheck() && MainFrame.textArea != null) {
+			if (!OpenedFile.initialText.equals(MainFrame.textArea.getText())) {
+				int result = JOptionPane.showConfirmDialog(GrammifyApplication.mainFrame,
+						"You have unsaved changes. Do you want to save?", "Unsaved Changes",
+						JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+				if (result == JOptionPane.YES_OPTION) {
+					saveFile();
+				} else if (result == JOptionPane.NO_OPTION) {
+					// Don't save
+				} else {
+					return;
+				}
 			}
 		}
-		
+
 		String fileName = "untitled.txt";
 		MainFrame.textArea.setEditable(true);
 		MainFrame.textArea.setText("");
 		MainFrame.showCaret();
 
 		// Changing the window title
-		GrammifyApplication.mainFrame.setTitle(Constants.APP_NAME + " - " + fileName);
+		GrammifyApplication.mainFrame.setTitle(Constants.APP_NAME + " - *" + fileName);
 
 		// Saving false infos for later
-		OpenedFile.file = new File("");
+		OpenedFile.file = null;
 		OpenedFile.name = fileName;
-		OpenedFile.path = "";
-		OpenedFile.initialText = "";
+		OpenedFile.path = null;
+		OpenedFile.initialText = null;
 
 		// Initialize Text Area functionalities (Check for unsaved, etc...)
 		CustomTextArea.init();
-		
+
 	}
 
 	// Method that opens a file
@@ -97,27 +100,32 @@ public final class FileManager {
 				if ((line = reader.readLine()) != null) {
 					text.append(line);
 				}
-				
+
 				// Reading the rest of the file
 				while ((line = reader.readLine()) != null) {
 					text.append("\n");
 					text.append(line);
 				}
-				
+
 				reader.close();
-				
+
 				// Check if a file is already opened
-				if (openedFileAlreadyCheck()) {
-					int result = JOptionPane.showConfirmDialog(GrammifyApplication.mainFrame, "You have unsaved changes. Do you want to save?",
-							"Unsaved Changes", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
-					if (result == JOptionPane.YES_OPTION) {
-						saveFile();
-					}else if (result == JOptionPane.NO_OPTION) {
-						// Don't save
-					}else {
-						return null;
+				if (openedFileAlreadyCheck() && MainFrame.textArea != null) {
+					if (!OpenedFile.initialText.equals(MainFrame.textArea.getText())) {
+						int result = JOptionPane.showConfirmDialog(GrammifyApplication.mainFrame,
+								"You have unsaved changes. Do you want to save?", "Unsaved Changes",
+								JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+						if (result == JOptionPane.YES_OPTION) {
+							saveFile();
+						} else if (result == JOptionPane.NO_OPTION) {
+							// Don't save
+						} else {
+							return null;
+						}
 					}
 				}
+				
+				openConfirmationDialog();
 
 				// Setting up the Text Area
 				MainFrame.textArea.setEditable(true);
@@ -204,37 +212,114 @@ public final class FileManager {
 
 				}
 
+			} else {
+				try {
+					File file = OpenedFile.file;
+					if (file == null || !file.exists()) {
+						// Creating the file if it does not exist
+						FileDialog fileDialog = new FileDialog(GrammifyApplication.mainFrame, "Save File",
+								FileDialog.SAVE);
+						fileDialog.setFile(OpenedFile.name);
+						fileDialog.setVisible(true);
+						if (OpenedFile.path == null || OpenedFile.path.isEmpty()) {
+							String directory = fileDialog.getDirectory();
+							String fileName = fileDialog.getFile();
+
+							if ((directory != null && !directory.isEmpty())
+									&& (fileName != null && !fileName.isEmpty())) {
+								OpenedFile.file = new File(directory, fileName);
+								OpenedFile.initialText = "";
+								OpenedFile.name = fileName;
+								OpenedFile.path = OpenedFile.file.getAbsolutePath();
+								file = OpenedFile.file;
+							} else {
+								throw new IOException("Unable to save the file");
+							}
+
+						} else {
+							throw new IOException("Unable to save the file");
+						}
+
+						if (!file.exists())
+							file.createNewFile();
+					}
+					if (file != null) {
+						// Writing into the file
+						if (file.exists() && file.canWrite()) {
+							if (!OpenedFile.initialText.equals(text)) {
+								BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+								writer.write(text);
+								OpenedFile.initialText = text;
+								writer.close();
+							} else { // Debugging
+								System.out.println("already saved !!");
+							}
+						} else {
+							throw new IOException("Unable to save the file:\n\"" + OpenedFile.path + "\"");
+						}
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
-	
+
 	// Method that checks if a file is already opened
-	public static boolean openedFileAlreadyCheck () {
-		return OpenedFile.file !=null;
+	public static boolean openedFileAlreadyCheck() {
+		return OpenedFile.name != null;
 	}
-	
+
 	// Method that opens a confirmation dialog
-	public static void openConfirmationDialog () {
+	public static void openConfirmationDialog() {
 		// Setting the close operation
 		GrammifyApplication.mainFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		
+
 		// Open the confirmation dialog
 		GrammifyApplication.mainFrame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				int result = JOptionPane.showConfirmDialog(GrammifyApplication.mainFrame, "You have unsaved changes. Do you want to save?",
-						"Unsaved Changes", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
-				if (result == JOptionPane.YES_OPTION) {
-					saveFile();
-					GrammifyApplication.mainFrame.dispose();
-					System.exit(0);
-				}else if (result == JOptionPane.NO_OPTION) {
-					GrammifyApplication.mainFrame.dispose();
-					System.exit(0);
+				if (openedFileAlreadyCheck() && MainFrame.textArea != null) {
+					if (OpenedFile.initialText == null) {
+						int result = JOptionPane.showConfirmDialog(GrammifyApplication.mainFrame,
+								"You have unsaved changes. Do you want to save?", "Unsaved Changes",
+								JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+						if (result == JOptionPane.YES_OPTION) {
+							saveFile();
+							GrammifyApplication.mainFrame.dispose();
+							System.exit(0);
+						} else if (result == JOptionPane.NO_OPTION) {
+							GrammifyApplication.mainFrame.dispose();
+							System.exit(0);
+						}
+					}else if (OpenedFile.file == null) {
+						int result = JOptionPane.showConfirmDialog(GrammifyApplication.mainFrame,
+								"You have unsaved changes. Do you want to save?", "Unsaved Changes",
+								JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+						if (result == JOptionPane.YES_OPTION) {
+							saveFile();
+							GrammifyApplication.mainFrame.dispose();
+							System.exit(0);
+						} else if (result == JOptionPane.NO_OPTION) {
+							GrammifyApplication.mainFrame.dispose();
+							System.exit(0);
+						}
+					}else if (!(MainFrame.textArea.getText().equals(OpenedFile.initialText))) {
+						int result = JOptionPane.showConfirmDialog(GrammifyApplication.mainFrame,
+								"You have unsaved changes. Do you want to save?", "Unsaved Changes",
+								JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+						if (result == JOptionPane.YES_OPTION) {
+							saveFile();
+							GrammifyApplication.mainFrame.dispose();
+							System.exit(0);
+						} else if (result == JOptionPane.NO_OPTION) {
+							GrammifyApplication.mainFrame.dispose();
+							System.exit(0);
+						}
+					}
 				}
 			}
 		});
 	}
-	
-	
+
 }

@@ -3,6 +3,7 @@ package ma.supmti.grammify.io;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import ma.supmti.grammify.utils.Error;
 
 /**
  * Contains all currently opened file infos needed
@@ -22,5 +23,5 @@ public final class OpenedFile {
 	public static String path;
 	public static String initialText;
 	
-	public static List<ma.supmti.grammify.grammar.detection.Error> errors = new ArrayList<>();
+	public static List<Error> errors = new ArrayList<>();
 }

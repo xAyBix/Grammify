@@ -1,6 +1,6 @@
 package ma.supmti.grammify.ui;
 
-import java.awt.Font;
+import java.awt.Color;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -29,30 +29,32 @@ public class CustomTextArea extends JTextPane {
 	public CustomTextArea() {
 		super();
 		setEditable(true);
-		setFont(new Font("Monospaced", 0, 16));
+		setFont(Constants.mainFont);
+		setBackground(Constants.secondaryColor);
+		setForeground(Color.WHITE);
+		setCaretColor(Color.WHITE);
 	}
 
 	// Checks if there are changes in text
 	public static void init() {
-		System.err.println("init");
+		//System.err.println("init");
 		if (executorService != null) {
 			executorService.shutdown();
 		}
-		
 		executorService = Executors.newFixedThreadPool(1);
 		executorService.submit((Runnable) () -> {
 			String textAreaCurrentText = "";
 			boolean index = false;
 			while (true) {
 				textAreaCurrentText = MainFrame.textArea.getText();
-				System.err.println(textAreaCurrentText);
+				//System.err.println(textAreaCurrentText);
 				Parser.pureTokens = Tokenizer.tokenize(textAreaCurrentText);
+				
 				if (!index) {
 					index = !index;
 					ErrorsDetector.init();
 				}
-
-				if (!OpenedFile.initialText.equals(MainFrame.textArea.getText())) {
+				if (OpenedFile.initialText == null || !OpenedFile.initialText.equals(MainFrame.textArea.getText())) {
 					GrammifyApplication.mainFrame.setTitle(Constants.APP_NAME + " - *" + OpenedFile.name);
 				} else {
 					GrammifyApplication.mainFrame.setTitle(Constants.APP_NAME + " - " + OpenedFile.name);
