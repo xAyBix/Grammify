@@ -45,6 +45,7 @@ public final class Constants {
 	// Colors
 	public static final Color mainColor = new Color(0x303030);
 	public static final Color secondaryColor = new Color(0x1F2022);
+	public static final Color thirdColor = new Color(0x656565);
 	
 	// Font
 	public static final Font mainFont = new Font("Monospaced", 1, 20);

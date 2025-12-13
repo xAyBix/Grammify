@@ -2,6 +2,7 @@ package ma.supmti.grammify.ui;
 
 import java.awt.Color;
 
+import javax.swing.BorderFactory;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -31,6 +32,8 @@ public class MenuBar extends JMenuBar{
 		
 		setBackground(Constants.mainColor);
 		setForeground(Color.WHITE);
+		
+		setBorder(BorderFactory.createEmptyBorder());
 		
 	}
 	

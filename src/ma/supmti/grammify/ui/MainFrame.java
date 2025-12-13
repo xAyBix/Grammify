@@ -2,9 +2,11 @@ package ma.supmti.grammify.ui;
 
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.event.ChangeListener;
@@ -45,7 +47,13 @@ public class MainFrame extends JFrame {
 		
 		// Add Text Area
 		textArea = new CustomTextArea();
+		LineNumber lineNumber = new LineNumber();
 		mainScrollPane = new JScrollPane(textArea);
+		mainScrollPane.setBorder(BorderFactory.createEmptyBorder());
+		mainScrollPane.setRowHeaderView(lineNumber);
+		mainScrollPane.getRowHeader().setOpaque(true);
+		mainScrollPane.getRowHeader().setBackground(Constants.secondaryColor);
+		
 		textArea.setEditable(false);
 		defaultCaret = textArea.getCaret();
 		hideCaret();
