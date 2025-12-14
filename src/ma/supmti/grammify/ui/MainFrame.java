@@ -2,7 +2,6 @@ package ma.supmti.grammify.ui;
 
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 
@@ -30,6 +29,7 @@ public class MainFrame extends JFrame {
 	private static final long serialVersionUID = 3816958299287539260L;
 	public static JScrollPane mainScrollPane;
 	public static CustomTextArea textArea;
+	public static LineNumber lineNumber;
 	private static Caret defaultCaret;
 	
 	public MainFrame() {
@@ -47,7 +47,7 @@ public class MainFrame extends JFrame {
 		
 		// Add Text Area
 		textArea = new CustomTextArea();
-		LineNumber lineNumber = new LineNumber();
+		lineNumber = new LineNumber();
 		mainScrollPane = new JScrollPane(textArea);
 		mainScrollPane.setBorder(BorderFactory.createEmptyBorder());
 		mainScrollPane.setRowHeaderView(lineNumber);
@@ -64,6 +64,7 @@ public class MainFrame extends JFrame {
 	
 	public static void showCaret () {
 		textArea.setCaret(defaultCaret);
+		lineNumber.setVisible(true);
 	}
 	
 	public static void hideCaret () {
@@ -131,6 +132,7 @@ public class MainFrame extends JFrame {
 			@Override
 			public void moveDot(int dot) {}};
 		textArea.setCaret(invisibleCaret);
+		lineNumber.setVisible(false);
 	}
 	
 	

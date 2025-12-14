@@ -1,5 +1,6 @@
 package ma.supmti.grammify.grammar.detection;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -7,8 +8,14 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.regex.Pattern;
 
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultHighlighter;
+import javax.swing.text.Highlighter;
+import javax.swing.text.Highlighter.HighlightPainter;
+
 import ma.supmti.grammify.grammar.Word;
 import ma.supmti.grammify.io.OpenedFile;
+import ma.supmti.grammify.ui.MainFrame;
 import ma.supmti.grammify.utils.Error;
 import ma.supmti.grammify.utils.WordMap;
 
@@ -49,6 +56,8 @@ public final class ErrorsDetector {
 					OpenedFile.errors.addAll(doubleSpacesErrorsCheck(words));
 					OpenedFile.errors.addAll(spaceAfterNewLineErrorsCheck(words));
 					OpenedFile.errors.addAll(firstCharacterUpperCaseErrorsCheck(words));
+					
+					displayErrors(words);
 
 					// Debugging
 					OpenedFile.errors.forEach(e -> {
@@ -64,6 +73,34 @@ public final class ErrorsDetector {
 				}
 			}
 		});
+	}
+
+	private static void displayErrors(List<WordMap> words) {
+		Highlighter highlighter = MainFrame.textArea.getHighlighter();
+		highlighter.removeAllHighlights();
+		HighlightPainter painter = new DefaultHighlighter.DefaultHighlightPainter(Color.RED);
+		if (!OpenedFile.errors.isEmpty()) {
+			for (Error err : OpenedFile.errors) {
+				int start = 0;
+				int end = 0;
+				for (WordMap wm : words) {
+					if (wm.equals(err.getWordMap())) {
+						break;
+					}
+					if (wm.getText().codePointAt(0)!=13) {
+						start += wm.getText().length();
+					}
+				}
+				end = start + err.getWordMap().getText().length();
+				
+				try {
+					highlighter.addHighlight(start, end, painter);
+				} catch (BadLocationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 
 	public static void addToIgnoredList(String text) {
@@ -165,4 +202,6 @@ public final class ErrorsDetector {
 
 		return errors;
 	}
+	
+	
 }

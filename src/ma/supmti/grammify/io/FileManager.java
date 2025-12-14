@@ -39,7 +39,18 @@ public final class FileManager {
 
 		// Check if a file is already opened
 		if (openedFileAlreadyCheck() && MainFrame.textArea != null) {
-			if (!OpenedFile.initialText.equals(MainFrame.textArea.getText())) {
+			if (OpenedFile.initialText == null && !MainFrame.textArea.getText().isEmpty()) {
+				int result = JOptionPane.showConfirmDialog(GrammifyApplication.mainFrame,
+						"You have unsaved changes. Do you want to save?", "Unsaved Changes",
+						JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+				if (result == JOptionPane.YES_OPTION) {
+					saveFile();
+				} else if (result == JOptionPane.NO_OPTION) {
+					// Don't save
+				} else {
+					return;
+				}
+			}else if (!OpenedFile.initialText.equals(MainFrame.textArea.getText())) {
 				int result = JOptionPane.showConfirmDialog(GrammifyApplication.mainFrame,
 						"You have unsaved changes. Do you want to save?", "Unsaved Changes",
 						JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);

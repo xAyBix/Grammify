@@ -48,6 +48,24 @@ public class MenuBar extends JMenuBar{
 		file.setBackground(Constants.mainColor);
 		file.setForeground(Color.WHITE);
 		file.setFont(Constants.secondaryFont);
+		file.getPopupMenu().setBorder(BorderFactory.createEmptyBorder());
+		
+		newItem.setBackground(Constants.mainColor);
+		newItem.setForeground(Color.WHITE);
+		newItem.setFont(Constants.secondaryFont);
+		newItem.setBorder(BorderFactory.createEmptyBorder());
+		openItem.setBackground(Constants.mainColor);
+		openItem.setForeground(Color.WHITE);
+		openItem.setFont(Constants.secondaryFont);
+		openItem.setBorder(BorderFactory.createEmptyBorder());
+		saveItem.setBackground(Constants.mainColor);
+		saveItem.setForeground(Color.WHITE);
+		saveItem.setFont(Constants.secondaryFont);
+		saveItem.setBorder(BorderFactory.createEmptyBorder());
+		exitItem.setBackground(Constants.mainColor);
+		exitItem.setForeground(Color.WHITE);
+		exitItem.setFont(Constants.secondaryFont);
+		exitItem.setBorder(BorderFactory.createEmptyBorder());
 		
 		newItem.addActionListener(e -> {
 			FileManager.newFile();
@@ -77,22 +95,52 @@ public class MenuBar extends JMenuBar{
 		file.add(newItem);
 		file.add(openItem);
 		file.add(saveItem);
-		file.addSeparator();
 		file.add(exitItem);
+
 		return file;
 	}
 	private JMenu buildEditMenu () {
 		JMenu edit = new JMenu("Edit");
-		edit.add(new JMenuItem("Undo"));
-		edit.add(new JMenuItem("Redo"));
-		edit.addSeparator();
-		edit.add(new JMenuItem("Cut"));
-		edit.add(new JMenuItem("Copy"));
-		edit.add(new JMenuItem("Paste"));
+		JMenuItem undoItem = new JMenuItem("Undo");
+		JMenuItem redoItem = new JMenuItem("Redo");
+		JMenuItem cutItem = new JMenuItem("Cut");
+		JMenuItem copyItem = new JMenuItem("Copy");
+		JMenuItem pasteItem = new JMenuItem("Paste");
 		
 		edit.setBackground(Constants.mainColor);
 		edit.setForeground(Color.WHITE);
 		edit.setFont(Constants.secondaryFont);
+		edit.getPopupMenu().setBorder(BorderFactory.createEmptyBorder());
+		
+		undoItem.setBackground(Constants.mainColor);
+		undoItem.setForeground(Color.WHITE);
+		undoItem.setFont(Constants.secondaryFont);
+		undoItem.setBorder(BorderFactory.createEmptyBorder());
+		redoItem.setBackground(Constants.mainColor);
+		redoItem.setForeground(Color.WHITE);
+		redoItem.setFont(Constants.secondaryFont);
+		redoItem.setBorder(BorderFactory.createEmptyBorder());
+		cutItem.setBackground(Constants.mainColor);
+		cutItem.setForeground(Color.WHITE);
+		cutItem.setFont(Constants.secondaryFont);
+		cutItem.setBorder(BorderFactory.createEmptyBorder());
+		copyItem.setBackground(Constants.mainColor);
+		copyItem.setForeground(Color.WHITE);
+		copyItem.setFont(Constants.secondaryFont);
+		copyItem.setBorder(BorderFactory.createEmptyBorder());
+		pasteItem.setBackground(Constants.mainColor);
+		pasteItem.setForeground(Color.WHITE);
+		pasteItem.setFont(Constants.secondaryFont);
+		pasteItem.setBorder(BorderFactory.createEmptyBorder());
+		
+		
+		edit.add(undoItem);
+		edit.add(redoItem);
+		edit.add(cutItem);
+		edit.add(copyItem);
+		edit.add(pasteItem);
+		
+		
 		return edit;
 	}
 	private JMenuItem buildSettingsMenu () {
@@ -101,15 +149,23 @@ public class MenuBar extends JMenuBar{
 		settings.setBackground(Constants.mainColor);
 		settings.setForeground(Color.WHITE);
 		settings.setFont(Constants.secondaryFont);
+		settings.setBorder(BorderFactory.createEmptyBorder());
 		return settings;
 	}
 	private JMenu buildHelpMenu () {
 		JMenu help = new JMenu("Help");
-		help.add(new JMenuItem("About"));
+		JMenuItem aboutItem = new JMenuItem("About");
+		aboutItem.setBackground(Constants.mainColor);
+		aboutItem.setForeground(Color.WHITE);
+		aboutItem.setFont(Constants.secondaryFont);
+		aboutItem.setBorder(BorderFactory.createEmptyBorder());
+		
+		help.add(aboutItem);
 		
 		help.setBackground(Constants.mainColor);
 		help.setForeground(Color.WHITE);
 		help.setFont(Constants.secondaryFont);
+		help.getPopupMenu().setBorder(BorderFactory.createEmptyBorder());
 		
 		return help;
 	}
