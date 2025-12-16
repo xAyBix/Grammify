@@ -21,7 +21,7 @@ public final class WordMap {
 	
 	private int index;
 	private String text;
-	private String state;
+	private String state; // founded | not founded | ignored
 	private List<Word> words;
 	
 	public WordMap (int index, String text, String state, List<Word> words) {

@@ -11,6 +11,7 @@ import java.util.regex.Pattern;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.Highlighter;
+import javax.swing.text.Highlighter.Highlight;
 import javax.swing.text.Highlighter.HighlightPainter;
 
 import ma.supmti.grammify.grammar.Word;
@@ -37,6 +38,7 @@ public final class ErrorsDetector {
 	// A list of words ignored by the user
 	private static List<String> ignoredWords = new ArrayList<>();
 	private static ExecutorService executorService;
+	private static HighlightPainter painter = new DefaultHighlighter.DefaultHighlightPainter(Color.RED);
 
 	// Starts a thread that searches constantly for errors in user inputs
 	public static void init() {
@@ -56,12 +58,14 @@ public final class ErrorsDetector {
 					OpenedFile.errors.addAll(doubleSpacesErrorsCheck(words));
 					OpenedFile.errors.addAll(spaceAfterNewLineErrorsCheck(words));
 					OpenedFile.errors.addAll(firstCharacterUpperCaseErrorsCheck(words));
+					OpenedFile.errors.addAll(spellingErrorsCheck(words));
 					
 					displayErrors(words);
 
 					// Debugging
 					OpenedFile.errors.forEach(e -> {
-						System.out.println(e.getErrorMessage() + " at " + e.getWordMap().getIndex());
+						//System.out.println(e.getErrorMessage() + " at " + e.getWordMap().getIndex());
+						System.out.println("did you mean: " + e.getAlternatives().get(0).getText() + " at " + e.getWordMap().getIndex());
 					});
 				}
 				// System.err.println("test");
@@ -77,8 +81,12 @@ public final class ErrorsDetector {
 
 	private static void displayErrors(List<WordMap> words) {
 		Highlighter highlighter = MainFrame.textArea.getHighlighter();
-		highlighter.removeAllHighlights();
-		HighlightPainter painter = new DefaultHighlighter.DefaultHighlightPainter(Color.RED);
+		for (Highlight h : highlighter.getHighlights()) {
+			if (h.getPainter().equals(painter)) {
+				highlighter.removeHighlight(h);
+			}
+		}
+		
 		if (!OpenedFile.errors.isEmpty()) {
 			for (Error err : OpenedFile.errors) {
 				int start = 0;
@@ -193,7 +201,7 @@ public final class ErrorsDetector {
 						&& Character.isLowerCase(words.get(i + 1).getText().charAt(0))) {
 					errors.add(new Error(words.get(i + 1), errorMessage,
 							Arrays.asList(new Word[] { new Word(
-									String.valueOf(words.get(i + 1).getWords().get(0).getText().charAt(0)).toUpperCase()
+									String.valueOf(words.get(i + 1).getText().charAt(0)).toUpperCase()
 											+ words.get(i + 1).getWords().get(0).getText().substring(1),
 									null) })));
 				}
@@ -203,5 +211,15 @@ public final class ErrorsDetector {
 		return errors;
 	}
 	
+	private static List<Error> spellingErrorsCheck (List<WordMap> words) {
+		List<Error> errors = new ArrayList<>();
+		String errorMessage = "Unfound word detected";
+		for (int i = 0; i<words.size(); i++) {
+			if(words.get(i).getState().equals("not founded")) {
+				errors.add(new Error(words.get(i), errorMessage, WordSuggestions.suggest(words.get(i).getText())));
+			}
+		}
+		return errors;
+	} 
 	
 }
