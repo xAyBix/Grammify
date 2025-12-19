@@ -66,6 +66,8 @@ public final class ErrorsDetector {
 					OpenedFile.errors.forEach(e -> {
 						//System.out.println(e.getErrorMessage() + " at " + e.getWordMap().getIndex());
 						System.out.println("did you mean: " + e.getAlternatives().get(0).getText() + " at " + e.getWordMap().getIndex());
+						//e.getAlternatives().forEach(ee -> System.out.println(e.getWordMap().getText() + " and " +ee.getText()+ " " + WordSuggestions.levenshtein(e.getWordMap().getText(), WordSuggestions.normalize(ee.getText()))));
+						
 					});
 				}
 				// System.err.println("test");
@@ -104,7 +106,6 @@ public final class ErrorsDetector {
 				try {
 					highlighter.addHighlight(start, end, painter);
 				} catch (BadLocationException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

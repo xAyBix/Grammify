@@ -236,6 +236,35 @@ public class Word {
 		
 		// 3rd group verbs
 		
+		// Nouns
+		words.add(new Noun("table", GrammaticalGender.FEMININE, "tables"));
+		words.add(new Noun("pomme", GrammaticalGender.FEMININE, "pommes"));
+		words.add(new Noun("tableau", GrammaticalGender.MASCULINE, "tableaux"));
+		words.add(new Noun("cahier", GrammaticalGender.MASCULINE, "cahiers"));
+		words.add(new Noun("ordinateur", GrammaticalGender.FEMININE, "ordinateurs"));
+		words.add(new Noun("ingénieur", GrammaticalGender.MASCULINE, "ingénieurs"));
+		words.add(new Noun("ingénieurie", GrammaticalGender.FEMININE, "ingénieuries"));
+		words.add(new Noun("ingénieure", GrammaticalGender.FEMININE, "ingénieures"));
+		words.add(new Noun("génie", GrammaticalGender.MASCULINE, "génies"));
+		words.add(new Noun("professeur", GrammaticalGender.MASCULINE, "professeurs"));
+		words.add(new Noun("professeuse", GrammaticalGender.FEMININE, "professeuses"));
+		words.add(new Noun("géologie", GrammaticalGender.FEMININE, "géologies"));
+		words.add(new Noun("terre", GrammaticalGender.FEMININE, "terres"));
+		words.add(new Noun("parent", GrammaticalGender.MASCULINE, "parents"));
+		words.add(new Noun("ciel", GrammaticalGender.MASCULINE, ""));
+		words.add(new Noun("ville", GrammaticalGender.FEMININE, "villes"));
+		words.add(new Noun("ami", GrammaticalGender.MASCULINE, "amis"));
+		words.add(new Noun("amie", GrammaticalGender.FEMININE, "amies"));
+		words.add(new Noun("jour", GrammaticalGender.MASCULINE, "jours"));
+		words.add(new Noun("nuit", GrammaticalGender.FEMININE, "nuits"));
+		words.add(new Noun("monde", GrammaticalGender.MASCULINE, "mondes"));
+		words.add(new Noun("homme", GrammaticalGender.MASCULINE, "hommes"));
+		words.add(new Noun("femme", GrammaticalGender.FEMININE, "femmes"));
+		words.add(new Noun("enfant", GrammaticalGender.MASCULINE, "enfants"));
+		words.add(new Noun("affaire", GrammaticalGender.FEMININE, "affaires"));
+		words.add(new Noun("an", GrammaticalGender.MASCULINE, "ans"));
+		words.add(new Noun("année", GrammaticalGender.FEMININE, "années"));
+		
 	}
 	
 	// Finding a word saved by text

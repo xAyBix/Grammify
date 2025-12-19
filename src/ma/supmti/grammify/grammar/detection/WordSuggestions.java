@@ -32,11 +32,11 @@ public class WordSuggestions {
 				.toList();
 	}
 
-	private static String normalize(String word) {
+	public static String normalize(String word) {
 		return Normalizer.normalize(word, Normalizer.Form.NFD).replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
 	}
 
-	private static int levenshtein(String word1, String word2) {
+	public static int levenshtein(String word1, String word2) {
 		int m = word1.length();
 		int n = word2.length();
 
