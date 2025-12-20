@@ -59,6 +59,7 @@ public class CustomTextArea extends JTextPane {
 				} else {
 					GrammifyApplication.mainFrame.setTitle(Constants.APP_NAME + " - " + OpenedFile.name);
 				}
+				MainFrame.statusBar.update();
 
 				try {
 					Thread.sleep(300);

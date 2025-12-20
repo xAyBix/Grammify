@@ -30,6 +30,7 @@ public class MainFrame extends JFrame {
 	public static JScrollPane mainScrollPane;
 	public static CustomTextArea textArea;
 	public static LineNumber lineNumber;
+	public static StatusBar statusBar;
 	private static Caret defaultCaret;
 	
 	public MainFrame() {
@@ -48,6 +49,7 @@ public class MainFrame extends JFrame {
 		// Add Text Area
 		textArea = new CustomTextArea();
 		lineNumber = new LineNumber();
+		statusBar = new StatusBar();
 		mainScrollPane = new JScrollPane(textArea);
 		mainScrollPane.setBorder(BorderFactory.createEmptyBorder());
 		mainScrollPane.setRowHeaderView(lineNumber);
@@ -58,6 +60,7 @@ public class MainFrame extends JFrame {
 		defaultCaret = textArea.getCaret();
 		hideCaret();
 		add(mainScrollPane, BorderLayout.CENTER);
+		add(statusBar, BorderLayout.SOUTH);
 		
 		
 	}
@@ -65,6 +68,7 @@ public class MainFrame extends JFrame {
 	public static void showCaret () {
 		textArea.setCaret(defaultCaret);
 		lineNumber.setVisible(true);
+		statusBar.update();
 	}
 	
 	public static void hideCaret () {
