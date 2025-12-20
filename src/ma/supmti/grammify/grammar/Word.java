@@ -188,50 +188,50 @@ public class Word {
 		words.add(new Verb1("arriver", Arrays.asList(new Auxiliary[] {Auxiliary.getEtre()}), false));
 		
 		// 2nd group verbs
-		words.add(new Verb1("applaudir", Arrays.asList(Auxiliary.getAvoir()), false));
-		words.add(new Verb1("avertir", Arrays.asList(Auxiliary.getAvoir()), false));
-		words.add(new Verb1("bâtir", Arrays.asList(Auxiliary.getAvoir()), false));
-		words.add(new Verb1("bénir", Arrays.asList(Auxiliary.getAvoir()), false));
-		words.add(new Verb1("blanchir", Arrays.asList(Auxiliary.getAvoir()), false));
-		words.add(new Verb1("bondir", Arrays.asList(Auxiliary.getAvoir()), false));
-		words.add(new Verb1("choisir", Arrays.asList(Auxiliary.getAvoir()), false));
-		words.add(new Verb1("définir", Arrays.asList(Auxiliary.getAvoir()), false));
-		words.add(new Verb1("désobéir", Arrays.asList(Auxiliary.getAvoir()), false));
-		words.add(new Verb1("démolir", Arrays.asList(Auxiliary.getAvoir()), false));
-		words.add(new Verb1("dépérir", Arrays.asList(Auxiliary.getAvoir()), false));
-		words.add(new Verb1("embellir", Arrays.asList(Auxiliary.getAvoir()), false));
-		words.add(new Verb1("envahir", Arrays.asList(Auxiliary.getAvoir()), false));
-		words.add(new Verb1("établir", Arrays.asList(Auxiliary.getAvoir()), false));
-		words.add(new Verb1("fleurir", Arrays.asList(Auxiliary.getAvoir()), false));
-		words.add(new Verb1("franchir", Arrays.asList(Auxiliary.getAvoir()), false));
-		words.add(new Verb1("grandir", Arrays.asList(Auxiliary.getAvoir()), false));
-		words.add(new Verb1("grossir", Arrays.asList(Auxiliary.getAvoir()), false));
-		words.add(new Verb1("haïr", Arrays.asList(Auxiliary.getAvoir()), false));
-		words.add(new Verb1("investir", Arrays.asList(Auxiliary.getAvoir()), false));
-		words.add(new Verb1("jaillir", Arrays.asList(Auxiliary.getAvoir()), false));
-		words.add(new Verb1("maigrir", Arrays.asList(Auxiliary.getAvoir()), false));
-		words.add(new Verb1("mincir", Arrays.asList(Auxiliary.getAvoir()), false));
-		words.add(new Verb1("noircir", Arrays.asList(Auxiliary.getAvoir()), false));
-		words.add(new Verb1("nourrir", Arrays.asList(Auxiliary.getAvoir()), false));
-		words.add(new Verb1("obéir", Arrays.asList(Auxiliary.getAvoir()), false));
-		words.add(new Verb1("pâlir", Arrays.asList(Auxiliary.getAvoir()), false));
-		words.add(new Verb1("punir", Arrays.asList(Auxiliary.getAvoir()), false));
-		words.add(new Verb1("réagir", Arrays.asList(Auxiliary.getAvoir()), false));
-		words.add(new Verb1("réfléchir", Arrays.asList(Auxiliary.getAvoir()), false));
-		words.add(new Verb1("réjouir", Arrays.asList(Auxiliary.getAvoir()), false));
-		words.add(new Verb1("remplir", Arrays.asList(Auxiliary.getAvoir()), false));
-		words.add(new Verb1("réussir", Arrays.asList(Auxiliary.getAvoir()), false));
-		words.add(new Verb1("rôtir", Arrays.asList(Auxiliary.getAvoir()), false));
-		words.add(new Verb1("rougir", Arrays.asList(Auxiliary.getAvoir()), false));
-		words.add(new Verb1("saisir", Arrays.asList(Auxiliary.getAvoir()), false));
-		words.add(new Verb1("vieillir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb2("applaudir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb2("avertir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb2("bâtir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb2("bénir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb2("blanchir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb2("bondir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb2("choisir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb2("définir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb2("désobéir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb2("démolir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb2("dépérir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb2("embellir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb2("envahir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb2("établir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb2("fleurir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb2("franchir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb2("grandir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb2("grossir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb2("haïr", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb2("investir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb2("jaillir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb2("maigrir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb2("mincir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb2("noircir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb2("nourrir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb2("obéir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb2("pâlir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb2("punir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb2("réagir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb2("réfléchir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb2("réjouir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb2("remplir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb2("réussir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb2("rôtir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb2("rougir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb2("saisir", Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb2("vieillir", Arrays.asList(Auxiliary.getAvoir()), false));
 		
-		words.add(new Verb1("agir", Arrays.asList(Auxiliary.getAvoir()), true));
-		words.add(new Verb1("finir", Arrays.asList(Auxiliary.getAvoir()), true));
-		words.add(new Verb1("guérir", Arrays.asList(Auxiliary.getAvoir()), true));
-		words.add(new Verb1("ralentir", Arrays.asList(Auxiliary.getAvoir()), true));
-		words.add(new Verb1("salir", Arrays.asList(Auxiliary.getAvoir()), true));
-		words.add(new Verb1("trahir", Arrays.asList(Auxiliary.getAvoir()), true));
+		words.add(new Verb2("agir", Arrays.asList(Auxiliary.getAvoir()), true));
+		words.add(new Verb2("finir", Arrays.asList(Auxiliary.getAvoir()), true));
+		words.add(new Verb2("guérir", Arrays.asList(Auxiliary.getAvoir()), true));
+		words.add(new Verb2("ralentir", Arrays.asList(Auxiliary.getAvoir()), true));
+		words.add(new Verb2("salir", Arrays.asList(Auxiliary.getAvoir()), true));
+		words.add(new Verb2("trahir", Arrays.asList(Auxiliary.getAvoir()), true));
 		
 		
 		// 3rd group verbs
@@ -264,7 +264,64 @@ public class Word {
 		words.add(new Noun("affaire", GrammaticalGender.FEMININE, "affaires"));
 		words.add(new Noun("an", GrammaticalGender.MASCULINE, "ans"));
 		words.add(new Noun("année", GrammaticalGender.FEMININE, "années"));
+		words.add(new Noun("appel", GrammaticalGender.MASCULINE, "appels"));
+		words.add(new Noun("mois", GrammaticalGender.MASCULINE, ""));
+		words.add(new Noun("vie", GrammaticalGender.FEMININE, "vies"));
+		words.add(new Noun("maison", GrammaticalGender.FEMININE, "maisons"));
+		words.add(new Noun("fois", GrammaticalGender.FEMININE, ""));
+		words.add(new Noun("argent", GrammaticalGender.MASCULINE, "argents"));
+		words.add(new Noun("arbre", GrammaticalGender.FEMININE, "arbres"));
+		words.add(new Noun("station", GrammaticalGender.FEMININE, "stations"));
+		words.add(new Noun("pantalon", GrammaticalGender.MASCULINE, "pontalons"));
+		words.add(new Noun("animal", GrammaticalGender.MASCULINE, "animaux"));
+		words.add(new Noun("parfum", GrammaticalGender.MASCULINE, "parfums"));
+		words.add(new Noun("roi", GrammaticalGender.MASCULINE, "rois"));
+		words.add(new Noun("reine", GrammaticalGender.FEMININE, "reines"));
+		words.add(new Noun("chien", GrammaticalGender.MASCULINE, "chiens"));
+		words.add(new Noun("chienne", GrammaticalGender.FEMININE, "chiennes"));
+		words.add(new Noun("chat", GrammaticalGender.MASCULINE, "chats"));
+		words.add(new Noun("chatte", GrammaticalGender.FEMININE, "chattes"));
+		words.add(new Noun("erreur", GrammaticalGender.FEMININE, "erreurs"));
+		words.add(new Noun("faute", GrammaticalGender.FEMININE, "fautes"));
+		words.add(new Noun("grammaire", GrammaticalGender.FEMININE, "grammaires"));
+		words.add(new Noun("banane", GrammaticalGender.FEMININE, "bananes"));
+		words.add(new Noun("fleur", GrammaticalGender.FEMININE, "fleurs"));
 		
+		// DETERMINERS
+		words.add(new Determiner("un", GrammaticalNumber.SINGULAR, GrammaticalGender.MASCULINE, DeterminerTypes.INDIFINITE));
+		words.add(new Determiner("une", GrammaticalNumber.SINGULAR, GrammaticalGender.FEMININE, DeterminerTypes.INDIFINITE));
+		words.add(new Determiner("des", GrammaticalNumber.PLURAL, GrammaticalGender.UNISEX, DeterminerTypes.INDIFINITE));
+		
+		words.add(new Determiner("le", GrammaticalNumber.SINGULAR, GrammaticalGender.MASCULINE, DeterminerTypes.DIFINITE));
+		words.add(new Determiner("la", GrammaticalNumber.SINGULAR, GrammaticalGender.FEMININE, DeterminerTypes.DIFINITE));
+		words.add(new Determiner("l", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, DeterminerTypes.DIFINITE));
+		words.add(new Determiner("les", GrammaticalNumber.PLURAL, GrammaticalGender.UNISEX, DeterminerTypes.DIFINITE));
+		
+		words.add(new Determiner("de", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, DeterminerTypes.PARTITIFS));
+		words.add(new Determiner("du", GrammaticalNumber.SINGULAR, GrammaticalGender.MASCULINE, DeterminerTypes.PARTITIFS));
+		words.add(new Determiner("des", GrammaticalNumber.PLURAL, GrammaticalGender.UNISEX, DeterminerTypes.PARTITIFS));
+		
+		words.add(new Determiner("mon", GrammaticalNumber.SINGULAR, GrammaticalGender.MASCULINE, DeterminerTypes.POSSESSIVE));
+		words.add(new Determiner("ma", GrammaticalNumber.SINGULAR, GrammaticalGender.FEMININE, DeterminerTypes.POSSESSIVE));
+		words.add(new Determiner("mes", GrammaticalNumber.PLURAL, GrammaticalGender.UNISEX, DeterminerTypes.POSSESSIVE));
+		words.add(new Determiner("ton", GrammaticalNumber.SINGULAR, GrammaticalGender.MASCULINE, DeterminerTypes.POSSESSIVE));
+		words.add(new Determiner("ta", GrammaticalNumber.SINGULAR, GrammaticalGender.FEMININE, DeterminerTypes.POSSESSIVE));
+		words.add(new Determiner("tes", GrammaticalNumber.PLURAL, GrammaticalGender.UNISEX, DeterminerTypes.POSSESSIVE));
+		words.add(new Determiner("son", GrammaticalNumber.SINGULAR, GrammaticalGender.MASCULINE, DeterminerTypes.POSSESSIVE));
+		words.add(new Determiner("sa", GrammaticalNumber.SINGULAR, GrammaticalGender.FEMININE, DeterminerTypes.POSSESSIVE));
+		words.add(new Determiner("ses", GrammaticalNumber.PLURAL, GrammaticalGender.UNISEX, DeterminerTypes.POSSESSIVE));
+		words.add(new Determiner("notre", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, DeterminerTypes.POSSESSIVE));
+		words.add(new Determiner("votre", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, DeterminerTypes.POSSESSIVE));
+		words.add(new Determiner("nos", GrammaticalNumber.PLURAL, GrammaticalGender.UNISEX, DeterminerTypes.POSSESSIVE));
+		words.add(new Determiner("vos", GrammaticalNumber.PLURAL, GrammaticalGender.UNISEX, DeterminerTypes.POSSESSIVE));
+		words.add(new Determiner("leur", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, DeterminerTypes.POSSESSIVE));
+		words.add(new Determiner("leurs", GrammaticalNumber.PLURAL, GrammaticalGender.UNISEX, DeterminerTypes.POSSESSIVE));
+		
+		words.add(new Determiner("ce", GrammaticalNumber.SINGULAR, GrammaticalGender.MASCULINE, DeterminerTypes.DEMONSTRATIVE));
+		words.add(new Determiner("cet", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, DeterminerTypes.DEMONSTRATIVE));
+		words.add(new Determiner("cette", GrammaticalNumber.SINGULAR, GrammaticalGender.FEMININE, DeterminerTypes.DEMONSTRATIVE));
+		words.add(new Determiner("ces", GrammaticalNumber.PLURAL, GrammaticalGender.UNISEX, DeterminerTypes.DEMONSTRATIVE));
+	
 	}
 	
 	// Finding a word saved by text

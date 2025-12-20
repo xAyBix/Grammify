@@ -41,6 +41,7 @@ public class Noun extends Word{
 		this.plural = null;
 	}
 	
+	// Checks if the noun is plural
 	public boolean isPlural () {
 		if (plural == null && singular != null) {
 			return true;
@@ -48,6 +49,7 @@ public class Noun extends Word{
 		return false;
 	}
 	
+	// Checks if the noun can be plural
 	public boolean canBePlural () {
 		if (singular == null && plural != null) {
 			return true;
