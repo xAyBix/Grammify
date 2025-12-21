@@ -18,11 +18,17 @@ public final class Error {
 	private WordMap wordMap;
 	private String errorMessage;
 	private List<Word> alternatives;
+	private boolean ignored;
+	private int start;
+	private int end;
 	
 	public Error(WordMap wordMap, String errorMessage, List<Word> alternatives) {
 		this.wordMap = wordMap;
 		this.errorMessage = errorMessage;
 		this.alternatives = alternatives;
+		this.start = -1;
+		this.end = -1;
+		this.ignored = false;
 	}
 
 	public WordMap getWordMap() {
@@ -47,6 +53,30 @@ public final class Error {
 
 	public void setAlternatives(List<Word> alternatives) {
 		this.alternatives = alternatives;
+	}
+
+	public int getStart() {
+		return start;
+	}
+
+	public void setStart(int start) {
+		this.start = start;
+	}
+
+	public int getEnd() {
+		return end;
+	}
+
+	public void setEnd(int end) {
+		this.end = end;
+	}
+
+	public boolean isIgnored() {
+		return ignored;
+	}
+
+	public void setIgnored(boolean ignored) {
+		this.ignored = ignored;
 	}
 	
 	

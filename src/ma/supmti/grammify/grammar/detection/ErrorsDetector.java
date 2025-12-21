@@ -1,6 +1,8 @@
 package ma.supmti.grammify.grammar.detection;
 
 import java.awt.Color;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -8,6 +10,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.regex.Pattern;
 
+import javax.swing.SwingUtilities;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.Highlighter;
@@ -17,6 +20,7 @@ import javax.swing.text.Highlighter.HighlightPainter;
 import ma.supmti.grammify.grammar.Word;
 import ma.supmti.grammify.io.OpenedFile;
 import ma.supmti.grammify.ui.MainFrame;
+import ma.supmti.grammify.ui.SuggestionsPopup;
 import ma.supmti.grammify.utils.Error;
 import ma.supmti.grammify.utils.WordMap;
 
@@ -36,7 +40,7 @@ public final class ErrorsDetector {
 	}
 
 	// A list of words ignored by the user
-	private static List<String> ignoredWords = new ArrayList<>();
+	private static List<Error> ignoredWords = new ArrayList<>();
 	private static ExecutorService executorService;
 	private static HighlightPainter painter = new DefaultHighlighter.DefaultHighlightPainter(Color.RED);
 
@@ -61,6 +65,7 @@ public final class ErrorsDetector {
 					OpenedFile.errors.addAll(spellingErrorsCheck(words));
 					
 					displayErrors(words);
+					
 
 					// Debugging
 					OpenedFile.errors.forEach(e -> {
@@ -102,18 +107,39 @@ public final class ErrorsDetector {
 					}
 				}
 				end = start + err.getWordMap().getText().length();
-				
+				err.setStart(start);
+				err.setEnd(end);
 				try {
 					highlighter.addHighlight(start, end, painter);
 				} catch (BadLocationException e) {
 					e.printStackTrace();
 				}
+				MainFrame.textArea.addMouseListener(new MouseListener() {
+					@Override
+					public void mouseReleased(MouseEvent e) {}
+					@Override
+					public void mousePressed(MouseEvent e) {}
+					@Override
+					public void mouseEntered(MouseEvent e) {}
+					@Override
+					public void mouseExited(MouseEvent e) {}
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						if (SwingUtilities.isRightMouseButton(e)) {
+							int pos = MainFrame.textArea.viewToModel2D(e.getPoint());
+							
+							if (pos >= err.getStart() && pos <= err.getEnd()) {
+								SuggestionsPopup.showSuggestionsPopup(err, e.getX(), e.getY());
+							}
+						}
+					}
+				});
 			}
 		}
 	}
 
-	public static void addToIgnoredList(String text) {
-		ignoredWords.add(text);
+	public static void addToIgnoredList(Error e) {
+		ignoredWords.add(e);
 	}
 
 	// Shutdown the executor
