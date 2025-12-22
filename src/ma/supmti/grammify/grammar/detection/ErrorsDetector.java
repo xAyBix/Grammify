@@ -70,7 +70,7 @@ public final class ErrorsDetector {
 					// Debugging
 					OpenedFile.errors.forEach(e -> {
 						//System.out.println(e.getErrorMessage() + " at " + e.getWordMap().getIndex());
-						System.out.println("did you mean: " + e.getAlternatives().get(0).getText() + " at " + e.getWordMap().getIndex());
+						//System.out.println("did you mean: " + e.getAlternatives().get(0).getText() + " at " + e.getWordMap().getIndex());
 						//e.getAlternatives().forEach(ee -> System.out.println(e.getWordMap().getText() + " and " +ee.getText()+ " " + WordSuggestions.levenshtein(e.getWordMap().getText(), WordSuggestions.normalize(ee.getText()))));
 						
 					});
@@ -202,7 +202,7 @@ public final class ErrorsDetector {
 										null) }))); // Fixing the uppercase
 					}
 				}
-			} else if (words.get(i).getText().equals(".")) { // If there was a point
+			} else if (words.get(i).getText().equals(".") || words.get(i).getText().equals("?") || words.get(i).getText().equals("!") || words.get(i).getText().equals("...")) { // If there was a point
 				if ((i + 1) < words.size() && words.get(i + 1).getText().equals(" ")) {
 					if ((i + 2) < words.size()
 							&& Pattern.compile("[a-zA-ZÀ-ÿ]+").matcher(words.get(i + 2).getText()).find()
