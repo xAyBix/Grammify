@@ -44,6 +44,15 @@ public class Word {
 		words.add(new Punctuation(""+((char)10), PunctuationTypes.NEW_LINE));
 		words.add(new Punctuation(""+((char)13), PunctuationTypes.NEW_LINE));
 		
+		// Coordinating Conjunctions
+		words.add(new CoordinatingConjunction("mais"));
+		words.add(new CoordinatingConjunction("ou"));
+		words.add(new CoordinatingConjunction("et"));
+		words.add(new CoordinatingConjunction("donc"));
+		words.add(new CoordinatingConjunction("or"));
+		words.add(new CoordinatingConjunction("ni"));
+		words.add(new CoordinatingConjunction("car"));
+		
 		// Pronouns
 		words.add(new Pronoun("je", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, PronounTypes.PERSONAL, "j"));
 		words.add(new Pronoun("tu", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, PronounTypes.PERSONAL, null));
@@ -97,7 +106,47 @@ public class Word {
 		words.add(new Pronoun("lui", GrammaticalNumber.SINGULAR, GrammaticalGender.MASCULINE, PronounTypes.STRESSED, null));
 		words.add(new Pronoun("eux", GrammaticalNumber.PLURAL, GrammaticalGender.MASCULINE, PronounTypes.STRESSED, null));
 		
-		// Adjectifs
+		// Adjectives
+		Adjective.createAdjective("petit", "petite", "petits", "petites");
+		Adjective.createAdjective("grand", "grande", "grands", "grandes");
+		Adjective.createAdjective("bon", "bonne", "bons", "bonnes");
+		Adjective.createAdjective("mauvais", "mauvaise", "mauvais", "mauvaises");
+		Adjective.createAdjective("nouveau", "nouvelle", "nouveaux", "nouvelles");
+		Adjective.createAdjective("vieux", "vieille", "vieux", "vieilles");
+		Adjective.createAdjective("long", "longue", "longs", "longues");
+		Adjective.createAdjective("court", "courte", "courts", "courtes");
+		Adjective.createAdjective("large", "", "larges", "");
+		Adjective.createAdjective("haut", "haute", "hauts", "hautes");
+		Adjective.createAdjective("beau", "belle", "beaux", "belles");
+		Adjective.createAdjective("joli", "jolie", "jolis", "jolies");
+		Adjective.createAdjective("jeune", "", "jeunes", "");
+		Adjective.createAdjective("vrai", "vraie", "vrais", "vraies");
+		Adjective.createAdjective("heureux", "heureuse", "heureux", "heureuses");
+		Adjective.createAdjective("triste", "", "tristes", "");
+		Adjective.createAdjective("facile", "", "faciles", "");
+		Adjective.createAdjective("difficile", "", "difficiles", "");
+		Adjective.createAdjective("rapide", "", "rapides", "");
+		Adjective.createAdjective("lent", "lente", "lents", "lentes");
+		
+		Adjective.createAdjective("rouge", "", "rouges", "");
+		Adjective.createAdjective("bleu", "bleue", "bleus", "bleues");
+		Adjective.createAdjective("vert", "verte", "verts", "vertes");
+		Adjective.createAdjective("jaune", "", "jaunes", "");
+		Adjective.createAdjective("orange", "", "oranges", "");
+		Adjective.createAdjective("rose", "", "roses", "");
+		Adjective.createAdjective("marron", "", "marron", "");
+		Adjective.createAdjective("violet", "violette", "violets", "violettes");
+		Adjective.createAdjective("gris", "grise", "gris", "grises");
+		Adjective.createAdjective("noir", "noire", "noirs", "noires");
+		Adjective.createAdjective("blanc", "blanche", "blancs", "blanches");
+		Adjective.createAdjective("brun", "brune", "bruns", "brunes");
+		Adjective.createAdjective("beige", "", "beiges", "");
+		Adjective.createAdjective("turquoise", "", "turquoises", "");
+		Adjective.createAdjective("kaki", "", "kaki", "");
+		Adjective.createAdjective("bordeaux", "", "bordeaux", "");
+		Adjective.createAdjective("ivoire", "", "ivoires", "");
+		Adjective.createAdjective("or", "", "or", "");
+		Adjective.createAdjective("argent", "", "argent", "");
 		
 		// Auxiliaries (already initialized in Auxialiary class)
 		// Saving Avoir to words
@@ -243,7 +292,7 @@ public class Word {
 		words.add(new Noun("tableau", GrammaticalGender.MASCULINE, "tableaux"));
 		words.add(new Noun("cahier", GrammaticalGender.MASCULINE, "cahiers"));
 		words.add(new Noun("ordinateur", GrammaticalGender.FEMININE, "ordinateurs"));
-		words.add(new Noun("ingénieur", GrammaticalGender.MASCULINE, "ingénieurs"));
+		words.add(new Noun("ingénieur", GrammaticalGender.UNISEX, "ingénieurs"));
 		words.add(new Noun("ingénieurie", GrammaticalGender.FEMININE, "ingénieuries"));
 		words.add(new Noun("ingénieure", GrammaticalGender.FEMININE, "ingénieures"));
 		words.add(new Noun("génie", GrammaticalGender.MASCULINE, "génies"));
@@ -287,6 +336,21 @@ public class Word {
 		words.add(new Noun("grammaire", GrammaticalGender.FEMININE, "grammaires"));
 		words.add(new Noun("banane", GrammaticalGender.FEMININE, "bananes"));
 		words.add(new Noun("fleur", GrammaticalGender.FEMININE, "fleurs"));
+		words.add(new Noun("porte", GrammaticalGender.FEMININE, "portes"));
+		words.add(new Noun("miroir", GrammaticalGender.FEMININE, "miroirs"));
+		words.add(new Noun("pain", GrammaticalGender.MASCULINE, "pains"));
+		words.add(new Noun("mur", GrammaticalGender.MASCULINE, "murs"));
+		words.add(new Noun("baguette", GrammaticalGender.FEMININE, "baguettes"));
+		words.add(new Noun("lesson", GrammaticalGender.FEMININE, "lessons"));
+		words.add(new Noun("lunette", GrammaticalGender.FEMININE, "lunettes"));
+		words.add(new Noun("médecin", GrammaticalGender.UNISEX, "médecins"));
+		words.add(new Noun("maître", GrammaticalGender.MASCULINE, "maîtres"));
+		words.add(new Noun("maîtresse", GrammaticalGender.FEMININE, "maîtresses"));
+		words.add(new Noun("lampe", GrammaticalGender.FEMININE, "lampes"));
+		words.add(new Noun("tajine", GrammaticalGender.FEMININE, "tajines"));
+		words.add(new Noun("poulet", GrammaticalGender.MASCULINE, "poulets"));
+		words.add(new Noun("garçon", GrammaticalGender.MASCULINE, "garçons"));
+		words.add(new Noun("fille", GrammaticalGender.FEMININE, "filles"));
 		
 		// DETERMINERS
 		words.add(new Determiner("un", GrammaticalNumber.SINGULAR, GrammaticalGender.MASCULINE, DeterminerTypes.INDIFINITE));

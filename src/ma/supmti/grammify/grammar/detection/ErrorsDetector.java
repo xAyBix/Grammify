@@ -129,7 +129,8 @@ public final class ErrorsDetector {
 							int pos = MainFrame.textArea.viewToModel2D(e.getPoint());
 							
 							if (pos >= err.getStart() && pos <= err.getEnd()) {
-								SuggestionsPopup.showSuggestionsPopup(err, e.getX(), e.getY());
+								if(OpenedFile.errors.contains(err)) // Only shows the suggestion popup if there is an error
+									SuggestionsPopup.showSuggestionsPopup(err, e.getX(), e.getY());
 							}
 						}
 					}
@@ -195,11 +196,9 @@ public final class ErrorsDetector {
 			if (i == 0) { // Checking if the first word isn't a number and does start with Uppercase
 				if (Pattern.compile("[a-zA-ZÀ-ÿ]+").matcher(words.get(i).getText()).find()) {
 					if (Character.isLowerCase(words.get(i).getText().charAt(0))) {
-						errors.add(new Error(words.get(i), errorMessage,
-								Arrays.asList(new Word[] { new Word(
-										String.valueOf(words.get(i).getWords().get(0).getText().charAt(0)).toUpperCase()
-												+ words.get(i).getWords().get(0).getText().substring(1),
-										null) }))); // Fixing the uppercase
+						Word w = new Word(words.get(i).getWords().get(0).getText(), null);
+						w.setText(String.valueOf(w.getText().charAt(0)).toUpperCase()+ w.getText().substring(1));
+						errors.add(new Error(words.get(i), errorMessage, Arrays.asList(new Word[] {w}))); // Fixing the uppercase
 					}
 				}
 			} else if (words.get(i).getText().equals(".") || words.get(i).getText().equals("?") || words.get(i).getText().equals("!") || words.get(i).getText().equals("...")) { // If there was a point
@@ -207,30 +206,24 @@ public final class ErrorsDetector {
 					if ((i + 2) < words.size()
 							&& Pattern.compile("[a-zA-ZÀ-ÿ]+").matcher(words.get(i + 2).getText()).find()
 							&& Character.isLowerCase(words.get(i + 2).getText().charAt(0))) {
-						// System.err.println(words.get(i + 2).getText().charAt(0)+" "+Character.isLowerCase(words.get(i + 2).getText().charAt(0))); 
-						errors.add(new Error(words.get(i + 2), errorMessage, Arrays.asList(new Word[] { new Word(
-								String.valueOf(words.get(i + 2).getWords().get(0).getText().charAt(0)).toUpperCase()
-										+ words.get(i + 2).getWords().get(0).getText().substring(1),
-								null) })));
+						Word w = new Word(words.get(i + 2).getWords().get(0).getText(), null);
+						w.setText(String.valueOf(w.getText().charAt(0)).toUpperCase()+ w.getText().substring(1));
+						errors.add(new Error(words.get(i + 2), errorMessage, Arrays.asList(new Word[] {w})));
 					}
 				} else if ((i + 1) < words.size()
 						&& Pattern.compile("[a-zA-ZÀ-ÿ]+").matcher(words.get(i + 1).getText()).find()
 						&& Character.isLowerCase(words.get(i + 1).getText().charAt(0))) {
-					errors.add(new Error(words.get(i + 1), errorMessage,
-							Arrays.asList(new Word[] { new Word(
-									String.valueOf(words.get(i + 1).getWords().get(0).getText().charAt(0)).toUpperCase()
-											+ words.get(i + 1).getWords().get(0).getText().substring(1),
-									null) })));
+					Word w = new Word(words.get(i + 1).getWords().get(0).getText(), null);
+					w.setText(String.valueOf(w.getText().charAt(0)).toUpperCase()+ w.getText().substring(1));
+					errors.add(new Error(words.get(i + 1), errorMessage, Arrays.asList(new Word[] {w})));
 				}
 			} else if (words.get(i).getText().equals("\n")) { // If there a new line
 				if ((i + 1) < words.size()
 						&& Pattern.compile("[a-zA-ZÀ-ÿ]+").matcher(words.get(i + 1).getText()).find()
 						&& Character.isLowerCase(words.get(i + 1).getText().charAt(0))) {
-					errors.add(new Error(words.get(i + 1), errorMessage,
-							Arrays.asList(new Word[] { new Word(
-									String.valueOf(words.get(i + 1).getText().charAt(0)).toUpperCase()
-											+ words.get(i + 1).getWords().get(0).getText().substring(1),
-									null) })));
+					Word w = new Word(words.get(i + 1).getWords().get(0).getText(), null);
+					w.setText(String.valueOf(w.getText().charAt(0)).toUpperCase()+ w.getText().substring(1));
+					errors.add(new Error(words.get(i + 1), errorMessage, Arrays.asList(new Word[] {w})));
 				}
 			}
 		}

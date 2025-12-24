@@ -15,7 +15,7 @@ import java.util.List;
  * @since 2025-12-17 11:45
  */
 public class Noun extends Word{
-	public static List<Noun> Nouns = new ArrayList<>();
+	public static List<Noun> nouns = new ArrayList<>();
 	private Noun plural;
 	private Noun singular;
 	private GrammaticalNumber grammaticalNumber;
@@ -31,6 +31,7 @@ public class Noun extends Word{
 		}else {
 			this.plural = null;
 		}
+		nouns.add(this);
 		
 	}
 	public Noun (String text, GrammaticalGender grammaticalGender, Noun singular) {
@@ -39,6 +40,8 @@ public class Noun extends Word{
 		this.grammaticalNumber = GrammaticalNumber.PLURAL;
 		this.singular = singular;
 		this.plural = null;
+		Word.words.add(this);
+		nouns.add(this);
 	}
 	
 	// Checks if the noun is plural
