@@ -285,6 +285,12 @@ public class Word {
 		
 		
 		// 3rd group verbs
+		words.add(new Verb3("dormir", Verb3Pattern.DORMIR, Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb3("sortir", Verb3Pattern.DORMIR, Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb3("servir", Verb3Pattern.DORMIR, Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb3("sentir", Verb3Pattern.DORMIR, Arrays.asList(Auxiliary.getAvoir()), false));
+		
+		words.add(new Verb3("aller", Verb3Pattern.ALLER, Arrays.asList(Auxiliary.getEtre()), false));
 		
 		// Nouns
 		words.add(new Noun("table", GrammaticalGender.FEMININE, "tables"));
@@ -298,7 +304,9 @@ public class Word {
 		words.add(new Noun("génie", GrammaticalGender.MASCULINE, "génies"));
 		words.add(new Noun("professeur", GrammaticalGender.MASCULINE, "professeurs"));
 		words.add(new Noun("professeuse", GrammaticalGender.FEMININE, "professeuses"));
+		words.add(new Noun("biologie", GrammaticalGender.FEMININE, "biologies"));
 		words.add(new Noun("géologie", GrammaticalGender.FEMININE, "géologies"));
+		words.add(new Noun("géographie", GrammaticalGender.FEMININE, "géographies"));
 		words.add(new Noun("terre", GrammaticalGender.FEMININE, "terres"));
 		words.add(new Noun("parent", GrammaticalGender.MASCULINE, "parents"));
 		words.add(new Noun("ciel", GrammaticalGender.MASCULINE, ""));
@@ -351,6 +359,7 @@ public class Word {
 		words.add(new Noun("poulet", GrammaticalGender.MASCULINE, "poulets"));
 		words.add(new Noun("garçon", GrammaticalGender.MASCULINE, "garçons"));
 		words.add(new Noun("fille", GrammaticalGender.FEMININE, "filles"));
+		words.add(new Noun("école", GrammaticalGender.FEMININE, "écoles"));
 		
 		// DETERMINERS
 		words.add(new Determiner("un", GrammaticalNumber.SINGULAR, GrammaticalGender.MASCULINE, DeterminerTypes.INDIFINITE));
