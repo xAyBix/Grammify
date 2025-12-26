@@ -291,6 +291,19 @@ public class Word {
 		words.add(new Verb3("sentir", Verb3Pattern.DORMIR, Arrays.asList(Auxiliary.getAvoir()), false));
 		
 		words.add(new Verb3("aller", Verb3Pattern.ALLER, Arrays.asList(Auxiliary.getEtre()), false));
+		words.add(new Verb3("vouloir", Verb3Pattern.VOULOIR, Arrays.asList(Auxiliary.getAvoir()), false));
+		
+		words.add(new Verb3("voir", Verb3Pattern.VOIR, Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb3("prévoir", Verb3Pattern.VOIR, Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb3("apercevoir", Verb3Pattern.VOIR, Arrays.asList(Auxiliary.getAvoir()), false));
+		
+		words.add(new Verb3("falloir", Verb3Pattern.FALLOIR, Arrays.asList(Auxiliary.getAvoir()), false));
+		
+		words.add(new Verb3("tenir", Verb3Pattern.TENIR, Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb3("maintenir", Verb3Pattern.TENIR, Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb3("soutenir", Verb3Pattern.TENIR, Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb3("obtenir", Verb3Pattern.TENIR, Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb3("retenir", Verb3Pattern.TENIR, Arrays.asList(Auxiliary.getAvoir()), false));
 		
 		// Nouns
 		words.add(new Noun("table", GrammaticalGender.FEMININE, "tables"));

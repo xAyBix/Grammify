@@ -8,7 +8,9 @@ public enum Verb3Pattern {
     DIRE,
     VENIR,
     TENIR,
+    VOULOIR,
     VOIR,
     ALLER,
     FAIRE,
+    FALLOIR
 }
