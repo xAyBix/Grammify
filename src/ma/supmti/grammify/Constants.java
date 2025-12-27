@@ -40,7 +40,7 @@ public final class Constants {
 	public static final int FRAME_HEIGHT = (int) (SCREEN_HEIGHT * 0.9);
 	
 	// Application icon
-	public static final Image img = getImage();
+	public static final Image IMG = getImage();
 	
 	// Colors
 	public static final Color mainColor = new Color(0x303030);

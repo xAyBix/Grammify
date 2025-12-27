@@ -37,7 +37,7 @@ public class MainFrame extends JFrame {
 		
 		// Interface's frame configuration
 		setTitle(Constants.APP_NAME);
-		setIconImage(Constants.img);
+		setIconImage(Constants.IMG);
 		setSize(Constants.FRAME_WIDTH, Constants.FRAME_HEIGHT);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);

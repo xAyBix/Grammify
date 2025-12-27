@@ -313,6 +313,14 @@ public class Word {
 		words.add(new Verb3("intervenir", Verb3Pattern.VENIR, Arrays.asList(Auxiliary.getAvoir()), false));
 		words.add(new Verb3("parvenir", Verb3Pattern.VENIR, Arrays.asList(Auxiliary.getAvoir()), false));
 		
+		words.add(new Verb3("dire", Verb3Pattern.DIRE, Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb3("redire", Verb3Pattern.DIRE, Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb3("interdire", Verb3Pattern.DIRE, Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb3("contredire", Verb3Pattern.DIRE, Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb3("médire", Verb3Pattern.DIRE, Arrays.asList(Auxiliary.getAvoir()), false));
+		
+		
+		
 		// Nouns
 		words.add(new Noun("table", GrammaticalGender.FEMININE, "tables"));
 		words.add(new Noun("pomme", GrammaticalGender.FEMININE, "pommes"));

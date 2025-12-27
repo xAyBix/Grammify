@@ -28,7 +28,6 @@ public class GrammifyApplication {
 		
 				
 		// Run UI
-		
 		SwingUtilities.invokeLater(new Runnable() {
 		    @Override
 		    public void run() {

@@ -238,11 +238,68 @@ public class Verb3 extends Verb {
 	}
 
 	private void buildDire() {
+		 String base = getText().substring(0, getText().length() - 4);
+
+		    String diStem    = base + "di";
+		    String futurStem = base + "dir";
+		    String pastPart  = base + "dit";
+
+			String[] present = { diStem + "s", diStem + "s", diStem + "t", diStem + "sons", diStem + "tes",
+					diStem + "sent" };
+			String[] imparfaitSuffixes = { "ais", "ais", "ait", "ions", "iez", "aient" };
+			String[] futurSuffixes = { "ai", "as", "a", "ons", "ez", "ont" };
+			String[] simplePastSuffixes = { "s", "s", "t", "̂mes", "̂tes", "rent" };
+
+			for (int i = 0; i < 6; i++) {
+				simplePresent[i] = new Verb(present[i], this);
+				imparfait[i] = new Verb(diStem + imparfaitSuffixes[i], this);
+				futur[i] = new Verb(futurStem + futurSuffixes[i], this);
+				simplePast[i] = new Verb(diStem + simplePastSuffixes[i], this);
+				
+				words.add(simplePast[i]);
+				words.add(futur[i]);
+				words.add(imparfait[i]);
+				words.add(simplePresent[i]);
+			}
+
+			pastParticiples = new Verb[] { new Verb(pastPart, this) };
+			words.add(pastParticiples[0]);
+			presentParticipal = new Verb(diStem + "sant", this);
+			words.add(presentParticipal);
 
 	}
 
 	private void buildMettre() {
+		String base = getText().substring(0, getText().length() - 5);
 
+	    String metStem    = base + "met";
+	    String mettStem   = base + "mett";
+	    String futurStem  = base + "mettr";
+	    String pastStem   = base + "mi";
+	    String pastPart   = base + "mis";
+
+		String[] present = { metStem + "s", metStem + "s", metStem, metStem + "tons", metStem + "tez",
+				mettStem + "ent" };
+		String[] imparfaitSuffixes = { "ais", "ais", "ait", "ions", "iez", "aient" };
+		String[] futurSuffixes = { "ai", "as", "a", "ons", "ez", "ont" };
+		String[] simplePastSuffixes = { "s", "s", "t", "̂mes", "̂tes", "rent" };
+
+		for (int i = 0; i < 6; i++) {
+			simplePresent[i] = new Verb(present[i], this);
+			imparfait[i] = new Verb(mettStem + imparfaitSuffixes[i], this);
+			futur[i] = new Verb(futurStem + futurSuffixes[i], this);
+			simplePast[i] = new Verb(pastStem + simplePastSuffixes[i], this);
+
+			words.add(simplePast[i]);
+			words.add(futur[i]);
+			words.add(imparfait[i]);
+			words.add(simplePresent[i]);
+		}
+
+		pastParticiples = new Verb[] { new Verb(pastPart, this) };
+		words.add(pastParticiples[0]);
+		presentParticipal = new Verb(mettStem + "ant", this);
+		words.add(presentParticipal);
 	}
 
 	private void buildPrendre() {
