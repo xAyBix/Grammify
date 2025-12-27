@@ -305,6 +305,14 @@ public class Word {
 		words.add(new Verb3("obtenir", Verb3Pattern.TENIR, Arrays.asList(Auxiliary.getAvoir()), false));
 		words.add(new Verb3("retenir", Verb3Pattern.TENIR, Arrays.asList(Auxiliary.getAvoir()), false));
 		
+		words.add(new Verb3("venir", Verb3Pattern.VENIR, Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb3("devenir", Verb3Pattern.VENIR, Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb3("revenir", Verb3Pattern.VENIR, Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb3("souvenir", Verb3Pattern.VENIR, Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb3("prévenir", Verb3Pattern.VENIR, Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb3("intervenir", Verb3Pattern.VENIR, Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb3("parvenir", Verb3Pattern.VENIR, Arrays.asList(Auxiliary.getAvoir()), false));
+		
 		// Nouns
 		words.add(new Noun("table", GrammaticalGender.FEMININE, "tables"));
 		words.add(new Noun("pomme", GrammaticalGender.FEMININE, "pommes"));

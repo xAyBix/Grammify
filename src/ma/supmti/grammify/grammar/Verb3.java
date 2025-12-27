@@ -205,7 +205,36 @@ public class Verb3 extends Verb {
 	}
 
 	private void buildVenir() {
+		String base = getText().substring(0, getText().length() - 4);
 
+	    String vienStem   = base + "vien";
+	    String venStem    = base + "ven";
+	    String futurStem  = base + "viendr";
+	    String pastStem   = base + "vin";
+	    String pastPart   = base + "venu";
+
+		String[] present = { vienStem + "s", vienStem + "s", vienStem + "t", venStem + "ons", venStem + "ez",
+				vienStem + "nent" };
+		String[] imparfaitSuffixes = { "ais", "ais", "ait", "ions", "iez", "aient" };
+		String[] futurSuffixes = { "ai", "as", "a", "ons", "ez", "ont" };
+		String[] simplePastSuffixes = { "s", "s", "t", "̂mes", "̂tes", "rent" };
+
+		for (int i = 0; i < 6; i++) {
+			simplePresent[i] = new Verb(present[i], this);
+			imparfait[i] = new Verb(venStem + imparfaitSuffixes[i], this);
+			futur[i] = new Verb(futurStem + futurSuffixes[i], this);
+			simplePast[i] = new Verb(pastStem + simplePastSuffixes[i], this);
+
+			words.add(simplePast[i]);
+			words.add(futur[i]);
+			words.add(imparfait[i]);
+			words.add(simplePresent[i]);
+		}
+
+		pastParticiples = new Verb[] { new Verb(pastPart, this) };
+		words.add(pastParticiples[0]);
+		presentParticipal = new Verb(venStem + "ant", this);
+		words.add(presentParticipal);
 	}
 
 	private void buildDire() {
