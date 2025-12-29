@@ -17,6 +17,8 @@ import javax.swing.text.Highlighter;
 import javax.swing.text.Highlighter.Highlight;
 import javax.swing.text.Highlighter.HighlightPainter;
 
+import ma.supmti.grammify.grammar.Pronoun;
+import ma.supmti.grammify.grammar.PronounTypes;
 import ma.supmti.grammify.grammar.Word;
 import ma.supmti.grammify.io.OpenedFile;
 import ma.supmti.grammify.ui.MainFrame;
@@ -231,6 +233,7 @@ public final class ErrorsDetector {
 		return errors;
 	}
 	
+	// Checks for spelling errors withing the words
 	private static List<Error> spellingErrorsCheck (List<WordMap> words) {
 		List<Error> errors = new ArrayList<>();
 		String errorMessage = "Unfound word detected";
@@ -241,5 +244,43 @@ public final class ErrorsDetector {
 		}
 		return errors;
 	} 
+	
+	// Checks for grammar errors (respecting the gender, respecting the number...)
+	private static List<Error> grammarErrorsCheck (List<WordMap> words) {
+		List<Error> errors = new ArrayList<>();
+		String genderErrorMessage = "Wrong gender detected";
+		String numberErrorMessage = "Wrong number detected";
+		
+		for (int i = 0; i < words.size(); i++) {
+
+		}
+		
+		return errors;
+	}
+	
+	// Checks for conjugation errors
+	private static List<Error> conjugationErrorsCheck (List<WordMap> words) {
+		List<Error> errors = new ArrayList<>();
+		String errorMessage = "Wrong conjugation detected";
+		
+		for (int i = 0; i < words.size(); i++) {
+
+		}
+		
+		return errors;
+	}
+	
+	// Checks for the right use of ponctuations
+	private static List<Error> ponctuationErrorsCheck (List<WordMap> words) {
+		List<Error> errors = new ArrayList<>();
+		String errorMessage = "Wrong ponctuation detected";
+		
+		for (int i=0; i<words.size(); i++) {
+			
+		}
+		
+		
+		return errors;
+	}
 	
 }

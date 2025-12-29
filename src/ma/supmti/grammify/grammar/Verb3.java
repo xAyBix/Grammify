@@ -137,7 +137,36 @@ public class Verb3 extends Verb {
 	}
 
 	private void buildFaire() {
+		String base = getText().substring(0, getText().length() - 4);
 
+	    String faiStem   = base + "fai";
+	    String faisStem  = base + "fais";
+	    String ferStem   = base + "fer";
+	    String pastStem  = base + "fi";
+	    String pastPart  = base + "fait";
+
+		String[] present = { faiStem + "s", faiStem + "s", faiStem + "t", faisStem + "ons", faisStem + "tes",
+				base + "font" };
+		String[] imparfaitSuffixes = { "ais", "ais", "ait", "ions", "iez", "aient" };
+		String[] futurSuffixes = { "ai", "as", "a", "ons", "ez", "ont" };
+		String[] simplePastSuffixes = { "s", "s", "t", "̂mes", "̂tes", "rent" };
+
+		for (int i = 0; i < 6; i++) {
+			simplePresent[i] = new Verb(present[i], this);
+			imparfait[i] = new Verb(faisStem + imparfaitSuffixes[i], this);
+			futur[i] = new Verb(ferStem + futurSuffixes[i], this);
+			simplePast[i] = new Verb(pastStem + simplePastSuffixes[i], this);
+
+			words.add(simplePast[i]);
+			words.add(futur[i]);
+			words.add(imparfait[i]);
+			words.add(simplePresent[i]);
+		}
+
+		pastParticiples = new Verb[] { new Verb(pastPart, this) };
+		words.add(pastParticiples[0]);
+		presentParticipal = new Verb(faisStem + "ant", this);
+		words.add(presentParticipal);
 	}
 
 	private void buildAller() {
@@ -303,11 +332,68 @@ public class Verb3 extends Verb {
 	}
 
 	private void buildPrendre() {
+		String base = getText().substring(0, getText().length() - 6);
 
+	    String prendStem = base + "prend";
+	    String prenStem  = base + "pren";
+	    String futurStem = prendStem;
+	    String pastStem  = base + "pri";
+	    String pastPart  = base + "pris";
+	    
+		String[] present = { prendStem + "s", prendStem + "s", prendStem, prenStem + "ons", prenStem + "ez",
+				base + "prennent" };
+		String[] imparfaitSuffixes = { "ais", "ais", "ait", "ions", "iez", "aient" };
+		String[] futurSuffixes = { "ai", "as", "a", "ons", "ez", "ont" };
+		String[] simplePastSuffixes = { "s", "s", "t", "̂mes", "̂tes", "rent" };
+
+		for (int i = 0; i < 6; i++) {
+			simplePresent[i] = new Verb(present[i], this);
+			imparfait[i] = new Verb(prenStem + imparfaitSuffixes[i], this);
+			futur[i] = new Verb(futurStem + futurSuffixes[i], this);
+			simplePast[i] = new Verb(pastStem + simplePastSuffixes[i], this);
+
+			words.add(simplePast[i]);
+			words.add(futur[i]);
+			words.add(imparfait[i]);
+			words.add(simplePresent[i]);
+		}
+
+		pastParticiples = new Verb[] { new Verb(pastPart, this) };
+		words.add(pastParticiples[0]);
+		presentParticipal = new Verb(prenStem + "ant", this);
+		words.add(presentParticipal);
 	}
 
 	private void buildPartir() {
+		String base = getText().substring(0, getText().length() - 2);
 
+	    String shortStem = base.substring(0, base.length() - 1);
+	    String fullStem  = base;
+	    String futurStem = base + "ir";
+	    String pastPart  = base + "i";
+
+		String[] present = { shortStem + "s", shortStem + "s", shortStem + "t", fullStem + "ons", fullStem + "ez",
+				shortStem + "ent" };
+		String[] imparfaitSuffixes = { "ais", "ais", "ait", "ions", "iez", "aient" };
+		String[] futurSuffixes = { "ai", "as", "a", "ons", "ez", "ont" };
+		String[] simplePastSuffixes = { "is", "is", "it", "îmes", "îtes", "irent" };
+
+		for (int i = 0; i < 6; i++) {
+			simplePresent[i] = new Verb(present[i], this);
+			imparfait[i] = new Verb(fullStem + imparfaitSuffixes[i], this);
+			futur[i] = new Verb(futurStem + futurSuffixes[i], this);
+			simplePast[i] = new Verb(fullStem + simplePastSuffixes[i], this);
+			
+			words.add(simplePast[i]);
+			words.add(futur[i]);
+			words.add(imparfait[i]);
+			words.add(simplePresent[i]);
+		}
+
+		pastParticiples = new Verb[] { new Verb(pastPart, this) };
+		words.add(pastParticiples[0]);
+		presentParticipal = new Verb(fullStem + "ant", this);
+		words.add(presentParticipal);
 	}
 
 	private void buildDormir() {

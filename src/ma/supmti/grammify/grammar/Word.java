@@ -319,7 +319,35 @@ public class Word {
 		words.add(new Verb3("contredire", Verb3Pattern.DIRE, Arrays.asList(Auxiliary.getAvoir()), false));
 		words.add(new Verb3("médire", Verb3Pattern.DIRE, Arrays.asList(Auxiliary.getAvoir()), false));
 		
+		words.add(new Verb3("mettre", Verb3Pattern.METTRE, Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb3("remettre", Verb3Pattern.METTRE, Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb3("permettre", Verb3Pattern.METTRE, Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb3("promettre", Verb3Pattern.METTRE, Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb3("admettre", Verb3Pattern.METTRE, Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb3("soumettre", Verb3Pattern.METTRE, Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb3("transmettre", Verb3Pattern.METTRE, Arrays.asList(Auxiliary.getAvoir()), false));
 		
+		words.add(new Verb3("prendre", Verb3Pattern.PRENDRE, Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb3("apprendre", Verb3Pattern.PRENDRE, Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb3("comprendre", Verb3Pattern.PRENDRE, Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb3("surprendre", Verb3Pattern.PRENDRE, Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb3("entreprendre", Verb3Pattern.PRENDRE, Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb3("reprendre", Verb3Pattern.PRENDRE, Arrays.asList(Auxiliary.getAvoir()), false));
+		
+		words.add(new Verb3("partir", Verb3Pattern.PARTIR, Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb3("repartir", Verb3Pattern.PARTIR, Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb3("sortir", Verb3Pattern.PARTIR, Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb3("servir", Verb3Pattern.PARTIR, Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb3("sentir", Verb3Pattern.PARTIR, Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb3("mentir", Verb3Pattern.PARTIR, Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb3("consentir", Verb3Pattern.PARTIR, Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb3("pressentir", Verb3Pattern.PARTIR, Arrays.asList(Auxiliary.getAvoir()), false));
+		
+		words.add(new Verb3("faire", Verb3Pattern.FAIRE, Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb3("défaire", Verb3Pattern.FAIRE, Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb3("refaire", Verb3Pattern.FAIRE, Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb3("contrefaire", Verb3Pattern.FAIRE, Arrays.asList(Auxiliary.getAvoir()), false));
+		words.add(new Verb3("satisfaire", Verb3Pattern.FAIRE, Arrays.asList(Auxiliary.getAvoir()), false));
 		
 		// Nouns
 		words.add(new Noun("table", GrammaticalGender.FEMININE, "tables"));
@@ -389,6 +417,7 @@ public class Word {
 		words.add(new Noun("garçon", GrammaticalGender.MASCULINE, "garçons"));
 		words.add(new Noun("fille", GrammaticalGender.FEMININE, "filles"));
 		words.add(new Noun("école", GrammaticalGender.FEMININE, "écoles"));
+		words.add(new Noun("chose", GrammaticalGender.FEMININE, "choses"));
 		
 		// DETERMINERS
 		words.add(new Determiner("un", GrammaticalNumber.SINGULAR, GrammaticalGender.MASCULINE, DeterminerTypes.INDIFINITE));
@@ -424,6 +453,18 @@ public class Word {
 		words.add(new Determiner("cet", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, DeterminerTypes.DEMONSTRATIVE));
 		words.add(new Determiner("cette", GrammaticalNumber.SINGULAR, GrammaticalGender.FEMININE, DeterminerTypes.DEMONSTRATIVE));
 		words.add(new Determiner("ces", GrammaticalNumber.PLURAL, GrammaticalGender.UNISEX, DeterminerTypes.DEMONSTRATIVE));
+		
+		//Negation Tools
+		words.add(new NegationTool("ne"));
+		words.add(new NegationTool("n"));
+		words.add(new NegationTool("pas"));
+		words.add(new NegationTool("aucun"));
+		words.add(new NegationTool("aucune"));
+		words.add(new NegationTool("jamais"));
+		words.add(new NegationTool("rien"));
+		words.add(new NegationTool("plus"));
+		words.add(new NegationTool("personne"));
+		words.add(new NegationTool("guère"));
 	
 	}
 	
