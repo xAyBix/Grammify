@@ -465,6 +465,32 @@ public class Word {
 		words.add(new NegationTool("plus"));
 		words.add(new NegationTool("personne"));
 		words.add(new NegationTool("guère"));
+		NegationTool.combos.add(new NegationCombo(NegationTool.getNegationToolByText("ne"), NegationTool.getNegationToolByText("pas")));
+		NegationTool.combos.add(new NegationCombo(NegationTool.getNegationToolByText("ne"), NegationTool.getNegationToolByText("aucun")));
+		NegationTool.combos.add(new NegationCombo(NegationTool.getNegationToolByText("ne"), NegationTool.getNegationToolByText("aucune")));
+		NegationTool.combos.add(new NegationCombo(NegationTool.getNegationToolByText("ne"), NegationTool.getNegationToolByText("jamais")));
+		NegationTool.combos.add(new NegationCombo(NegationTool.getNegationToolByText("ne"), NegationTool.getNegationToolByText("rien")));
+		NegationTool.combos.add(new NegationCombo(NegationTool.getNegationToolByText("ne"), NegationTool.getNegationToolByText("plus")));
+		NegationTool.combos.add(new NegationCombo(NegationTool.getNegationToolByText("ne"), NegationTool.getNegationToolByText("personne")));
+		NegationTool.combos.add(new NegationCombo(NegationTool.getNegationToolByText("ne"), NegationTool.getNegationToolByText("guère")));
+		
+		NegationTool.combos.add(new NegationCombo(NegationTool.getNegationToolByText("n"), NegationTool.getNegationToolByText("pas")));
+		NegationTool.combos.add(new NegationCombo(NegationTool.getNegationToolByText("n"), NegationTool.getNegationToolByText("aucun")));
+		NegationTool.combos.add(new NegationCombo(NegationTool.getNegationToolByText("n"), NegationTool.getNegationToolByText("aucune")));
+		NegationTool.combos.add(new NegationCombo(NegationTool.getNegationToolByText("n"), NegationTool.getNegationToolByText("jamais")));
+		NegationTool.combos.add(new NegationCombo(NegationTool.getNegationToolByText("n"), NegationTool.getNegationToolByText("rien")));
+		NegationTool.combos.add(new NegationCombo(NegationTool.getNegationToolByText("n"), NegationTool.getNegationToolByText("plus")));
+		NegationTool.combos.add(new NegationCombo(NegationTool.getNegationToolByText("n"), NegationTool.getNegationToolByText("personne")));
+		NegationTool.combos.add(new NegationCombo(NegationTool.getNegationToolByText("n"), NegationTool.getNegationToolByText("guère")));
+		
+		NegationTool.combos.add(new NegationCombo(NegationTool.getNegationToolByText("aucun"), NegationTool.getNegationToolByText("ne")));
+		NegationTool.combos.add(new NegationCombo(NegationTool.getNegationToolByText("aucun"), NegationTool.getNegationToolByText("n")));
+		NegationTool.combos.add(new NegationCombo(NegationTool.getNegationToolByText("aucune"), NegationTool.getNegationToolByText("ne")));
+		NegationTool.combos.add(new NegationCombo(NegationTool.getNegationToolByText("aucune"), NegationTool.getNegationToolByText("n")));
+		NegationTool.combos.add(new NegationCombo(NegationTool.getNegationToolByText("rien"), NegationTool.getNegationToolByText("ne")));
+		NegationTool.combos.add(new NegationCombo(NegationTool.getNegationToolByText("rien"), NegationTool.getNegationToolByText("n")));
+		NegationTool.combos.add(new NegationCombo(NegationTool.getNegationToolByText("personne"), NegationTool.getNegationToolByText("ne")));
+		NegationTool.combos.add(new NegationCombo(NegationTool.getNegationToolByText("personne"), NegationTool.getNegationToolByText("n")));
 	
 	}
 	

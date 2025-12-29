@@ -21,6 +21,13 @@ public class NegationTool extends Word{
 		super(text, PartOfSpeech.NEGATION_TOOLS);
 		negationTools.add(this);
 	}
+	public static NegationTool getNegationToolByText (String text) {
+		for (NegationTool nt : negationTools) {
+			if (nt.getText().equals(text))
+				return nt;
+		}
+		return null;
+	}
 
 }
 

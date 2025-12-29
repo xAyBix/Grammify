@@ -17,8 +17,12 @@ import javax.swing.text.Highlighter;
 import javax.swing.text.Highlighter.Highlight;
 import javax.swing.text.Highlighter.HighlightPainter;
 
+import ma.supmti.grammify.grammar.Noun;
+import ma.supmti.grammify.grammar.PartOfSpeech;
 import ma.supmti.grammify.grammar.Pronoun;
 import ma.supmti.grammify.grammar.PronounTypes;
+import ma.supmti.grammify.grammar.Punctuation;
+import ma.supmti.grammify.grammar.Verb;
 import ma.supmti.grammify.grammar.Word;
 import ma.supmti.grammify.io.OpenedFile;
 import ma.supmti.grammify.ui.MainFrame;
@@ -65,6 +69,7 @@ public final class ErrorsDetector {
 					OpenedFile.errors.addAll(spaceAfterNewLineErrorsCheck(words));
 					OpenedFile.errors.addAll(firstCharacterUpperCaseErrorsCheck(words));
 					OpenedFile.errors.addAll(spellingErrorsCheck(words));
+					//OpenedFile.errors.addAll(conjugationErrorsCheck(words));
 					
 					displayErrors(words);
 					
@@ -262,18 +267,59 @@ public final class ErrorsDetector {
 	private static List<Error> conjugationErrorsCheck (List<WordMap> words) {
 		List<Error> errors = new ArrayList<>();
 		String errorMessage = "Wrong conjugation detected";
-		
+		String noVerbErrorMessage = "No verb detected";
+		int[] personalPronounsIndexes = {0, 1, 2, 2,
+				3, 4, 5, 5};
+		int indexUsed = -1;
+		Word subjectUsed = null;
+		int subjectIndex = -1;
+		Verb verbUsed = null;
+		int verbIndex = -1;
 		for (int i = 0; i < words.size(); i++) {
+			List<Word> currentWord = words.get(i).getWords();
+			for (Word w : currentWord) {
+				if (subjectUsed == null) {
+		            if (w.getPartOfSpeech().equals(PartOfSpeech.NOUN)) {
+		                subjectUsed = w;
+		                subjectIndex = i;
+		            }
+		            else if (w.getPartOfSpeech().equals(PartOfSpeech.PRONOUN) && ((Pronoun) w).getPronounType().contains(PronounTypes.PERSONAL)) {
+		                subjectUsed = w;
+		                subjectIndex = i;
+		            }
+		        } 
+				if (verbUsed == null && w.getPartOfSpeech().equals(PartOfSpeech.VERB)) {
+					verbIndex = i;
+					verbUsed = (Verb) w;
+				}
+			}
+			if (words.get(i).getWords().get(0).getPartOfSpeech().equals(PartOfSpeech.PUNCTUATION)) {
+				if (subjectUsed.getPartOfSpeech().equals(PartOfSpeech.PRONOUN) && ((Pronoun) subjectUsed).getPronounType().contains(PronounTypes.PERSONAL) && verbUsed == null) {
+		            errors.add(
+		                new Error(words.get(subjectIndex),
+		                noVerbErrorMessage,
+		                List.of())
+		            );
+		        }
 
+		        // RESET for next sentence
+		        subjectUsed = null;
+		        verbUsed = null;
+		        subjectIndex = -1;
+		        verbIndex = -1;
+				
+			}
+			
+			
 		}
 		
 		return errors;
 	}
 	
-	// Checks for the right use of ponctuations
-	private static List<Error> ponctuationErrorsCheck (List<WordMap> words) {
+	// Checks for the right use of punctuations
+	private static List<Error> punctuationErrorsCheck (List<WordMap> words) {
 		List<Error> errors = new ArrayList<>();
-		String errorMessage = "Wrong ponctuation detected";
+		String errorMessage = "Wrong punctuation detected";
 		
 		for (int i=0; i<words.size(); i++) {
 			
