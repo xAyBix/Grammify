@@ -43,16 +43,17 @@ public class SuggestionsPopup {
 		popup.add(errorMessage);
 		popup.add(ignoreItem);
 		
-		for(Word suggestion : err.getAlternatives()) {
-			JMenuItem menuItem = new JMenuItem("\"" + suggestion.getText()+ "\"");
-			menuItem.setFont(Constants.secondaryFont);
-			menuItem.setBackground(new Color(0x1E1E1E));
-			menuItem.setForeground(Color.WHITE);
-			menuItem.setBorder(BorderFactory.createEmptyBorder());
-			menuItem.addActionListener(e -> replace(suggestion.getText(), err.getStart(), err.getEnd()));
-			popup.add(menuItem);
-			
-			
+		if (!err.getAlternatives().isEmpty()) {
+			for (Word suggestion : err.getAlternatives()) {
+				JMenuItem menuItem = new JMenuItem("\"" + suggestion.getText() + "\"");
+				menuItem.setFont(Constants.secondaryFont);
+				menuItem.setBackground(new Color(0x1E1E1E));
+				menuItem.setForeground(Color.WHITE);
+				menuItem.setBorder(BorderFactory.createEmptyBorder());
+				menuItem.addActionListener(e -> replace(suggestion.getText(), err.getStart(), err.getEnd()));
+				popup.add(menuItem);
+
+			}
 		}
 		popup.show(MainFrame.textArea, x, y);
 	}
