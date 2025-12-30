@@ -29,38 +29,38 @@ public class Auxiliary extends Verb{
 	private Verb[] imparfait;
 	private Verb[] futur;
 	private Verb[] simplePast;
-	private Verb[] pastParticipal;
-	private Verb presentParticipal;
+	private Verb[] pastParticiples;
+	private Verb presentParticiple;
 	
 	// Constructor
 	public Auxiliary(String text) {
-		super(text, null);
+		super(text, null, 0);
 		
 		// Check to fill in the conjugation
 		if (text.equals("avoir")) {
-			simplePresent = new Verb[]{new Verb ("ai", this), new Verb ("as", this), 
-					new Verb ("a", this), new Verb ("avons", this), new Verb ("avez", this), new Verb ("ont", this)};
-			imparfait = new Verb[] {new Verb ("avais", this), new Verb ("avais", this), 
-					new Verb ("avait", this), new Verb ("avions", this), new Verb ("aviez", this), new Verb ("avaient", this)};
-			futur = new Verb[]{new Verb ("aurai", this), new Verb ("auras", this), 
-					new Verb ("aura", this), new Verb ("aurons", this), new Verb ("aurez", this), new Verb ("auront", this)};
-			simplePast = new Verb[]{new Verb ("eus", this), new Verb ("eus", this), 
-					new Verb ("eut", this), new Verb ("eûmes", this), new Verb ("eûtes", this), new Verb ("eurent", this)};
-			pastParticipal = new Verb[]{new Verb("eu", this), new Verb("eus", this),
-					new Verb("eue", this), new Verb("eues", this)};
-			presentParticipal = new Verb("ayant", this);
+			simplePresent = new Verb[]{new Verb ("ai", this, 0), new Verb ("as", this, 0), 
+					new Verb ("a", this, 0), new Verb ("avons", this, 0), new Verb ("avez", this, 0), new Verb ("ont", this, 0)};
+			imparfait = new Verb[] {new Verb ("avais", this, 0), new Verb ("avais", this, 0), 
+					new Verb ("avait", this, 0), new Verb ("avions", this, 0), new Verb ("aviez", this, 0), new Verb ("avaient", this, 0)};
+			futur = new Verb[]{new Verb ("aurai", this, 0), new Verb ("auras", this, 0), 
+					new Verb ("aura", this, 0), new Verb ("aurons", this, 0), new Verb ("aurez", this, 0), new Verb ("auront", this, 0)};
+			simplePast = new Verb[]{new Verb ("eus", this, 0), new Verb ("eus", this, 0), 
+					new Verb ("eut", this, 0), new Verb ("eûmes", this, 0), new Verb ("eûtes", this, 0), new Verb ("eurent", this, 0)};
+			Verb ppe = new Verb("eu", this, 0);
+			pastParticiples = new Verb[]{ppe, ppe, ppe, ppe};
+			presentParticiple = new Verb("ayant", this, 0);
 		}else if (text.equals("être")) {
-			simplePresent = new Verb[]{new Verb ("suis", this), new Verb ("es", this), 
-					new Verb ("est", this), new Verb ("sommes", this), new Verb ("êtes", this), new Verb ("sont", this)};
-			imparfait = new Verb[] {new Verb ("étais", this), new Verb ("étais", this), 
-					new Verb ("était", this), new Verb ("étions", this), new Verb ("étiez", this), new Verb ("étaient", this)};
-			futur = new Verb[]{new Verb ("serai", this), new Verb ("seras", this), 
-					new Verb ("sera", this), new Verb ("serons", this), new Verb ("serez", this), new Verb ("seront", this)};
-			simplePast = new Verb[]{new Verb ("fus", this), new Verb ("fus", this), 
-					new Verb ("fut", this), new Verb ("fûmes", this), new Verb ("fûtes", this), new Verb ("furent", this)};
-			Verb ppe = new Verb("été", this);
-			pastParticipal = new Verb[]{ppe, ppe, ppe, ppe};
-			presentParticipal = new Verb("étant", this);
+			simplePresent = new Verb[]{new Verb ("suis", this, 0), new Verb ("es", this, 0), 
+					new Verb ("est", this, 0), new Verb ("sommes", this, 0), new Verb ("êtes", this, 0), new Verb ("sont", this, 0)};
+			imparfait = new Verb[] {new Verb ("étais", this, 0), new Verb ("étais", this, 0), 
+					new Verb ("était", this, 0), new Verb ("étions", this, 0), new Verb ("étiez", this, 0), new Verb ("étaient", this, 0)};
+			futur = new Verb[]{new Verb ("serai", this, 0), new Verb ("seras", this, 0), 
+					new Verb ("sera", this, 0), new Verb ("serons", this, 0), new Verb ("serez", this, 0), new Verb ("seront", this, 0)};
+			simplePast = new Verb[]{new Verb ("fus", this, 0), new Verb ("fus", this, 0), 
+					new Verb ("fut", this, 0), new Verb ("fûmes", this, 0), new Verb ("fûtes", this, 0), new Verb ("furent", this, 0)};
+			Verb ppe = new Verb("été", this, 0);
+			pastParticiples = new Verb[]{ppe, ppe, ppe, ppe};
+			presentParticiple = new Verb("étant", this, 0);
 		}
 	}
 	
@@ -72,6 +72,26 @@ public class Auxiliary extends Verb{
 		return auxiliaries.get(1);
 	}
 	
+	public Verb[] getConjugationTime(String verb) {
+		for (Verb v : simplePresent) {
+			if (v.getText().equals(verb))
+				return simplePresent;
+		}
+		for (Verb v : simplePast) {
+			if (v.getText().equals(verb))
+				return simplePast;
+		}
+		for (Verb v : futur) {
+			if (v.getText().equals(verb))
+				return futur;
+		}
+		for (Verb v : imparfait) {
+			if (v.getText().equals(verb))
+				return imparfait;
+		}
+		return null;
+	}
+	
 	
 	public Verb[] getSimplePresent() {
 		return simplePresent;
@@ -80,20 +100,20 @@ public class Auxiliary extends Verb{
 		this.simplePresent = simplePresent;
 	}
 
-	public Verb[] getPastParticipal() {
-		return pastParticipal;
+	public Verb[] getPastParticiples() {
+		return pastParticiples;
 	}
 
-	public void setPastParticipal(Verb[] pastParticipal) {
-		this.pastParticipal = pastParticipal;
+	public void setPastParticiples(Verb[] pastParticiples) {
+		this.pastParticiples = pastParticiples;
 	}
 
-	public Verb getPresentParticipal() {
-		return presentParticipal;
+	public Verb getPresentParticiple() {
+		return presentParticiple;
 	}
 
-	public void setPresentParticipal(Verb presentParticipal) {
-		this.presentParticipal = presentParticipal;
+	public void setPresentParticiple(Verb presentParticiple) {
+		this.presentParticiple = presentParticiple;
 	}
 
 	public Verb[] getImparfait() {

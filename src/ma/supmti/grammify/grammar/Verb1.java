@@ -19,16 +19,16 @@ public class Verb1 extends Verb{
 	public static final String[] IMPARFAIT_SUFFIXES = {"ais", "ais", "ait", "ions", "iez", "aient"};
 	public static final String[] FUTUR_SUFFIXES = {"erai", "eras", "era", "erons", "erez", "eront"};
 	public static final String[] SIMPLE_PAST_SUFFIXES = {"ai", "as", "a", "âmes", "âtes", "èrent"};
-	public static final String[] PAST_PARTICIPAL_SUFFIXES = {"é", "és", "ée", "ées"};
-	public static final String PRESENT_PARTICIPAL_SUFFIX = "ant";
+	public static final String[] PAST_PARTICIPLE_SUFFIXES = {"é", "és", "ée", "ées"};
+	public static final String PRESENT_PARTICIPLE_SUFFIX = "ant";
 	
 	// Conjugations
 	private Verb[] simplePresent;
 	private Verb[] imparfait;
 	private Verb[] futur;
 	private Verb[] simplePast;
-	private Verb[] pastParticipals;
-	private Verb presentParticipal;
+	private Verb[] pastParticiples;
+	private Verb presentParticiple;
 	private String radical;
 	
 	// Indicates which auxiliaries the verb uses when conjugates
@@ -39,7 +39,7 @@ public class Verb1 extends Verb{
 	
 	// Constructor
 	public Verb1(String text, List<Auxiliary> auxiliaries, boolean pronominal) {
-		super(text, null);
+		super(text, null, 1);
 		
 		this.auxiliaries = auxiliaries;
 		this.pronominal = pronominal;
@@ -47,7 +47,7 @@ public class Verb1 extends Verb{
 		imparfait = new Verb[IMPARFAIT_SUFFIXES.length];
 		futur = new Verb[FUTUR_SUFFIXES.length];
 		simplePast = new Verb[SIMPLE_PAST_SUFFIXES.length];
-		pastParticipals = new Verb[PAST_PARTICIPAL_SUFFIXES.length];
+		pastParticiples = new Verb[PAST_PARTICIPLE_SUFFIXES.length];
 		
 		if (text.endsWith("er")) {
 			this.radical = text.substring(0, text.length()-2);
@@ -57,23 +57,23 @@ public class Verb1 extends Verb{
 			for (int i = 0 ; i < SIMPLE_PRESENT_SUFFIXES.length ; i++) {
 				// Simple present
 				if (SIMPLE_PRESENT_SUFFIXES[i].equals("ons")) {
-					simplePresent[i] = new Verb(radical + "e" + SIMPLE_PRESENT_SUFFIXES[i], this);
+					simplePresent[i] = new Verb(radical + "e" + SIMPLE_PRESENT_SUFFIXES[i], this, 1);
 				}else {
-					simplePresent[i] = new Verb(radical + SIMPLE_PRESENT_SUFFIXES[i], this);
+					simplePresent[i] = new Verb(radical + SIMPLE_PRESENT_SUFFIXES[i], this, 1);
 				}
 				// Imparfait
 				if (IMPARFAIT_SUFFIXES[i].equals("ions") || IMPARFAIT_SUFFIXES[i].equals("iez")) {
-					imparfait[i] = new Verb(radical + IMPARFAIT_SUFFIXES[i], this);
+					imparfait[i] = new Verb(radical + IMPARFAIT_SUFFIXES[i], this, 1);
 				}else {
-					imparfait[i] = new Verb(radical + "e" + IMPARFAIT_SUFFIXES[i], this);
+					imparfait[i] = new Verb(radical + "e" + IMPARFAIT_SUFFIXES[i], this, 1);
 				}
 				// Futur
-				futur[i] = new Verb(radical + FUTUR_SUFFIXES[i], this);
+				futur[i] = new Verb(radical + FUTUR_SUFFIXES[i], this, 1);
 				// Simple past
 				if (SIMPLE_PAST_SUFFIXES[i].equals("èrent")) {
-					simplePast[i] = new Verb(radical + SIMPLE_PAST_SUFFIXES[i], this);
+					simplePast[i] = new Verb(radical + SIMPLE_PAST_SUFFIXES[i], this, 1);
 				}else {
-					simplePast[i] = new Verb(radical + "e" + SIMPLE_PAST_SUFFIXES[i], this);
+					simplePast[i] = new Verb(radical + "e" + SIMPLE_PAST_SUFFIXES[i], this, 1);
 				}
 				
 				words.add(simplePresent[i]);
@@ -85,23 +85,23 @@ public class Verb1 extends Verb{
 			for (int i = 0 ; i < SIMPLE_PRESENT_SUFFIXES.length ; i++) {
 				// Simple present
 				if (SIMPLE_PRESENT_SUFFIXES[i].equals("ons")) {
-					simplePresent[i] = new Verb((radical.substring(0, radical.length()-1) + "ç" + SIMPLE_PRESENT_SUFFIXES[i]), this);
+					simplePresent[i] = new Verb((radical.substring(0, radical.length()-1) + "ç" + SIMPLE_PRESENT_SUFFIXES[i]), this, 1);
 				}else {
-					simplePresent[i] = new Verb(radical + SIMPLE_PRESENT_SUFFIXES[i], this);
+					simplePresent[i] = new Verb(radical + SIMPLE_PRESENT_SUFFIXES[i], this, 1);
 				}
 				// Imparfait
 				if (IMPARFAIT_SUFFIXES[i].equals("ions") || IMPARFAIT_SUFFIXES[i].equals("iez")) {
-					imparfait[i] = new Verb(radical + IMPARFAIT_SUFFIXES[i], this);
+					imparfait[i] = new Verb(radical + IMPARFAIT_SUFFIXES[i], this, 1);
 				}else {
-					imparfait[i] = new Verb(radical.substring(0, radical.length()-1) + "ç" + IMPARFAIT_SUFFIXES[i], this);
+					imparfait[i] = new Verb(radical.substring(0, radical.length()-1) + "ç" + IMPARFAIT_SUFFIXES[i], this, 1);
 				}
 				// Futur
-				futur[i] = new Verb(radical + FUTUR_SUFFIXES[i], this);
+				futur[i] = new Verb(radical + FUTUR_SUFFIXES[i], this, 1);
 				// Simple past
 				if (SIMPLE_PAST_SUFFIXES[i].equals("èrent")) {
-					simplePast[i] = new Verb(radical + SIMPLE_PAST_SUFFIXES[i], this);
+					simplePast[i] = new Verb(radical + SIMPLE_PAST_SUFFIXES[i], this, 1);
 				}else {
-					simplePast[i] = new Verb(radical.substring(0, radical.length()-1) + "ç" + SIMPLE_PAST_SUFFIXES[i], this);
+					simplePast[i] = new Verb(radical.substring(0, radical.length()-1) + "ç" + SIMPLE_PAST_SUFFIXES[i], this, 1);
 				}
 				
 				words.add(simplePresent[i]);
@@ -113,16 +113,16 @@ public class Verb1 extends Verb{
 			for (int i = 0 ; i < SIMPLE_PRESENT_SUFFIXES.length ; i++) {
 				// Simple present
 				if (SIMPLE_PRESENT_SUFFIXES[i].equals("ons") || SIMPLE_PRESENT_SUFFIXES[i].equals("ez")) {
-					simplePresent[i] = new Verb(radical + SIMPLE_PRESENT_SUFFIXES[i], this);
+					simplePresent[i] = new Verb(radical + SIMPLE_PRESENT_SUFFIXES[i], this, 1);
 				}else {
-					simplePresent[i] = new Verb((radical.substring(0, radical.length()-1) + "i" + SIMPLE_PRESENT_SUFFIXES[i]), this);
+					simplePresent[i] = new Verb((radical.substring(0, radical.length()-1) + "i" + SIMPLE_PRESENT_SUFFIXES[i]), this, 1);
 				}
 				// Imparfait
-				imparfait[i] = new Verb(radical + IMPARFAIT_SUFFIXES[i], this);
+				imparfait[i] = new Verb(radical + IMPARFAIT_SUFFIXES[i], this, 1);
 				// Futur
-				futur[i] = new Verb(radical.substring(0, radical.length()-1) + "i" + FUTUR_SUFFIXES[i], this);
+				futur[i] = new Verb(radical.substring(0, radical.length()-1) + "i" + FUTUR_SUFFIXES[i], this, 1);
 				// Simple past
-				simplePast[i] = new Verb(radical + SIMPLE_PAST_SUFFIXES[i], this);
+				simplePast[i] = new Verb(radical + SIMPLE_PAST_SUFFIXES[i], this, 1);
 				
 				words.add(simplePresent[i]);
 				words.add(imparfait[i]);
@@ -131,10 +131,10 @@ public class Verb1 extends Verb{
 			}
 		}else if (radical != null) {
 			for (int i = 0 ; i < SIMPLE_PRESENT_SUFFIXES.length ; i++) {
-				simplePresent[i] = new Verb(radical + SIMPLE_PRESENT_SUFFIXES[i], this);
-				imparfait[i] = new Verb(radical + IMPARFAIT_SUFFIXES[i], this);
-				futur[i] = new Verb(radical + FUTUR_SUFFIXES[i], this);
-				simplePast[i] = new Verb(radical + SIMPLE_PAST_SUFFIXES[i], this);
+				simplePresent[i] = new Verb(radical + SIMPLE_PRESENT_SUFFIXES[i], this, 1);
+				imparfait[i] = new Verb(radical + IMPARFAIT_SUFFIXES[i], this, 1);
+				futur[i] = new Verb(radical + FUTUR_SUFFIXES[i], this, 1);
+				simplePast[i] = new Verb(radical + SIMPLE_PAST_SUFFIXES[i], this, 1);
 				
 				words.add(simplePresent[i]);
 				words.add(imparfait[i]);
@@ -143,18 +143,37 @@ public class Verb1 extends Verb{
 			}
 		}
 		
-		// Initializing past participal
-		for (int i = 0 ; i < PAST_PARTICIPAL_SUFFIXES.length ; i++) {
-			pastParticipals [i] = new Verb(radical + PAST_PARTICIPAL_SUFFIXES[i], this);
-			words.add(pastParticipals[i]);
+		// Initializing past PARTICIPLE
+		for (int i = 0 ; i < PAST_PARTICIPLE_SUFFIXES.length ; i++) {
+			pastParticiples [i] = new Verb(radical + PAST_PARTICIPLE_SUFFIXES[i], this, 1);
+			words.add(pastParticiples[i]);
 		}
 		
-		// Initializing present participal
-		presentParticipal = new Verb(radical + PRESENT_PARTICIPAL_SUFFIX, this);
-		words.add(presentParticipal);
+		// Initializing present PARTICIPLE
+		presentParticiple = new Verb(radical + PRESENT_PARTICIPLE_SUFFIX, this, 1);
+		words.add(presentParticiple);
 	}
 
 	
+	public Verb[] getConjugationTime(String verb) {
+		for (Verb v : simplePresent) {
+			if (v.getText().equals(verb))
+				return simplePresent;
+		}
+		for (Verb v : simplePast) {
+			if (v.getText().equals(verb))
+				return simplePast;
+		}
+		for (Verb v : futur) {
+			if (v.getText().equals(verb))
+				return futur;
+		}
+		for (Verb v : imparfait) {
+			if (v.getText().equals(verb))
+				return imparfait;
+		}
+		return null;
+	}
 	
 	public boolean isPronominal() {
 		return pronominal;
@@ -180,20 +199,20 @@ public class Verb1 extends Verb{
 		this.simplePresent = simplePresent;
 	}
 
-	public Verb[] getPastParticipals() {
-		return pastParticipals;
+	public Verb[] getPastParticiples() {
+		return pastParticiples;
 	}
 
-	public void setPastParticipals(Verb[] pastParticipals) {
-		this.pastParticipals = pastParticipals;
+	public void setPastParticiples(Verb[] pastParticiples) {
+		this.pastParticiples = pastParticiples;
 	}
 
-	public Verb getPresentParticipal() {
-		return presentParticipal;
+	public Verb getPresentParticiple() {
+		return presentParticiple;
 	}
 
-	public void setPresentParticipal(Verb presentParticipal) {
-		this.presentParticipal = presentParticipal;
+	public void setPresentParticiple(Verb presentParticiple) {
+		this.presentParticiple = presentParticiple;
 	}
 
 	public List<Auxiliary> getAuxiliaries() {

@@ -19,16 +19,16 @@ public class Verb2 extends Verb {
 	public static final String[] IMPARFAIT_SUFFIXES = { "issais", "issais", "issait", "issions", "issiez", "issaient" };
 	public static final String[] FUTUR_SUFFIXES = { "irai", "iras", "ira", "irons", "irez", "iront" };
 	public static final String[] SIMPLE_PAST_SUFFIXES = { "is", "is", "it", "îmes", "îtes", "irent" };
-	public static final String[] PAST_PARTICIPAL_SUFFIXES = { "i", "is", "ie", "ies" };
-	public static final String PRESENT_PARTICIPAL_SUFFIX = "issant";
+	public static final String[] PAST_PARTICIPLE_SUFFIXES = { "i", "is", "ie", "ies" };
+	public static final String PRESENT_PARTICIPLE_SUFFIX = "issant";
 
 	// Conjugations
 	private Verb[] simplePresent;
 	private Verb[] imparfait;
 	private Verb[] futur;
 	private Verb[] simplePast;
-	private Verb[] pastParticipals;
-	private Verb presentParticipal;
+	private Verb[] pastParticiples;
+	private Verb presentParticiple;
 	private String radical;
 
 	// Indicates which auxiliaries the verb uses when conjugates
@@ -39,7 +39,7 @@ public class Verb2 extends Verb {
 
 	// Constructor
 	public Verb2(String text, List<Auxiliary> auxiliaries, boolean pronominal) {
-		super(text, null);
+		super(text, null, 2);
 
 		this.auxiliaries = auxiliaries;
 		this.pronominal = pronominal;
@@ -47,7 +47,7 @@ public class Verb2 extends Verb {
 		imparfait = new Verb[IMPARFAIT_SUFFIXES.length];
 		futur = new Verb[FUTUR_SUFFIXES.length];
 		simplePast = new Verb[SIMPLE_PAST_SUFFIXES.length];
-		pastParticipals = new Verb[PAST_PARTICIPAL_SUFFIXES.length];
+		pastParticiples = new Verb[PAST_PARTICIPLE_SUFFIXES.length];
 
 		if (text.endsWith("ir")) {
 			this.radical = text.substring(0, text.length() - 2);
@@ -55,10 +55,10 @@ public class Verb2 extends Verb {
 		// Initializing simple present, imparfait, futur and simple past
 		if (radical != null) {
 			for (int i = 0; i < SIMPLE_PRESENT_SUFFIXES.length; i++) {
-				simplePresent[i] = new Verb(radical + SIMPLE_PRESENT_SUFFIXES[i], this);
-				imparfait[i] = new Verb(radical + IMPARFAIT_SUFFIXES[i], this);
-				futur[i] = new Verb(radical + FUTUR_SUFFIXES[i], this);
-				simplePast[i] = new Verb(radical + SIMPLE_PAST_SUFFIXES[i], this);
+				simplePresent[i] = new Verb(radical + SIMPLE_PRESENT_SUFFIXES[i], this, 2);
+				imparfait[i] = new Verb(radical + IMPARFAIT_SUFFIXES[i], this, 2);
+				futur[i] = new Verb(radical + FUTUR_SUFFIXES[i], this, 2);
+				simplePast[i] = new Verb(radical + SIMPLE_PAST_SUFFIXES[i], this, 2);
 
 				words.add(simplePresent[i]);
 				words.add(imparfait[i]);
@@ -68,11 +68,31 @@ public class Verb2 extends Verb {
 		}
 
 		// Initializing past participal
-		for (int i = 0; i < PAST_PARTICIPAL_SUFFIXES.length; i++) {
-			pastParticipals[i] = new Verb(radical + PAST_PARTICIPAL_SUFFIXES[i], this);
-			words.add(pastParticipals[i]);
+		for (int i = 0; i < PAST_PARTICIPLE_SUFFIXES.length; i++) {
+			pastParticiples[i] = new Verb(radical + PAST_PARTICIPLE_SUFFIXES[i], this, 2);
+			words.add(pastParticiples[i]);
 		}
 
+	}
+	
+	public Verb[] getConjugationTime(String verb) {
+		for (Verb v : simplePresent) {
+			if (v.getText().equals(verb))
+				return simplePresent;
+		}
+		for (Verb v : simplePast) {
+			if (v.getText().equals(verb))
+				return simplePast;
+		}
+		for (Verb v : futur) {
+			if (v.getText().equals(verb))
+				return futur;
+		}
+		for (Verb v : imparfait) {
+			if (v.getText().equals(verb))
+				return imparfait;
+		}
+		return null;
 	}
 
 	public Verb[] getSimplePresent() {
@@ -107,20 +127,20 @@ public class Verb2 extends Verb {
 		this.simplePast = simplePast;
 	}
 
-	public Verb[] getPastParticipals() {
-		return pastParticipals;
+	public Verb[] getPastParticiples() {
+		return pastParticiples;
 	}
 
-	public void setPastParticipals(Verb[] pastParticipals) {
-		this.pastParticipals = pastParticipals;
+	public void setPastParticiples(Verb[] pastParticiples) {
+		this.pastParticiples = pastParticiples;
 	}
 
-	public Verb getPresentParticipal() {
-		return presentParticipal;
+	public Verb getPresentParticiple() {
+		return presentParticiple;
 	}
 
-	public void setPresentParticipal(Verb presentParticipal) {
-		this.presentParticipal = presentParticipal;
+	public void setPresentParticiple(Verb presentParticiple) {
+		this.presentParticiple = presentParticiple;
 	}
 
 	public String getRadical() {

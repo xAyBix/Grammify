@@ -19,10 +19,12 @@ public class Verb extends Word{
 	public static List<Verb> verbs = new ArrayList<Verb>();
 	
 	private Verb infinitive;
+	private int group;
 	
 	// Constructor
-	public Verb(String text, Verb infinitive) {
+	public Verb(String text, Verb infinitive, int group) {
 		super(text, PartOfSpeech.VERB);
+		this.group = group;
 		if(infinitive == null) {
 			this.infinitive = this;
 		}else {
@@ -41,7 +43,14 @@ public class Verb extends Word{
 	public void setInfinitive(Verb infinitive) {
 		this.infinitive = infinitive;
 	}
-	
+
+	public int getGroup() {
+		return group;
+	}
+
+	public void setGroup(int group) {
+		this.group = group;
+	}
 	
 
 }

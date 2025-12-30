@@ -7,12 +7,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.regex.Pattern;
 
 import javax.swing.SwingUtilities;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.Highlighter;
@@ -20,12 +17,15 @@ import javax.swing.text.Highlighter.Highlight;
 import javax.swing.text.Highlighter.HighlightPainter;
 
 import ma.supmti.grammify.grammar.Auxiliary;
-import ma.supmti.grammify.grammar.Noun;
 import ma.supmti.grammify.grammar.PartOfSpeech;
 import ma.supmti.grammify.grammar.Pronoun;
 import ma.supmti.grammify.grammar.PronounTypes;
 import ma.supmti.grammify.grammar.Punctuation;
+import ma.supmti.grammify.grammar.PunctuationTypes;
 import ma.supmti.grammify.grammar.Verb;
+import ma.supmti.grammify.grammar.Verb1;
+import ma.supmti.grammify.grammar.Verb2;
+import ma.supmti.grammify.grammar.Verb3;
 import ma.supmti.grammify.grammar.Word;
 import ma.supmti.grammify.io.OpenedFile;
 import ma.supmti.grammify.ui.MainFrame;
@@ -272,18 +272,19 @@ public final class ErrorsDetector {
 		int indexUsed = -1;
 		Word subjectUsed = null;
 		int subjectIndex = -1;
-		Auxiliary auxiliaryUsed = null;
+		Word auxiliaryUsed = null;
 		int auxiliaryIndex = -1;
-		Verb verbUsed = null;
+		Word verbUsed = null;
 		int verbIndex = -1;
+		// add reflexive pronoun later
 		for (int i = 0; i < words.size(); i++) {
 			List<Word> currentWord = words.get(i).getWords();
 			if (subjectUsed == null) {
 				for (int j = 0; j < currentWord.size(); j++) {
-					if (currentWord.get(j).getPartOfSpeech().equals(PartOfSpeech.NOUN)) {
+					if (currentWord.get(j).getPartOfSpeech() == PartOfSpeech.NOUN) {
 						subjectUsed = currentWord.get(j);
 						subjectIndex = i;
-					}else if (currentWord.get(j).getPartOfSpeech().equals(PartOfSpeech.PRONOUN)) {
+					}else if (currentWord.get(j).getPartOfSpeech() == PartOfSpeech.PRONOUN) {
 						if (((Pronoun)currentWord.get(j)).getPronounType().contains(PronounTypes.PERSONAL)) {
 							subjectUsed = currentWord.get(j);
 							subjectIndex = i;
@@ -291,22 +292,271 @@ public final class ErrorsDetector {
 					}
 				}
 			}
-			if (verbUsed == null) {
+			if (auxiliaryUsed == null || verbUsed == null) {
 				for (int j = 0; j < currentWord.size(); j++) {
-
+					if (currentWord.get(j).getPartOfSpeech() == PartOfSpeech.VERB) {
+						if (!((Verb)currentWord.get(j)).isInfinitive()) {
+							String vrbTxt = ((Verb)currentWord.get(j)).getInfinitive().getText();
+							if (auxiliaryUsed == null && (vrbTxt.equals("avoir") || vrbTxt.equals("être"))) {
+								auxiliaryUsed = currentWord.get(j);
+								auxiliaryIndex = i;
+							} else{
+								verbUsed = currentWord.get(j);
+								verbIndex = i;
+							}
+						}
+					}
 				}
 			}
-			if (currentWord.get(0).getPartOfSpeech().equals(PartOfSpeech.PUNCTUATION)) {
-				if (subjectUsed != null && subjectUsed.getPartOfSpeech().equals(PartOfSpeech.PRONOUN)
-						&& ((Pronoun)subjectUsed).getPronounType().contains(PronounTypes.PERSONAL) && verbUsed != null) {
-					errors.add(new Error(words.get(subjectIndex), noVerbErrorMessage, List.of()));
+			if (currentWord.get(0).getPartOfSpeech() == PartOfSpeech.PUNCTUATION) {
+				if (((Punctuation)currentWord.get(0)).getPunctuationTypes() != PunctuationTypes.WHITE_SPACE && 
+						((Punctuation)currentWord.get(0)).getPunctuationTypes() != PunctuationTypes.LEFT_PARENTHESE &&
+						((Punctuation)currentWord.get(0)).getPunctuationTypes() != PunctuationTypes.RIGHT_PARENTHESE &&
+						((Punctuation)currentWord.get(0)).getPunctuationTypes() != PunctuationTypes.APOSTROPHE) {
+					// Checks for verb used with pronouns
+					if (subjectUsed != null && subjectUsed.getPartOfSpeech() == PartOfSpeech.PRONOUN
+							&& ((Pronoun)subjectUsed).getPronounType().contains(PronounTypes.PERSONAL) && (verbUsed == null && auxiliaryUsed == null)) {
+						errors.add(new Error(words.get(subjectIndex), noVerbErrorMessage, List.of()));
+					} else {
+						if (subjectUsed != null && subjectUsed.getPartOfSpeech() == PartOfSpeech.PRONOUN
+								&& ((Pronoun)subjectUsed).getPronounType().contains(PronounTypes.PERSONAL) && (verbUsed != null && auxiliaryUsed == null)) {
+							Verb infVerb = ((Verb)verbUsed).getInfinitive();
+							String subj = subjectUsed.getText();
+							Verb[] conjugationTime;
+							List<Word> suggestions = new ArrayList<>();
+							if (infVerb.getGroup() == 1) {
+								conjugationTime = ((Verb1)infVerb).getConjugationTime(verbUsed.getText());
+							}else if (infVerb.getGroup() == 2) {
+								conjugationTime = ((Verb2)infVerb).getConjugationTime(verbUsed.getText());
+							}else {
+								conjugationTime = ((Verb3)infVerb).getConjugationTime(verbUsed.getText());
+							}
+							switch (subj) {
+								case "je": {
+									if (!verbUsed.getText().equals(conjugationTime[0].getText())) {
+										suggestions.add(conjugationTime[0]);
+										errors.add(new Error(words.get(verbIndex), errorMessage, suggestions));
+									}
+									break;
+								}
+								case "tu": {
+									if (!verbUsed.getText().equals(conjugationTime[1].getText())) {
+										suggestions.add(conjugationTime[1]);
+										errors.add(new Error(words.get(verbIndex), errorMessage, suggestions));
+									}
+									break;
+								}
+								case "il": {
+									if (!verbUsed.getText().equals(conjugationTime[2].getText())) {
+										suggestions.add(conjugationTime[2]);
+										errors.add(new Error(words.get(verbIndex), errorMessage, suggestions));
+									}
+									break;
+								}
+								case "elle": {
+									if (!verbUsed.getText().equals(conjugationTime[2].getText())) {
+										suggestions.add(conjugationTime[2]);
+										errors.add(new Error(words.get(verbIndex), errorMessage, suggestions));
+									}
+									break;
+								}
+								case "nous": {
+									if (!verbUsed.getText().equals(conjugationTime[3].getText())) {
+										suggestions.add(conjugationTime[3]);
+										errors.add(new Error(words.get(verbIndex), errorMessage, suggestions));
+									}
+									break;
+								}
+								case "vous": {
+									if (!verbUsed.getText().equals(conjugationTime[4].getText())) {
+										suggestions.add(conjugationTime[4]);
+										errors.add(new Error(words.get(verbIndex), errorMessage, suggestions));
+									}
+									break;
+								}
+								case "ils": {
+									if (!verbUsed.getText().equals(conjugationTime[5].getText())) {
+										suggestions.add(conjugationTime[5]);
+										errors.add(new Error(words.get(verbIndex), errorMessage, suggestions));
+									}
+									break;
+								}
+								case "elles": {
+									if (!verbUsed.getText().equals(conjugationTime[5].getText())) {
+										suggestions.add(conjugationTime[5]);
+										errors.add(new Error(words.get(verbIndex), errorMessage, suggestions));
+									}
+									break;
+								}
+								
+							}
+							
+						}else if (subjectUsed != null && subjectUsed.getPartOfSpeech() == PartOfSpeech.PRONOUN
+								&& ((Pronoun)subjectUsed).getPronounType().contains(PronounTypes.PERSONAL) && (verbUsed == null && auxiliaryUsed != null)) {
+							Verb infVerb = ((Verb)auxiliaryUsed).getInfinitive();
+							String subj = subjectUsed.getText();
+							Verb[] conjugationTime;
+							List<Word> suggestions = new ArrayList<>();
+							conjugationTime = ((Auxiliary)infVerb).getConjugationTime(auxiliaryUsed.getText());
+							switch (subj) {
+								case "je": {
+									if (!auxiliaryUsed.getText().equals(conjugationTime[0].getText())) {
+										suggestions.add(conjugationTime[0]);
+										errors.add(new Error(words.get(auxiliaryIndex), errorMessage, suggestions));
+									}
+									break;
+								}
+								case "tu": {
+									if (!auxiliaryUsed.getText().equals(conjugationTime[1].getText())) {
+										suggestions.add(conjugationTime[1]);
+										errors.add(new Error(words.get(auxiliaryIndex), errorMessage, suggestions));
+									}
+									break;
+								}
+								case "il": {
+									if (!auxiliaryUsed.getText().equals(conjugationTime[2].getText())) {
+										suggestions.add(conjugationTime[2]);
+										errors.add(new Error(words.get(auxiliaryIndex), errorMessage, suggestions));
+									}
+									break;
+								}
+								case "elle": {
+									if (!auxiliaryUsed.getText().equals(conjugationTime[2].getText())) {
+										suggestions.add(conjugationTime[2]);
+										errors.add(new Error(words.get(auxiliaryIndex), errorMessage, suggestions));
+									}
+									break;
+								}
+								case "nous": {
+									if (!auxiliaryUsed.getText().equals(conjugationTime[3].getText())) {
+										suggestions.add(conjugationTime[3]);
+										errors.add(new Error(words.get(auxiliaryIndex), errorMessage, suggestions));
+									}
+									break;
+								}
+								case "vous": {
+									if (!auxiliaryUsed.getText().equals(conjugationTime[4].getText())) {
+										suggestions.add(conjugationTime[4]);
+										errors.add(new Error(words.get(auxiliaryIndex), errorMessage, suggestions));
+									}
+									break;
+								}
+								case "ils": {
+									if (!auxiliaryUsed.getText().equals(conjugationTime[5].getText())) {
+										suggestions.add(conjugationTime[5]);
+										errors.add(new Error(words.get(auxiliaryIndex), errorMessage, suggestions));
+									}
+									break;
+								}
+								case "elles": {
+									if (!auxiliaryUsed.getText().equals(conjugationTime[5].getText())) {
+										suggestions.add(conjugationTime[5]);
+										errors.add(new Error(words.get(auxiliaryIndex), errorMessage, suggestions));
+									}
+									break;
+								}
+								
+							}
+						}else if (subjectUsed != null && subjectUsed.getPartOfSpeech() == PartOfSpeech.PRONOUN
+								&& ((Pronoun)subjectUsed).getPronounType().contains(PronounTypes.PERSONAL) && (verbUsed == null && auxiliaryUsed == null)) {
+							Verb infAux = ((Verb)auxiliaryUsed).getInfinitive();
+							Verb infVerb = ((Verb)verbUsed).getInfinitive();
+							String subj = subjectUsed.getText();
+							Verb[] conjugationTime = ((Auxiliary)infVerb).getConjugationTime(auxiliaryUsed.getText());
+							if (infVerb.getGroup() == 0) {
+								if (!infAux.getText().equals("avoir")) {
+									
+								}else if (!verbUsed.getText().equals(((Auxiliary)infVerb).getPastParticiples()[0].getText())) {
+									
+								}
+							}else if (infVerb.getGroup() == 1) {
+								int index = 0;
+								for (Auxiliary a : ((Verb1)infVerb).getAuxiliaries()) {
+									if (infAux.getText().equals(a.getText())) {
+										index=1;
+										break;
+									}
+								}
+								if (index == 0 ) {
+									// Error use the right auxiliary
+								}else if (!verbUsed.getText().equals(((Verb1)infVerb).getPastParticiples()[0].getText())) {
+									// Error use PastParticiple
+								}
+							}else if (infVerb.getGroup() == 2) {
+								int index = 0;
+								for (Auxiliary a : ((Verb2)infVerb).getAuxiliaries()) {
+									if (infAux.getText().equals(a.getText())) {
+										index=1;
+										break;
+									}
+								}
+								if (index == 0 ) {
+									
+								}else if (!verbUsed.getText().equals(((Verb2)infVerb).getPastParticiples()[0].getText())) {
+									
+								}
+								
+							}else if (infVerb.getGroup() == 3) {
+								int index = 0;
+								for (Auxiliary a : ((Verb3)infVerb).getAuxiliaries()) {
+									if (infAux.getText().equals(a.getText())) {
+										index=1;
+										break;
+									}
+								}
+								if (index == 0 ) {
+									
+								}else if (!verbUsed.getText().equals(((Verb3)infVerb).getPastParticiples()[0].getText())) {
+									
+								}
+							}
+							
+							switch (subj) {
+							case "je": {
+								
+								break;
+							}
+							case "tu": {
+								
+								break;
+							}
+							case "il": {
+								
+								break;
+							}
+							case "elle": {
+								
+								break;
+							}
+							case "nous": {
+								
+								break;
+							}
+							case "vous": {
+								
+								break;
+							}
+							case "ils": {
+								
+								break;
+							}
+							case "elles": {
+								
+								break;
+							}
+
+							}
+							
+						}
+					}
+					subjectUsed = null;
+					subjectIndex = -1;
+					auxiliaryUsed = null;
+					auxiliaryIndex = -1;
+					verbUsed = null;
+					verbIndex = -1;
 				}
-				subjectUsed = null;
-				subjectIndex = -1;
-				auxiliaryUsed = null;
-				auxiliaryIndex = -1;
-				verbUsed = null;
-				verbIndex = -1;
+				
 			}
 			
 		}

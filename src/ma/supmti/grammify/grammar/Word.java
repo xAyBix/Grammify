@@ -89,7 +89,7 @@ public class Word {
 		words.add(new Pronoun("ceux", GrammaticalNumber.PLURAL, GrammaticalGender.MASCULINE, PronounTypes.DEMONSTRATIVE, null));
 		words.add(new Pronoun("celles", GrammaticalNumber.PLURAL, GrammaticalGender.FEMININE, PronounTypes.DEMONSTRATIVE, null));
 		words.add(new Pronoun("ceci", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, PronounTypes.DEMONSTRATIVE, null));
-		words.add(new Pronoun("cela", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, PronounTypes.DEMONSTRATIVE, null));
+		words.add(new Pronoun("cela", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, PronounTypes.DEMONSTRATIVE, "c"));
 		words.add(new Pronoun("ça", GrammaticalNumber.SINGULAR, GrammaticalGender.UNISEX, PronounTypes.DEMONSTRATIVE, null));
 		words.add(new Pronoun("y", GrammaticalNumber.BOTH, GrammaticalGender.UNISEX, PronounTypes.ADVERBIAL, null));
 		words.add(new Pronoun("qui", GrammaticalNumber.BOTH, GrammaticalGender.UNISEX, Arrays.asList(new PronounTypes[] {PronounTypes.RELATIVE, PronounTypes.INTERROGATIVE}), null));
@@ -155,16 +155,16 @@ public class Word {
 		words.addAll(Arrays.asList(Auxiliary.getAvoir().getImparfait()));
 		words.addAll(Arrays.asList(Auxiliary.getAvoir().getFutur()));
 		words.addAll(Arrays.asList(Auxiliary.getAvoir().getSimplePast()));
-		words.addAll(Arrays.asList(Auxiliary.getAvoir().getPastParticipal()));
-		words.addAll(Arrays.asList(Auxiliary.getAvoir().getPresentParticipal()));
+		words.addAll(Arrays.asList(Auxiliary.getAvoir().getPastParticiples()));
+		words.addAll(Arrays.asList(Auxiliary.getAvoir().getPresentParticiple()));
 		// Saving Etre to words
 		words.add(Auxiliary.getEtre());
 		words.addAll(Arrays.asList(Auxiliary.getEtre().getSimplePresent()));
 		words.addAll(Arrays.asList(Auxiliary.getEtre().getImparfait()));
 		words.addAll(Arrays.asList(Auxiliary.getEtre().getFutur()));
 		words.addAll(Arrays.asList(Auxiliary.getEtre().getSimplePast()));
-		words.addAll(Arrays.asList(Auxiliary.getEtre().getPastParticipal()));
-		words.addAll(Arrays.asList(Auxiliary.getEtre().getPresentParticipal()));
+		words.addAll(Arrays.asList(Auxiliary.getEtre().getPastParticiples()));
+		words.addAll(Arrays.asList(Auxiliary.getEtre().getPresentParticiple()));
 		
 		// 1st group verbs
 		words.add(new Verb1("causer", Arrays.asList(new Auxiliary[] {Auxiliary.getAvoir()}), false));

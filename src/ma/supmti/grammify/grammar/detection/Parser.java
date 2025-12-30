@@ -58,7 +58,7 @@ public final class Parser {
 		while (true) {
 			currentToken = peek();
 			if ((Pattern.compile("[a-zA-ZÀ-ÿ]+").matcher(currentToken).find() || Pattern.compile("[0-9]+").matcher(currentToken).find()) &&
-					currentToken.equals(currentToken.toUpperCase())) { // Ignored token because it's written entirely in upper case 
+					currentToken.equals(currentToken.toUpperCase()) && currentToken.length() > 1) { // Ignored token because it's written entirely in upper case 
 				parsedTokens.add(new WordMap(currentIndex, currentToken, "ignored", Arrays.asList(new Word[] {new Word(currentToken, null)})));
 			} else {
 				List<Word> wordsFounded = Word.findByText(currentToken);
