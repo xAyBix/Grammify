@@ -1038,27 +1038,1108 @@ public final class ErrorsDetector {
 								break;
 							}
 							case "il": {
-								
+								if (infVerb.getGroup() == 0) {
+									if (!infAux.getText().equals("avoir")) {
+										switch (conjugationTime[0].getText()) {
+										case "suis":{
+											correctAuxiliary = Auxiliary.getAvoir().getSimplePresent()[2]; 
+											break;
+										}
+										case "étais": {
+											correctAuxiliary = Auxiliary.getAvoir().getImparfait()[2]; 
+											break;
+										}
+										case "serai": {
+											correctAuxiliary = Auxiliary.getAvoir().getFutur()[2]; 
+											break;
+										}
+										case "fus": {
+											correctAuxiliary = Auxiliary.getAvoir().getSimplePast()[2]; 
+											break;
+										}
+										default:
+											correctAuxiliary = Auxiliary.getAvoir().getSimplePresent()[2]; 
+											break;
+										}
+										errors.add(new Error(words.get(auxiliaryIndex), wrongAuxiliaryErrorMessage, Arrays.asList(new Verb[] {correctAuxiliary})));
+									}else if (!verbUsed.getText().equals(((Auxiliary)infVerb).getPastParticiples()[0].getText())) {
+										errors.add(new Error(words.get(verbIndex), pastParticipleErrorMessage, Arrays.asList(new Verb[] {((Auxiliary)infVerb).getPastParticiples()[0]})));
+									}
+								}else if (infVerb.getGroup() == 1) {
+									int index = 0;
+									for (Auxiliary a : ((Verb1)infVerb).getAuxiliaries()) {
+										if (infAux.getText().equals(a.getText())) {
+											index=1;
+											break;
+										}
+									}
+									if (index == 0 ) {
+										// Error use the right auxiliary
+										switch (conjugationTime[0].getText()) {
+										case "suis":{
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getSimplePresent()[2]; 
+											break;
+										}
+										case "ai":{
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getSimplePresent()[2]; 
+											break;
+										}
+										case "étais": {
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getImparfait()[2]; 
+											break;
+										}
+										case "avais":{
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getImparfait()[2]; 
+											break;
+										}
+										case "serai": {
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getFutur()[2]; 
+											break;
+										}
+										case "aurai":{
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getFutur()[2]; 
+											break;
+										}
+										case "fus": {
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getSimplePast()[2]; 
+											break;
+										}
+										case "eus":{
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getSimplePast()[2]; 
+											break;
+										}
+										default:
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getSimplePresent()[2]; 
+											break;
+										}
+										errors.add(new Error(words.get(auxiliaryIndex), wrongAuxiliaryErrorMessage, Arrays.asList(new Verb[] {correctAuxiliary})));
+									}else if (!verbUsed.getText().equals(((Verb1)infVerb).getPastParticiples()[0].getText())) {
+										errors.add(new Error(words.get(verbIndex), pastParticipleErrorMessage, Arrays.asList(new Verb[] {((Verb1)infVerb).getPastParticiples()[0]})));
+									}
+								}else if (infVerb.getGroup() == 2) {
+									int index = 0;
+									for (Auxiliary a : ((Verb2)infVerb).getAuxiliaries()) {
+										if (infAux.getText().equals(a.getText())) {
+											index=1;
+											break;
+										}
+									}
+									if (index == 0 ) {
+										switch (conjugationTime[0].getText()) {
+										case "suis":{
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getSimplePresent()[2]; 
+											break;
+										}
+										case "ai":{
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getSimplePresent()[2]; 
+											break;
+										}
+										case "étais": {
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getImparfait()[2]; 
+											break;
+										}
+										case "avais":{
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getImparfait()[2]; 
+											break;
+										}
+										case "serai": {
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getFutur()[2]; 
+											break;
+										}
+										case "aurai":{
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getFutur()[2]; 
+											break;
+										}
+										case "fus": {
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getSimplePast()[2]; 
+											break;
+										}
+										case "eus":{
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getSimplePast()[2]; 
+											break;
+										}
+										default:
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getSimplePresent()[2]; 
+											break;
+										}
+										errors.add(new Error(words.get(auxiliaryIndex), wrongAuxiliaryErrorMessage, Arrays.asList(new Verb[] {correctAuxiliary})));
+										
+									}else if (!verbUsed.getText().equals(((Verb2)infVerb).getPastParticiples()[0].getText())) {
+										errors.add(new Error(words.get(verbIndex), pastParticipleErrorMessage, Arrays.asList(new Verb[] {((Verb2)infVerb).getPastParticiples()[0]})));
+									}
+									
+								}else if (infVerb.getGroup() == 3) {
+									int index = 0;
+									for (Auxiliary a : ((Verb3)infVerb).getAuxiliaries()) {
+										if (infAux.getText().equals(a.getText())) {
+											index=1;
+											break;
+										}
+									}
+									if (index == 0 ) {
+										switch (conjugationTime[0].getText()) {
+										case "suis":{
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getSimplePresent()[2]; 
+											break;
+										}
+										case "ai":{
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getSimplePresent()[2]; 
+											break;
+										}
+										case "étais": {
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getImparfait()[2]; 
+											break;
+										}
+										case "avais":{
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getImparfait()[2]; 
+											break;
+										}
+										case "serai": {
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getFutur()[2]; 
+											break;
+										}
+										case "aurai":{
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getFutur()[2]; 
+											break;
+										}
+										case "fus": {
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getSimplePast()[2]; 
+											break;
+										}
+										case "eus":{
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getSimplePast()[2]; 
+											break;
+										}
+										default:
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getSimplePresent()[2]; 
+											break;
+										}
+										errors.add(new Error(words.get(auxiliaryIndex), wrongAuxiliaryErrorMessage, Arrays.asList(new Verb[] {correctAuxiliary})));
+									}else if (!verbUsed.getText().equals(((Verb3)infVerb).getPastParticiples()[0].getText())) {
+										errors.add(new Error(words.get(verbIndex), pastParticipleErrorMessage, Arrays.asList(new Verb[] {((Verb3)infVerb).getPastParticiples()[0]})));
+									}
+								}
 								break;
 							}
 							case "elle": {
-								
+								if (infVerb.getGroup() == 0) {
+									if (!infAux.getText().equals("avoir")) {
+										switch (conjugationTime[0].getText()) {
+										case "suis":{
+											correctAuxiliary = Auxiliary.getAvoir().getSimplePresent()[2]; 
+											break;
+										}
+										case "étais": {
+											correctAuxiliary = Auxiliary.getAvoir().getImparfait()[2]; 
+											break;
+										}
+										case "serai": {
+											correctAuxiliary = Auxiliary.getAvoir().getFutur()[2]; 
+											break;
+										}
+										case "fus": {
+											correctAuxiliary = Auxiliary.getAvoir().getSimplePast()[2]; 
+											break;
+										}
+										default:
+											correctAuxiliary = Auxiliary.getAvoir().getSimplePresent()[2]; 
+											break;
+										}
+										errors.add(new Error(words.get(auxiliaryIndex), wrongAuxiliaryErrorMessage, Arrays.asList(new Verb[] {correctAuxiliary})));
+									}else if (!verbUsed.getText().equals(((Auxiliary)infVerb).getPastParticiples()[0].getText())) {
+										errors.add(new Error(words.get(verbIndex), pastParticipleErrorMessage, Arrays.asList(new Verb[] {((Auxiliary)infVerb).getPastParticiples()[0]})));
+									}
+								}else if (infVerb.getGroup() == 1) {
+									int index = 0;
+									for (Auxiliary a : ((Verb1)infVerb).getAuxiliaries()) {
+										if (infAux.getText().equals(a.getText())) {
+											index=1;
+											break;
+										}
+									}
+									if (index == 0 ) {
+										// Error use the right auxiliary
+										switch (conjugationTime[0].getText()) {
+										case "suis":{
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getSimplePresent()[2]; 
+											break;
+										}
+										case "ai":{
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getSimplePresent()[2]; 
+											break;
+										}
+										case "étais": {
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getImparfait()[2]; 
+											break;
+										}
+										case "avais":{
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getImparfait()[2]; 
+											break;
+										}
+										case "serai": {
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getFutur()[2]; 
+											break;
+										}
+										case "aurai":{
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getFutur()[2]; 
+											break;
+										}
+										case "fus": {
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getSimplePast()[2]; 
+											break;
+										}
+										case "eus":{
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getSimplePast()[2]; 
+											break;
+										}
+										default:
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getSimplePresent()[2]; 
+											break;
+										}
+										errors.add(new Error(words.get(auxiliaryIndex), wrongAuxiliaryErrorMessage, Arrays.asList(new Verb[] {correctAuxiliary})));
+									}else if (!verbUsed.getText().equals(((Verb1)infVerb).getPastParticiples()[0].getText())) {
+										errors.add(new Error(words.get(verbIndex), pastParticipleErrorMessage, Arrays.asList(new Verb[] {((Verb1)infVerb).getPastParticiples()[0]})));
+									}
+								}else if (infVerb.getGroup() == 2) {
+									int index = 0;
+									for (Auxiliary a : ((Verb2)infVerb).getAuxiliaries()) {
+										if (infAux.getText().equals(a.getText())) {
+											index=1;
+											break;
+										}
+									}
+									if (index == 0 ) {
+										switch (conjugationTime[0].getText()) {
+										case "suis":{
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getSimplePresent()[2]; 
+											break;
+										}
+										case "ai":{
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getSimplePresent()[2]; 
+											break;
+										}
+										case "étais": {
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getImparfait()[2]; 
+											break;
+										}
+										case "avais":{
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getImparfait()[2]; 
+											break;
+										}
+										case "serai": {
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getFutur()[2]; 
+											break;
+										}
+										case "aurai":{
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getFutur()[2]; 
+											break;
+										}
+										case "fus": {
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getSimplePast()[2]; 
+											break;
+										}
+										case "eus":{
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getSimplePast()[2]; 
+											break;
+										}
+										default:
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getSimplePresent()[2]; 
+											break;
+										}
+										errors.add(new Error(words.get(auxiliaryIndex), wrongAuxiliaryErrorMessage, Arrays.asList(new Verb[] {correctAuxiliary})));
+										
+									}else if (!verbUsed.getText().equals(((Verb2)infVerb).getPastParticiples()[0].getText())) {
+										errors.add(new Error(words.get(verbIndex), pastParticipleErrorMessage, Arrays.asList(new Verb[] {((Verb2)infVerb).getPastParticiples()[0]})));
+									}
+									
+								}else if (infVerb.getGroup() == 3) {
+									int index = 0;
+									for (Auxiliary a : ((Verb3)infVerb).getAuxiliaries()) {
+										if (infAux.getText().equals(a.getText())) {
+											index=1;
+											break;
+										}
+									}
+									if (index == 0 ) {
+										switch (conjugationTime[0].getText()) {
+										case "suis":{
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getSimplePresent()[2]; 
+											break;
+										}
+										case "ai":{
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getSimplePresent()[2]; 
+											break;
+										}
+										case "étais": {
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getImparfait()[2]; 
+											break;
+										}
+										case "avais":{
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getImparfait()[2]; 
+											break;
+										}
+										case "serai": {
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getFutur()[2]; 
+											break;
+										}
+										case "aurai":{
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getFutur()[2]; 
+											break;
+										}
+										case "fus": {
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getSimplePast()[2]; 
+											break;
+										}
+										case "eus":{
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getSimplePast()[2]; 
+											break;
+										}
+										default:
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getSimplePresent()[2]; 
+											break;
+										}
+										errors.add(new Error(words.get(auxiliaryIndex), wrongAuxiliaryErrorMessage, Arrays.asList(new Verb[] {correctAuxiliary})));
+									}else if (!verbUsed.getText().equals(((Verb3)infVerb).getPastParticiples()[0].getText())) {
+										errors.add(new Error(words.get(verbIndex), pastParticipleErrorMessage, Arrays.asList(new Verb[] {((Verb3)infVerb).getPastParticiples()[0]})));
+									}
+								}
 								break;
 							}
 							case "nous": {
+								if (infVerb.getGroup() == 0) {
+									if (!infAux.getText().equals("avoir")) {
+										switch (conjugationTime[0].getText()) {
+										case "suis":{
+											correctAuxiliary = Auxiliary.getAvoir().getSimplePresent()[3]; 
+											break;
+										}
+										case "étais": {
+											correctAuxiliary = Auxiliary.getAvoir().getImparfait()[3]; 
+											break;
+										}
+										case "serai": {
+											correctAuxiliary = Auxiliary.getAvoir().getFutur()[3]; 
+											break;
+										}
+										case "fus": {
+											correctAuxiliary = Auxiliary.getAvoir().getSimplePast()[3]; 
+											break;
+										}
+										default:
+											correctAuxiliary = Auxiliary.getAvoir().getSimplePresent()[3]; 
+											break;
+										}
+										errors.add(new Error(words.get(auxiliaryIndex), wrongAuxiliaryErrorMessage, Arrays.asList(new Verb[] {correctAuxiliary})));
+									}else if (!verbUsed.getText().equals(((Auxiliary)infVerb).getPastParticiples()[0].getText())) {
+										errors.add(new Error(words.get(verbIndex), pastParticipleErrorMessage, Arrays.asList(new Verb[] {((Auxiliary)infVerb).getPastParticiples()[0]})));
+									}
+								}else if (infVerb.getGroup() == 1) {
+									int index = 0;
+									for (Auxiliary a : ((Verb1)infVerb).getAuxiliaries()) {
+										if (infAux.getText().equals(a.getText())) {
+											index=1;
+											break;
+										}
+									}
+									if (index == 0 ) {
+										// Error use the right auxiliary
+										switch (conjugationTime[0].getText()) {
+										case "suis":{
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getSimplePresent()[3]; 
+											break;
+										}
+										case "ai":{
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getSimplePresent()[3]; 
+											break;
+										}
+										case "étais": {
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getImparfait()[3]; 
+											break;
+										}
+										case "avais":{
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getImparfait()[3]; 
+											break;
+										}
+										case "serai": {
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getFutur()[3]; 
+											break;
+										}
+										case "aurai":{
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getFutur()[3]; 
+											break;
+										}
+										case "fus": {
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getSimplePast()[3]; 
+											break;
+										}
+										case "eus":{
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getSimplePast()[3]; 
+											break;
+										}
+										default:
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getSimplePresent()[3]; 
+											break;
+										}
+										errors.add(new Error(words.get(auxiliaryIndex), wrongAuxiliaryErrorMessage, Arrays.asList(new Verb[] {correctAuxiliary})));
+									}else if (!verbUsed.getText().equals(((Verb1)infVerb).getPastParticiples()[0].getText())) {
+										errors.add(new Error(words.get(verbIndex), pastParticipleErrorMessage, Arrays.asList(new Verb[] {((Verb1)infVerb).getPastParticiples()[0]})));
+									}
+								}else if (infVerb.getGroup() == 2) {
+									int index = 0;
+									for (Auxiliary a : ((Verb2)infVerb).getAuxiliaries()) {
+										if (infAux.getText().equals(a.getText())) {
+											index=1;
+											break;
+										}
+									}
+									if (index == 0 ) {
+										switch (conjugationTime[0].getText()) {
+										case "suis":{
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getSimplePresent()[3]; 
+											break;
+										}
+										case "ai":{
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getSimplePresent()[3]; 
+											break;
+										}
+										case "étais": {
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getImparfait()[3]; 
+											break;
+										}
+										case "avais":{
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getImparfait()[3]; 
+											break;
+										}
+										case "serai": {
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getFutur()[3]; 
+											break;
+										}
+										case "aurai":{
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getFutur()[3]; 
+											break;
+										}
+										case "fus": {
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getSimplePast()[3]; 
+											break;
+										}
+										case "eus":{
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getSimplePast()[3]; 
+											break;
+										}
+										default:
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getSimplePresent()[3]; 
+											break;
+										}
+										errors.add(new Error(words.get(auxiliaryIndex), wrongAuxiliaryErrorMessage, Arrays.asList(new Verb[] {correctAuxiliary})));
+										
+									}else if (!verbUsed.getText().equals(((Verb2)infVerb).getPastParticiples()[0].getText())) {
+										errors.add(new Error(words.get(verbIndex), pastParticipleErrorMessage, Arrays.asList(new Verb[] {((Verb2)infVerb).getPastParticiples()[0]})));
+									}
+									
+								}else if (infVerb.getGroup() == 3) {
+									int index = 0;
+									for (Auxiliary a : ((Verb3)infVerb).getAuxiliaries()) {
+										if (infAux.getText().equals(a.getText())) {
+											index=1;
+											break;
+										}
+									}
+									if (index == 0 ) {
+										switch (conjugationTime[0].getText()) {
+										case "suis":{
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getSimplePresent()[3]; 
+											break;
+										}
+										case "ai":{
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getSimplePresent()[3]; 
+											break;
+										}
+										case "étais": {
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getImparfait()[3]; 
+											break;
+										}
+										case "avais":{
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getImparfait()[3]; 
+											break;
+										}
+										case "serai": {
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getFutur()[3]; 
+											break;
+										}
+										case "aurai":{
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getFutur()[3]; 
+											break;
+										}
+										case "fus": {
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getSimplePast()[3]; 
+											break;
+										}
+										case "eus":{
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getSimplePast()[3]; 
+											break;
+										}
+										default:
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getSimplePresent()[3]; 
+											break;
+										}
+										errors.add(new Error(words.get(auxiliaryIndex), wrongAuxiliaryErrorMessage, Arrays.asList(new Verb[] {correctAuxiliary})));
+									}else if (!verbUsed.getText().equals(((Verb3)infVerb).getPastParticiples()[0].getText())) {
+										errors.add(new Error(words.get(verbIndex), pastParticipleErrorMessage, Arrays.asList(new Verb[] {((Verb3)infVerb).getPastParticiples()[0]})));
+									}
+								}
 								
 								break;
 							}
 							case "vous": {
-								
+								if (infVerb.getGroup() == 0) {
+									if (!infAux.getText().equals("avoir")) {
+										switch (conjugationTime[0].getText()) {
+										case "suis":{
+											correctAuxiliary = Auxiliary.getAvoir().getSimplePresent()[4]; 
+											break;
+										}
+										case "étais": {
+											correctAuxiliary = Auxiliary.getAvoir().getImparfait()[4]; 
+											break;
+										}
+										case "serai": {
+											correctAuxiliary = Auxiliary.getAvoir().getFutur()[4]; 
+											break;
+										}
+										case "fus": {
+											correctAuxiliary = Auxiliary.getAvoir().getSimplePast()[4]; 
+											break;
+										}
+										default:
+											correctAuxiliary = Auxiliary.getAvoir().getSimplePresent()[4]; 
+											break;
+										}
+										errors.add(new Error(words.get(auxiliaryIndex), wrongAuxiliaryErrorMessage, Arrays.asList(new Verb[] {correctAuxiliary})));
+									}else if (!verbUsed.getText().equals(((Auxiliary)infVerb).getPastParticiples()[0].getText())) {
+										errors.add(new Error(words.get(verbIndex), pastParticipleErrorMessage, Arrays.asList(new Verb[] {((Auxiliary)infVerb).getPastParticiples()[0]})));
+									}
+								}else if (infVerb.getGroup() == 1) {
+									int index = 0;
+									for (Auxiliary a : ((Verb1)infVerb).getAuxiliaries()) {
+										if (infAux.getText().equals(a.getText())) {
+											index=1;
+											break;
+										}
+									}
+									if (index == 0 ) {
+										// Error use the right auxiliary
+										switch (conjugationTime[0].getText()) {
+										case "suis":{
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getSimplePresent()[4]; 
+											break;
+										}
+										case "ai":{
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getSimplePresent()[4]; 
+											break;
+										}
+										case "étais": {
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getImparfait()[4]; 
+											break;
+										}
+										case "avais":{
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getImparfait()[4]; 
+											break;
+										}
+										case "serai": {
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getFutur()[4]; 
+											break;
+										}
+										case "aurai":{
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getFutur()[4]; 
+											break;
+										}
+										case "fus": {
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getSimplePast()[4]; 
+											break;
+										}
+										case "eus":{
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getSimplePast()[4]; 
+											break;
+										}
+										default:
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getSimplePresent()[4]; 
+											break;
+										}
+										errors.add(new Error(words.get(auxiliaryIndex), wrongAuxiliaryErrorMessage, Arrays.asList(new Verb[] {correctAuxiliary})));
+									}else if (!verbUsed.getText().equals(((Verb1)infVerb).getPastParticiples()[0].getText())) {
+										errors.add(new Error(words.get(verbIndex), pastParticipleErrorMessage, Arrays.asList(new Verb[] {((Verb1)infVerb).getPastParticiples()[0]})));
+									}
+								}else if (infVerb.getGroup() == 2) {
+									int index = 0;
+									for (Auxiliary a : ((Verb2)infVerb).getAuxiliaries()) {
+										if (infAux.getText().equals(a.getText())) {
+											index=1;
+											break;
+										}
+									}
+									if (index == 0 ) {
+										switch (conjugationTime[0].getText()) {
+										case "suis":{
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getSimplePresent()[4]; 
+											break;
+										}
+										case "ai":{
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getSimplePresent()[4]; 
+											break;
+										}
+										case "étais": {
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getImparfait()[4]; 
+											break;
+										}
+										case "avais":{
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getImparfait()[4]; 
+											break;
+										}
+										case "serai": {
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getFutur()[4]; 
+											break;
+										}
+										case "aurai":{
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getFutur()[4]; 
+											break;
+										}
+										case "fus": {
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getSimplePast()[4]; 
+											break;
+										}
+										case "eus":{
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getSimplePast()[4]; 
+											break;
+										}
+										default:
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getSimplePresent()[4]; 
+											break;
+										}
+										errors.add(new Error(words.get(auxiliaryIndex), wrongAuxiliaryErrorMessage, Arrays.asList(new Verb[] {correctAuxiliary})));
+										
+									}else if (!verbUsed.getText().equals(((Verb2)infVerb).getPastParticiples()[0].getText())) {
+										errors.add(new Error(words.get(verbIndex), pastParticipleErrorMessage, Arrays.asList(new Verb[] {((Verb2)infVerb).getPastParticiples()[0]})));
+									}
+									
+								}else if (infVerb.getGroup() == 3) {
+									int index = 0;
+									for (Auxiliary a : ((Verb3)infVerb).getAuxiliaries()) {
+										if (infAux.getText().equals(a.getText())) {
+											index=1;
+											break;
+										}
+									}
+									if (index == 0 ) {
+										switch (conjugationTime[0].getText()) {
+										case "suis":{
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getSimplePresent()[4]; 
+											break;
+										}
+										case "ai":{
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getSimplePresent()[4]; 
+											break;
+										}
+										case "étais": {
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getImparfait()[4]; 
+											break;
+										}
+										case "avais":{
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getImparfait()[4]; 
+											break;
+										}
+										case "serai": {
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getFutur()[4]; 
+											break;
+										}
+										case "aurai":{
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getFutur()[4]; 
+											break;
+										}
+										case "fus": {
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getSimplePast()[4]; 
+											break;
+										}
+										case "eus":{
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getSimplePast()[4]; 
+											break;
+										}
+										default:
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getSimplePresent()[4]; 
+											break;
+										}
+										errors.add(new Error(words.get(auxiliaryIndex), wrongAuxiliaryErrorMessage, Arrays.asList(new Verb[] {correctAuxiliary})));
+									}else if (!verbUsed.getText().equals(((Verb3)infVerb).getPastParticiples()[0].getText())) {
+										errors.add(new Error(words.get(verbIndex), pastParticipleErrorMessage, Arrays.asList(new Verb[] {((Verb3)infVerb).getPastParticiples()[0]})));
+									}
+								}
 								break;
 							}
 							case "ils": {
-								
+								if (infVerb.getGroup() == 0) {
+									if (!infAux.getText().equals("avoir")) {
+										switch (conjugationTime[0].getText()) {
+										case "suis":{
+											correctAuxiliary = Auxiliary.getAvoir().getSimplePresent()[5]; 
+											break;
+										}
+										case "étais": {
+											correctAuxiliary = Auxiliary.getAvoir().getImparfait()[5]; 
+											break;
+										}
+										case "serai": {
+											correctAuxiliary = Auxiliary.getAvoir().getFutur()[5]; 
+											break;
+										}
+										case "fus": {
+											correctAuxiliary = Auxiliary.getAvoir().getSimplePast()[5]; 
+											break;
+										}
+										default:
+											correctAuxiliary = Auxiliary.getAvoir().getSimplePresent()[5]; 
+											break;
+										}
+										errors.add(new Error(words.get(auxiliaryIndex), wrongAuxiliaryErrorMessage, Arrays.asList(new Verb[] {correctAuxiliary})));
+									}else if (!verbUsed.getText().equals(((Auxiliary)infVerb).getPastParticiples()[0].getText())) {
+										errors.add(new Error(words.get(verbIndex), pastParticipleErrorMessage, Arrays.asList(new Verb[] {((Auxiliary)infVerb).getPastParticiples()[0]})));
+									}
+								}else if (infVerb.getGroup() == 1) {
+									int index = 0;
+									for (Auxiliary a : ((Verb1)infVerb).getAuxiliaries()) {
+										if (infAux.getText().equals(a.getText())) {
+											index=1;
+											break;
+										}
+									}
+									if (index == 0 ) {
+										// Error use the right auxiliary
+										switch (conjugationTime[0].getText()) {
+										case "suis":{
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getSimplePresent()[5]; 
+											break;
+										}
+										case "ai":{
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getSimplePresent()[5]; 
+											break;
+										}
+										case "étais": {
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getImparfait()[5]; 
+											break;
+										}
+										case "avais":{
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getImparfait()[5]; 
+											break;
+										}
+										case "serai": {
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getFutur()[5]; 
+											break;
+										}
+										case "aurai":{
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getFutur()[5]; 
+											break;
+										}
+										case "fus": {
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getSimplePast()[5]; 
+											break;
+										}
+										case "eus":{
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getSimplePast()[5]; 
+											break;
+										}
+										default:
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getSimplePresent()[5]; 
+											break;
+										}
+										errors.add(new Error(words.get(auxiliaryIndex), wrongAuxiliaryErrorMessage, Arrays.asList(new Verb[] {correctAuxiliary})));
+									}else if (!verbUsed.getText().equals(((Verb1)infVerb).getPastParticiples()[0].getText())) {
+										errors.add(new Error(words.get(verbIndex), pastParticipleErrorMessage, Arrays.asList(new Verb[] {((Verb1)infVerb).getPastParticiples()[0]})));
+									}
+								}else if (infVerb.getGroup() == 2) {
+									int index = 0;
+									for (Auxiliary a : ((Verb2)infVerb).getAuxiliaries()) {
+										if (infAux.getText().equals(a.getText())) {
+											index=1;
+											break;
+										}
+									}
+									if (index == 0 ) {
+										switch (conjugationTime[0].getText()) {
+										case "suis":{
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getSimplePresent()[5]; 
+											break;
+										}
+										case "ai":{
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getSimplePresent()[5]; 
+											break;
+										}
+										case "étais": {
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getImparfait()[5]; 
+											break;
+										}
+										case "avais":{
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getImparfait()[5]; 
+											break;
+										}
+										case "serai": {
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getFutur()[5]; 
+											break;
+										}
+										case "aurai":{
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getFutur()[5]; 
+											break;
+										}
+										case "fus": {
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getSimplePast()[5]; 
+											break;
+										}
+										case "eus":{
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getSimplePast()[5]; 
+											break;
+										}
+										default:
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getSimplePresent()[5]; 
+											break;
+										}
+										errors.add(new Error(words.get(auxiliaryIndex), wrongAuxiliaryErrorMessage, Arrays.asList(new Verb[] {correctAuxiliary})));
+										
+									}else if (!verbUsed.getText().equals(((Verb2)infVerb).getPastParticiples()[0].getText())) {
+										errors.add(new Error(words.get(verbIndex), pastParticipleErrorMessage, Arrays.asList(new Verb[] {((Verb2)infVerb).getPastParticiples()[0]})));
+									}
+									
+								}else if (infVerb.getGroup() == 3) {
+									int index = 0;
+									for (Auxiliary a : ((Verb3)infVerb).getAuxiliaries()) {
+										if (infAux.getText().equals(a.getText())) {
+											index=1;
+											break;
+										}
+									}
+									if (index == 0 ) {
+										switch (conjugationTime[0].getText()) {
+										case "suis":{
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getSimplePresent()[5]; 
+											break;
+										}
+										case "ai":{
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getSimplePresent()[5]; 
+											break;
+										}
+										case "étais": {
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getImparfait()[5]; 
+											break;
+										}
+										case "avais":{
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getImparfait()[5]; 
+											break;
+										}
+										case "serai": {
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getFutur()[5]; 
+											break;
+										}
+										case "aurai":{
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getFutur()[5]; 
+											break;
+										}
+										case "fus": {
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getSimplePast()[5]; 
+											break;
+										}
+										case "eus":{
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getSimplePast()[5]; 
+											break;
+										}
+										default:
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getSimplePresent()[5]; 
+											break;
+										}
+										errors.add(new Error(words.get(auxiliaryIndex), wrongAuxiliaryErrorMessage, Arrays.asList(new Verb[] {correctAuxiliary})));
+									}else if (!verbUsed.getText().equals(((Verb3)infVerb).getPastParticiples()[0].getText())) {
+										errors.add(new Error(words.get(verbIndex), pastParticipleErrorMessage, Arrays.asList(new Verb[] {((Verb3)infVerb).getPastParticiples()[0]})));
+									}
+								}
 								break;
 							}
 							case "elles": {
-								
+								if (infVerb.getGroup() == 0) {
+									if (!infAux.getText().equals("avoir")) {
+										switch (conjugationTime[0].getText()) {
+										case "suis":{
+											correctAuxiliary = Auxiliary.getAvoir().getSimplePresent()[5]; 
+											break;
+										}
+										case "étais": {
+											correctAuxiliary = Auxiliary.getAvoir().getImparfait()[5]; 
+											break;
+										}
+										case "serai": {
+											correctAuxiliary = Auxiliary.getAvoir().getFutur()[5]; 
+											break;
+										}
+										case "fus": {
+											correctAuxiliary = Auxiliary.getAvoir().getSimplePast()[5]; 
+											break;
+										}
+										default:
+											correctAuxiliary = Auxiliary.getAvoir().getSimplePresent()[5]; 
+											break;
+										}
+										errors.add(new Error(words.get(auxiliaryIndex), wrongAuxiliaryErrorMessage, Arrays.asList(new Verb[] {correctAuxiliary})));
+									}else if (!verbUsed.getText().equals(((Auxiliary)infVerb).getPastParticiples()[0].getText())) {
+										errors.add(new Error(words.get(verbIndex), pastParticipleErrorMessage, Arrays.asList(new Verb[] {((Auxiliary)infVerb).getPastParticiples()[0]})));
+									}
+								}else if (infVerb.getGroup() == 1) {
+									int index = 0;
+									for (Auxiliary a : ((Verb1)infVerb).getAuxiliaries()) {
+										if (infAux.getText().equals(a.getText())) {
+											index=1;
+											break;
+										}
+									}
+									if (index == 0 ) {
+										// Error use the right auxiliary
+										switch (conjugationTime[0].getText()) {
+										case "suis":{
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getSimplePresent()[5]; 
+											break;
+										}
+										case "ai":{
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getSimplePresent()[5]; 
+											break;
+										}
+										case "étais": {
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getImparfait()[5]; 
+											break;
+										}
+										case "avais":{
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getImparfait()[5]; 
+											break;
+										}
+										case "serai": {
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getFutur()[5]; 
+											break;
+										}
+										case "aurai":{
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getFutur()[5]; 
+											break;
+										}
+										case "fus": {
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getSimplePast()[5]; 
+											break;
+										}
+										case "eus":{
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getSimplePast()[5]; 
+											break;
+										}
+										default:
+											correctAuxiliary = ((Verb1)infVerb).getAuxiliaries().get(0).getSimplePresent()[5]; 
+											break;
+										}
+										errors.add(new Error(words.get(auxiliaryIndex), wrongAuxiliaryErrorMessage, Arrays.asList(new Verb[] {correctAuxiliary})));
+									}else if (!verbUsed.getText().equals(((Verb1)infVerb).getPastParticiples()[0].getText())) {
+										errors.add(new Error(words.get(verbIndex), pastParticipleErrorMessage, Arrays.asList(new Verb[] {((Verb1)infVerb).getPastParticiples()[0]})));
+									}
+								}else if (infVerb.getGroup() == 2) {
+									int index = 0;
+									for (Auxiliary a : ((Verb2)infVerb).getAuxiliaries()) {
+										if (infAux.getText().equals(a.getText())) {
+											index=1;
+											break;
+										}
+									}
+									if (index == 0 ) {
+										switch (conjugationTime[0].getText()) {
+										case "suis":{
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getSimplePresent()[5]; 
+											break;
+										}
+										case "ai":{
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getSimplePresent()[5]; 
+											break;
+										}
+										case "étais": {
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getImparfait()[5]; 
+											break;
+										}
+										case "avais":{
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getImparfait()[5]; 
+											break;
+										}
+										case "serai": {
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getFutur()[5]; 
+											break;
+										}
+										case "aurai":{
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getFutur()[5]; 
+											break;
+										}
+										case "fus": {
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getSimplePast()[5]; 
+											break;
+										}
+										case "eus":{
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getSimplePast()[5]; 
+											break;
+										}
+										default:
+											correctAuxiliary = ((Verb2)infVerb).getAuxiliaries().get(0).getSimplePresent()[5]; 
+											break;
+										}
+										errors.add(new Error(words.get(auxiliaryIndex), wrongAuxiliaryErrorMessage, Arrays.asList(new Verb[] {correctAuxiliary})));
+										
+									}else if (!verbUsed.getText().equals(((Verb2)infVerb).getPastParticiples()[0].getText())) {
+										errors.add(new Error(words.get(verbIndex), pastParticipleErrorMessage, Arrays.asList(new Verb[] {((Verb2)infVerb).getPastParticiples()[0]})));
+									}
+									
+								}else if (infVerb.getGroup() == 3) {
+									int index = 0;
+									for (Auxiliary a : ((Verb3)infVerb).getAuxiliaries()) {
+										if (infAux.getText().equals(a.getText())) {
+											index=1;
+											break;
+										}
+									}
+									if (index == 0 ) {
+										switch (conjugationTime[0].getText()) {
+										case "suis":{
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getSimplePresent()[5]; 
+											break;
+										}
+										case "ai":{
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getSimplePresent()[5]; 
+											break;
+										}
+										case "étais": {
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getImparfait()[5]; 
+											break;
+										}
+										case "avais":{
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getImparfait()[5]; 
+											break;
+										}
+										case "serai": {
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getFutur()[5]; 
+											break;
+										}
+										case "aurai":{
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getFutur()[5]; 
+											break;
+										}
+										case "fus": {
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getSimplePast()[5]; 
+											break;
+										}
+										case "eus":{
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getSimplePast()[5]; 
+											break;
+										}
+										default:
+											correctAuxiliary = ((Verb3)infVerb).getAuxiliaries().get(0).getSimplePresent()[5]; 
+											break;
+										}
+										errors.add(new Error(words.get(auxiliaryIndex), wrongAuxiliaryErrorMessage, Arrays.asList(new Verb[] {correctAuxiliary})));
+									}else if (!verbUsed.getText().equals(((Verb3)infVerb).getPastParticiples()[0].getText())) {
+										errors.add(new Error(words.get(verbIndex), pastParticipleErrorMessage, Arrays.asList(new Verb[] {((Verb3)infVerb).getPastParticiples()[0]})));
+									}
+								}
 								break;
 							}
 
