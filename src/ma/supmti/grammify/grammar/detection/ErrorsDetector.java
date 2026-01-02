@@ -6,7 +6,6 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
 import java.util.regex.Pattern;
 
 import javax.swing.SwingUtilities;
@@ -17,6 +16,7 @@ import javax.swing.text.Highlighter.Highlight;
 import javax.swing.text.Highlighter.HighlightPainter;
 
 import ma.supmti.grammify.grammar.Auxiliary;
+import ma.supmti.grammify.grammar.Determiner;
 import ma.supmti.grammify.grammar.PartOfSpeech;
 import ma.supmti.grammify.grammar.Pronoun;
 import ma.supmti.grammify.grammar.PronounTypes;
@@ -50,7 +50,6 @@ public final class ErrorsDetector {
 
 	// A list of words ignored by the user
 	private static List<Error> ignoredWords = new ArrayList<>();
-	private static ExecutorService executorService;
 	private static HighlightPainter painter = new DefaultHighlighter.DefaultHighlightPainter(Color.RED);
 
 	// Starts a thread that searches constantly for errors in user inputs
@@ -67,6 +66,8 @@ public final class ErrorsDetector {
 			OpenedFile.errors.addAll(firstCharacterUpperCaseErrorsCheck(words));
 			OpenedFile.errors.addAll(spellingErrorsCheck(words));
 			OpenedFile.errors.addAll(conjugationErrorsCheck(words));
+			OpenedFile.errors.addAll(grammarErrorsCheck(words));
+			OpenedFile.errors.addAll(punctuationErrorsCheck(words));
 
 			displayErrors(words);
 
@@ -255,9 +256,48 @@ public final class ErrorsDetector {
 		List<Error> errors = new ArrayList<>();
 		String genderErrorMessage = "Wrong gender detected";
 		String numberErrorMessage = "Wrong number detected";
-
+		String mustUseElisionErrorMessage = "Must use elision version";
+		String mustUseFullErrorMessage = "Must use full version";
+		
+		List<Word> currentWord = null;
+		List<Word> nextWord = null;
 		for (int i = 0; i < words.size(); i++) {
+			currentWord = words.get(i).getWords();
+			int j = i + 1;
+	        while (j < words.size() && words.get(j).getText().equals(" ")) {
+	            j++;
+	        }
+	        if (j >= words.size()) {
+	            continue;
+	        }
+	        nextWord = words.get(j).getWords();
 
+			for (Word w : currentWord) {
+				if (w.getPartOfSpeech() == PartOfSpeech.PRONOUN || w.getPartOfSpeech() == PartOfSpeech.DETERMINER) {
+					if (nextWord.get(0).getText().startsWith("a") ||
+							nextWord.get(0).getText().startsWith("o") ||
+							nextWord.get(0).getText().startsWith("i") ||
+							nextWord.get(0).getText().startsWith("u") ||
+							nextWord.get(0).getText().startsWith("y") ||
+							nextWord.get(0).getText().startsWith("e") ||
+							nextWord.get(0).getText().startsWith("é") ||
+							nextWord.get(0).getText().startsWith("è") ||
+							nextWord.get(0).getText().startsWith("ê") ||
+							nextWord.get(0).getText().startsWith("h")) {
+						if (w.getPartOfSpeech() == PartOfSpeech.PRONOUN && ((Pronoun)w).canBeElidedOrFull() == 1) {
+							errors.add(new Error(words.get(i), mustUseElisionErrorMessage, Arrays.asList(new Word[] {new Word(((Pronoun)w).getElision().getText()+"'", null)})));
+						}else if (w.getPartOfSpeech() == PartOfSpeech.DETERMINER){
+							if (((Determiner)w).getText().equals("le") || ((Determiner)w).getText().equals("la")) {
+								errors.add(new Error(words.get(i), mustUseElisionErrorMessage, Arrays.asList(new Word[] {new Word("l'", null)})));
+							}else if (((Determiner)w).getText().equals("ce")) {
+								errors.add(new Error(words.get(i), mustUseElisionErrorMessage, Arrays.asList(new Word[] {new Word("cet", null)})));
+							}
+						}
+					}else {
+						// unnessecery elided
+					}
+				}
+			}
 		}
 
 		return errors;
@@ -2166,9 +2206,36 @@ public final class ErrorsDetector {
 	private static List<Error> punctuationErrorsCheck(List<WordMap> words) {
 		List<Error> errors = new ArrayList<>();
 		String errorMessage = "Wrong punctuation detected";
-
+		String unnecessaryPunctuationErrorMessage = "Unnecessary punctuation";
+		List<Word> currentWord = null;
+		List<Word> nextWord = null;
+		
+		boolean isQuestion = false;
+		boolean isNormal = false;
+		boolean isExclamative = false;
 		for (int i = 0; i < words.size(); i++) {
-
+			currentWord = words.get(i).getWords();
+			int j = i + 1;
+	        while (j < words.size() && words.get(j).getText().equals(" ")) {
+	            j++;
+	        }
+	        if (i == 0) {
+				if (currentWord.get(0).getPartOfSpeech() == PartOfSpeech.PUNCTUATION) {
+					if (((Punctuation)currentWord.get(0)).getPunctuationTypes() != PunctuationTypes.NEW_LINE &&
+							((Punctuation)currentWord.get(0)).getPunctuationTypes() != PunctuationTypes.WHITE_SPACE &&
+							((Punctuation)currentWord.get(0)).getPunctuationTypes() != PunctuationTypes.HYPHEN && 
+							((Punctuation)currentWord.get(0)).getPunctuationTypes() != PunctuationTypes.QUOTATION_MARK &&
+							((Punctuation)currentWord.get(0)).getPunctuationTypes() != PunctuationTypes.LEFT_PARENTHESE) {
+						errors.add(new Error(words.get(i), unnecessaryPunctuationErrorMessage, Arrays.asList(new Word[] {new Word("", null)})));
+						continue;
+					}
+				}
+			}
+	        if (j >= words.size()) {
+	            continue;
+	        }
+	        nextWord = words.get(j).getWords();
+			
 		}
 
 		return errors;

@@ -1,9 +1,6 @@
 package ma.supmti.grammify.ui;
 
 import java.awt.Color;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 import javax.swing.JTextPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -26,7 +23,6 @@ import ma.supmti.grammify.io.OpenedFile;
 public class CustomTextArea extends JTextPane {
 
 	private static final long serialVersionUID = -690400514247574287L;
-	private static ExecutorService executorService;
 
 	public CustomTextArea() {
 		super();
@@ -75,10 +71,5 @@ public class CustomTextArea extends JTextPane {
 			GrammifyApplication.mainFrame.setTitle(Constants.APP_NAME + " - " + OpenedFile.name);
 		}
 		MainFrame.statusBar.update();
-	}
-
-	// Shutdown the executor
-	public static void shutdown() {
-		executorService.shutdown();
 	}
 }
