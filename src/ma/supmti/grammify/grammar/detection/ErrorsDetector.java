@@ -5,7 +5,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import javax.swing.SwingUtilities;
@@ -17,6 +19,8 @@ import javax.swing.text.Highlighter.HighlightPainter;
 
 import ma.supmti.grammify.grammar.Auxiliary;
 import ma.supmti.grammify.grammar.Determiner;
+import ma.supmti.grammify.grammar.GrammaticalGender;
+import ma.supmti.grammify.grammar.GrammaticalNumber;
 import ma.supmti.grammify.grammar.PartOfSpeech;
 import ma.supmti.grammify.grammar.Pronoun;
 import ma.supmti.grammify.grammar.PronounTypes;
@@ -259,46 +263,139 @@ public final class ErrorsDetector {
 		String mustUseElisionErrorMessage = "Must use elision version";
 		String mustUseFullErrorMessage = "Must use full version";
 		
-		List<Word> currentWord = null;
-		List<Word> nextWord = null;
+		Map<Integer, GrammaticalGender> genderCheck = new HashMap<Integer, GrammaticalGender>();
+		Map<Integer, GrammaticalNumber> numberCheck = new HashMap<Integer, GrammaticalNumber>();
+		
 		for (int i = 0; i < words.size(); i++) {
-			currentWord = words.get(i).getWords();
-			int j = i + 1;
-	        while (j < words.size() && words.get(j).getText().equals(" ")) {
+	        List<Word> currentWord = words.get(i).getWords();
+
+	        int j = i + 1;
+	        int spaceIndex = -1;
+	        int apostropheIndex = -1;
+
+	        while (j < words.size()
+	                && (words.get(j).getText().equals(" ")
+	                || words.get(j).getText().equals("'"))) {
+
+	            if (words.get(j).getText().equals(" "))
+	                spaceIndex = j;
+	            if (words.get(j).getText().equals("'"))
+	                apostropheIndex = j;
+
 	            j++;
 	        }
-	        if (j >= words.size()) {
-	            continue;
-	        }
-	        nextWord = words.get(j).getWords();
 
-			for (Word w : currentWord) {
-				if (w.getPartOfSpeech() == PartOfSpeech.PRONOUN || w.getPartOfSpeech() == PartOfSpeech.DETERMINER) {
-					if (nextWord.get(0).getText().startsWith("a") ||
-							nextWord.get(0).getText().startsWith("o") ||
-							nextWord.get(0).getText().startsWith("i") ||
-							nextWord.get(0).getText().startsWith("u") ||
-							nextWord.get(0).getText().startsWith("y") ||
-							nextWord.get(0).getText().startsWith("e") ||
-							nextWord.get(0).getText().startsWith("é") ||
-							nextWord.get(0).getText().startsWith("è") ||
-							nextWord.get(0).getText().startsWith("ê") ||
-							nextWord.get(0).getText().startsWith("h")) {
-						if (w.getPartOfSpeech() == PartOfSpeech.PRONOUN && ((Pronoun)w).canBeElidedOrFull() == 1) {
-							errors.add(new Error(words.get(i), mustUseElisionErrorMessage, Arrays.asList(new Word[] {new Word(((Pronoun)w).getElision().getText()+"'", null)})));
-						}else if (w.getPartOfSpeech() == PartOfSpeech.DETERMINER){
-							if (((Determiner)w).getText().equals("le") || ((Determiner)w).getText().equals("la")) {
-								errors.add(new Error(words.get(i), mustUseElisionErrorMessage, Arrays.asList(new Word[] {new Word("l'", null)})));
-							}else if (((Determiner)w).getText().equals("ce")) {
-								errors.add(new Error(words.get(i), mustUseElisionErrorMessage, Arrays.asList(new Word[] {new Word("cet", null)})));
-							}
-						}
-					}else {
-						// unnessecery elided
-					}
-				}
-			}
-		}
+	        if (j >= words.size())
+	            continue;
+
+	        List<Word> nextWord = words.get(j).getWords();
+	        String nextText = nextWord.get(0).getText();
+
+	        boolean startsWithVowelOrH =
+	                nextText.matches("^[aeiouyéèêh].*");
+
+	        for (Word w : currentWord) {
+
+	            if (w.getPartOfSpeech() != PartOfSpeech.PRONOUN
+	                    && w.getPartOfSpeech() != PartOfSpeech.DETERMINER)
+	                continue;
+
+	            if (startsWithVowelOrH) {
+	                if (w.getPartOfSpeech() == PartOfSpeech.PRONOUN
+	                        && ((Pronoun) w).canBeElidedOrFull() == 1) {
+	                    errors.add(new Error(
+	                            words.get(i),
+	                            mustUseElisionErrorMessage,
+	                            List.of(new Word(((Pronoun) w).getElision().getText() + "'", null))
+	                    ));
+
+	                    if (spaceIndex != -1) {
+	                        errors.add(new Error(
+	                                words.get(spaceIndex),
+	                                "Remove space after elision",
+	                                List.of(
+	                                		new Word("", null))
+	                        ));
+	                    }
+	                }
+
+	                if (w.getPartOfSpeech() == PartOfSpeech.DETERMINER) {
+
+	                    String det = w.getText();
+
+	                    if (det.equals("le") || det.equals("la")) {
+	                        errors.add(new Error(
+	                                words.get(i),
+	                                mustUseElisionErrorMessage,
+	                                List.of(new Word("l'", null))
+	                        ));
+
+	                        if (spaceIndex != -1) {
+	                            errors.add(new Error(
+	                                    words.get(spaceIndex),
+	                                    "Remove space after elision",
+	                                    List.of(
+	                                    		new Word("", null))
+	                            ));
+	                        }
+	                    }
+
+	                    if (det.equals("ce")) {
+	                        errors.add(new Error(
+	                                words.get(i),
+	                                mustUseElisionErrorMessage,
+	                                List.of(new Word("cet", null))
+	                        ));
+	                    }
+	                }
+	            }
+
+	            else {
+	                if (w.getPartOfSpeech() == PartOfSpeech.PRONOUN
+	                        && ((Pronoun) w).canBeElidedOrFull() == -1) {
+	                    errors.add(new Error(
+	                            words.get(i),
+	                            mustUseFullErrorMessage,
+	                            List.of(((Pronoun) w).getFull())
+	                    ));
+
+	                    if (apostropheIndex != -1) {
+	                        errors.add(new Error(
+	                                words.get(apostropheIndex),
+	                                "Remove apostrophe",
+	                                List.of(
+	                                		new Word(" ", null))
+	                        ));
+	                    }
+	                }
+
+	                if (w.getPartOfSpeech() == PartOfSpeech.DETERMINER) {
+
+	                    String det = w.getText();
+
+	                    if (det.equals("cet")) {
+	                        errors.add(new Error(
+	                                words.get(i),
+	                                mustUseFullErrorMessage,
+	                                List.of(new Word("ce", null))
+	                        ));
+	                    }
+
+	                    if (det.equals("l")) {
+	                        errors.add(new Error(
+	                                words.get(i),
+	                                mustUseFullErrorMessage,
+	                                List.of(
+	                                        new Word("le", null),
+	                                        new Word("la", null)
+	                                )
+	                        ));
+	                    }
+	                }
+	            }
+	        }
+	        
+	    }
 
 		return errors;
 	}
