@@ -245,7 +245,6 @@ public final class ErrorsDetector {
 		return errors;
 	}
 
-	// Checks for spelling errors withing the words
 	private static List<Error> spellingErrorsCheck(List<WordMap> words) {
 		List<Error> errors = new ArrayList<>();
 		String errorMessage = "Unfound word detected";
@@ -292,10 +291,8 @@ public final class ErrorsDetector {
 
 			for (Word w : currentWord) {
 
-				// ===================== NOUN FOUND =====================
 				if (w.getPartOfSpeech() == PartOfSpeech.NOUN) {
 
-					// ---- Look backward for determiners & adjectives
 					for (int k = i - 1; k >= 0; k--) {
 						Noun noun = (Noun) w;
 						GrammaticalGender nounGender = noun.getGrammaticalGender();
@@ -306,7 +303,6 @@ public final class ErrorsDetector {
 
 						for (Word prev : words.get(k).getWords()) {
 
-							// ========== DETERMINER ==========
 							if (prev.getPartOfSpeech() == PartOfSpeech.DETERMINER) {
 
 								Determiner det = (Determiner) prev;
@@ -323,7 +319,6 @@ public final class ErrorsDetector {
 								index = 1;
 							}
 
-							// ========== ADJECTIVE ==========
 							if (prev.getPartOfSpeech() == PartOfSpeech.ADJECTIVE) {
 
 								Adjective adj = (Adjective) prev;
@@ -2636,9 +2631,26 @@ public final class ErrorsDetector {
 		for (int i = 0; i < words.size(); i++) {
 			currentWord = words.get(i).getWords();
 			int j = i + 1;
-			while (j < words.size() && words.get(j).getText().equals(" ")) {
+			while (j < words.size() && (words.get(j).getText().equals(" ") || words.get(j).getText().equals("-"))) {
 				j++;
 			}
+			
+			if (currentWord.get(0).getPartOfSpeech() == PartOfSpeech.PUNCTUATION) {
+				if ((currentWord.get(0).getText().equals("?") && isQuestion)) {
+					isQuestion =false;
+				}
+				if ((currentWord.get(0).getText().equals(".") 
+						|| currentWord.get(0).getText().equals("!"))
+						&& isQuestion) {
+					System.out.println("tt");
+					errors.add(new Error(words.get(i), errorMessage,
+							List.of(new Word("?", null))));
+					isQuestion=false;
+				}
+			}
+			
+			if (j >= words.size())
+                continue;
 			if (i == 0) {
 				if (currentWord.get(0).getPartOfSpeech() == PartOfSpeech.PUNCTUATION) {
 					if (((Punctuation) currentWord.get(0)).getPunctuationTypes() != PunctuationTypes.NEW_LINE
@@ -2652,12 +2664,16 @@ public final class ErrorsDetector {
 								Arrays.asList(new Word[] { new Word("", null) })));
 						continue;
 					}
+				}else if (currentWord.get(0).getPartOfSpeech() == PartOfSpeech.VERB) {
+					for(Word w : words.get(j).getWords()) {
+						if (w.getPartOfSpeech() == PartOfSpeech.PRONOUN) {
+							if (((Pronoun)w).getPronounType().contains(PronounTypes.PERSONAL)) {
+								isQuestion = true;
+							}
+						}
+					}
 				}
 			}
-			if (j >= words.size()) {
-				continue;
-			}
-			nextWord = words.get(j).getWords();
 
 		}
 
