@@ -17,6 +17,7 @@ import ma.supmti.grammify.Constants;
 import ma.supmti.grammify.GrammifyApplication;
 import ma.supmti.grammify.ui.CustomTextArea;
 import ma.supmti.grammify.ui.MainFrame;
+import ma.supmti.grammify.utils.UndoRedoManager;
 
 /**
  * Contains all the methods that help manipulating files
@@ -227,12 +228,19 @@ public final class FileManager {
 	    // Set loading flag
 	    CustomTextArea.isLoadingFile = true;
 	    
+	 // Temporarily remove the undo listener to prevent tracking this setText
+	    UndoRedoManager.removeListener();
+	    
 	    try {
 	        MainFrame.textArea.setEditable(true);
 	        MainFrame.textArea.setText(content);
 	        MainFrame.showCaret();
 	    } finally {
-	        CustomTextArea.isLoadingFile = false;
+	        // Re-add the listener
+	        UndoRedoManager.addListener();
+	        
+	        // Reset undo history for the new file
+	        UndoRedoManager.reset();
 	    }
 	}
 

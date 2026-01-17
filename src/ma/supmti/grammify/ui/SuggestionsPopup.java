@@ -31,9 +31,9 @@ public class SuggestionsPopup {
 		popup.removeAll();
 		popup.setBackground(new Color(0x1E1E1E));
 		popup.setBorder(BorderFactory.createLineBorder(new Color(0x3C3C3C)));
-		errorMessage.setFont(Constants.mainFont);
+		errorMessage.setFont(Constants.mainFont());
 		errorMessage.setForeground(new Color(0xF44747));
-		ignoreItem.setFont(Constants.secondaryFont);
+		ignoreItem.setFont(Constants.secondaryFont());
 		ignoreItem.setBackground(new Color(0x1E1E1E));
 		ignoreItem.setForeground(Color.WHITE);
 		ignoreItem.setBorder(BorderFactory.createEmptyBorder());
@@ -46,7 +46,7 @@ public class SuggestionsPopup {
 		if (!err.getAlternatives().isEmpty()) {
 			for (Word suggestion : err.getAlternatives()) {
 				JMenuItem menuItem = new JMenuItem("\"" + suggestion.getText() + "\"");
-				menuItem.setFont(Constants.secondaryFont);
+				menuItem.setFont(Constants.secondaryFont());
 				menuItem.setBackground(new Color(0x1E1E1E));
 				menuItem.setForeground(Color.WHITE);
 				menuItem.setBorder(BorderFactory.createEmptyBorder());

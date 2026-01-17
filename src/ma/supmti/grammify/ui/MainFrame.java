@@ -31,7 +31,9 @@ import javax.swing.text.JTextComponent;
 
 import ma.supmti.grammify.Constants;
 import ma.supmti.grammify.GrammifyApplication;
+import ma.supmti.grammify.Settings;
 import ma.supmti.grammify.io.FileManager;
+import ma.supmti.grammify.utils.UndoRedoManager;
 
 
 
@@ -88,9 +90,13 @@ public class MainFrame extends JFrame {
         statusBar = new StatusBar();
         mainScrollPane = new JScrollPane(textArea);
         mainScrollPane.setBorder(BorderFactory.createEmptyBorder());
-        mainScrollPane.setRowHeaderView(lineNumber);
+        if (Settings.showLineNumbers) {
+            mainScrollPane.setRowHeaderView(lineNumber);
+            mainScrollPane.getRowHeader().setOpaque(true);
+            mainScrollPane.getRowHeader().setBackground(Constants.secondaryColor());
+        }
         mainScrollPane.getRowHeader().setOpaque(true);
-        mainScrollPane.getRowHeader().setBackground(Constants.secondaryColor);
+        mainScrollPane.getRowHeader().setBackground(Constants.secondaryColor());
         
         textArea.setEditable(false);
         defaultCaret = textArea.getCaret();
@@ -102,7 +108,7 @@ public class MainFrame extends JFrame {
     
     private void createWelcomeScreen() {
         welcomePanel = new JPanel(new GridBagLayout());
-        welcomePanel.setBackground(Constants.secondaryColor);
+        welcomePanel.setBackground(Constants.secondaryColor());
         
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -245,6 +251,7 @@ public class MainFrame extends JFrame {
     public static void showCaret() {
         textArea.setCaret(defaultCaret);
         lineNumber.setVisible(true);
+        UndoRedoManager.initialize();
         statusBar.update();
         switchToEditor();
     }

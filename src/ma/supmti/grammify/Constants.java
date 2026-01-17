@@ -42,14 +42,16 @@ public final class Constants {
 	// Application icon
 	public static final Image IMG = getImage();
 	
-	// Colors
-	public static final Color mainColor = new Color(0x303030);
-	public static final Color secondaryColor = new Color(0x1F2022);
-	public static final Color thirdColor = new Color(0x656565);
+	// Colors - now delegate to Settings
+	public static Color mainColor() { return Settings.mainColor; }
+	public static Color secondaryColor() { return Settings.secondaryColor; }
+	public static Color thirdColor() { return Settings.thirdColor; }
+	public static Color backgroundColor() { return Settings.backgroundColor; }
+	public static Color textColor() { return Settings.textColor; }
 	
-	// Font
-	public static final Font mainFont = new Font("Monospaced", 1, 20);
-	public static final Font secondaryFont = new Font("Monospaced", 1, 16);
+	// Fonts - now delegate to Settings
+	public static Font mainFont() { return Settings.getMainFont(); }
+	public static Font secondaryFont() { return Settings.getSecondaryFont(); }
 
 	// Application icon helper method
 	private static Image getImage () {

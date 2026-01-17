@@ -31,7 +31,7 @@ public class LineNumber extends JComponent implements DocumentListener {
 		MainFrame.textArea.setMargin(new Insets(0, 5, 0, 0));
 
 		setFont(MainFrame.textArea.getFont());
-		setForeground(Constants.thirdColor);
+		setForeground(Constants.thirdColor());
 	}
 
 	@Override

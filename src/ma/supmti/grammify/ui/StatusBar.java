@@ -24,10 +24,10 @@ public class StatusBar extends JPanel{
 	
 	public StatusBar () {
 		super(new BorderLayout());
-		statusLabel.setFont(Constants.secondaryFont);
+		statusLabel.setFont(Constants.secondaryFont());
 		statusLabel.setForeground(Color.WHITE);
 		statusLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		setBackground(Constants.mainColor);
+		setBackground(Constants.mainColor());
 		setBorder(BorderFactory.createEmptyBorder());
 		add(statusLabel, BorderLayout.EAST);
 	}

@@ -28,8 +28,8 @@ public class CustomTextArea extends JTextPane {
 	public CustomTextArea() {
 		super();
 		setEditable(true);
-		setFont(Constants.mainFont);
-		setBackground(Constants.secondaryColor);
+		setFont(Constants.mainFont());
+		setBackground(Constants.secondaryColor());
 		setForeground(Color.WHITE);
 		setCaretColor(Color.WHITE);
 	}
