@@ -2,6 +2,8 @@ package ma.supmti.grammify;
 
 
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+
 import ma.supmti.grammify.grammar.Word;
 import ma.supmti.grammify.ui.MainFrame;
 
@@ -21,6 +23,19 @@ public class GrammifyApplication {
 	public static MainFrame mainFrame;
 	
 	public static void main(String[] args) {
+		// Enable anti-aliasing and improve font rendering
+	    System.setProperty("awt.useSystemAAFontSettings", "on");
+	    System.setProperty("swing.aatext", "true");
+	    
+	    // For high DPI displays
+	    System.setProperty("sun.java2d.uiScale", "1.0");
+	    
+	    // Use system look and feel for better native font rendering (optional)
+	    try {
+	        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
 		
 		// Load dictionary
 		Word.init();

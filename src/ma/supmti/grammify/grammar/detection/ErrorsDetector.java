@@ -5,9 +5,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Pattern;
 
 import javax.swing.SwingUtilities;
@@ -309,12 +307,149 @@ public final class ErrorsDetector {
 
 								if (det.getGrammaticalGender() != GrammaticalGender.UNISEX
 										&& det.getGrammaticalGender() != nounGender) {
-
-									errors.add(new Error(words.get(k), genderErrorMessage, List.of()));
+									String rep = "";
+									switch (det.getText()) {
+									case "le": {
+										rep = "la";
+										break;
+									}
+									case "la": {
+										rep = "le";
+										break;
+									}
+									case "un": {
+										rep = "une";
+										break;
+									}
+									case "une": {
+										rep = "un";
+										break;
+									}
+									case "mon": {
+										rep = "ma";
+										break;
+									}
+									case "ma": {
+										rep = "mon";
+										break;
+									}
+									case "ton": {
+										rep = "ta";
+										break;
+									}
+									case "ta": {
+										rep = "ton";
+										break;
+									}
+									case "son": {
+										rep = "sa";
+										break;
+									}
+									case "sa": {
+										rep = "son";
+										break;
+									}
+									case "ce": {
+										rep = "cette";
+										break;
+									}
+									case "cette": {
+										rep = "ce";
+										break;
+									}
+									}
+									errors.add(new Error(words.get(k), genderErrorMessage, List.of(new Word(rep, null))));
 								}
 
 								if (det.getGrammaticalNumber() != nounNumber) {
-									errors.add(new Error(words.get(k), numberErrorMessage, List.of()));
+									String[] rep = new String[2];
+									switch (det.getText()) {
+									case "les": {
+										rep[0] = "la";
+										rep[1] = "le";
+										break;
+									}
+									case "des": {
+										rep[0] = "un";
+										rep[1] = "une";
+										break;
+									}
+									case "mes": {
+										rep[0] = "me";
+										rep[1] = "ma";
+										break;
+									}
+									case "tes": {
+										rep[0] = "ton";
+										rep[1] = "ta";
+										break;
+									}
+									case "ses": {
+										rep[0] = "son";
+										rep[1] = "sa";
+										break;
+									}
+									case "leurs": {
+										rep[0] = "leur";
+										break;
+									}
+									case "nos": {
+										rep[0] = "notre";
+										break;
+									}
+									case "vos": {
+										rep[0] = "votre";
+										break;
+									}
+									case "ces": {
+										rep[0] = "ce";
+										rep[1] = "cette";
+										break;
+									}
+									case "la":
+								    case "le": {
+								        rep[0] = "les";
+								        break;
+								    }
+								    case "un":
+								    case "une": {
+								        rep[0] = "des";
+								        break;
+								    }
+								    case "me":
+								    case "ma": {
+								        rep[0] = "mes";
+								        break;
+								    }
+								    case "ton":
+								    case "ta": {
+								        rep[0] = "tes";
+								        break;
+								    }
+								    case "son":
+								    case "sa": {
+								        rep[0] = "ses";
+								        break;
+								    }
+								    case "leur": {
+								        rep[0] = "leurs";
+								        break;
+								    }
+								    case "notre": {
+								        rep[0] = "nos";
+								        break;
+								    }
+								    case "votre": {
+								        rep[0] = "vos";
+								        break;
+								    }
+								    case "ce":
+								    case "cette": {
+								        rep[0] = "ces";
+								        break;
+								    }
+									}
+									errors.add(new Error(words.get(k), numberErrorMessage, List.of(new Word (rep[0], null), new Word (rep[1] == null ? "" : rep[1], null))));
 								}
 								index = 1;
 							}
@@ -2642,7 +2777,6 @@ public final class ErrorsDetector {
 				if ((currentWord.get(0).getText().equals(".") 
 						|| currentWord.get(0).getText().equals("!"))
 						&& isQuestion) {
-					System.out.println("tt");
 					errors.add(new Error(words.get(i), errorMessage,
 							List.of(new Word("?", null))));
 					isQuestion=false;

@@ -34,135 +34,220 @@ public final class FileManager {
 
 	//
 	public static void newFile() {
-		// Setting the close operation
-		openConfirmationDialog();
+	    // Check if a file is already opened FIRST
+	    if (openedFileAlreadyCheck() && MainFrame.textArea != null) {
+	        if (OpenedFile.initialText == null && !MainFrame.textArea.getText().isEmpty()) {
+	            int result = JOptionPane.showConfirmDialog(GrammifyApplication.mainFrame,
+	                    "You have unsaved changes. Do you want to save?", "Unsaved Changes",
+	                    JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+	            if (result == JOptionPane.YES_OPTION) {
+	                saveFile();
+	            } else if (result == JOptionPane.NO_OPTION) {
+	                // Don't save
+	            } else {
+	                return;
+	            }
+	        } else if (OpenedFile.initialText != null && !OpenedFile.initialText.equals(MainFrame.textArea.getText())) {
+	            int result = JOptionPane.showConfirmDialog(GrammifyApplication.mainFrame,
+	                    "You have unsaved changes. Do you want to save?", "Unsaved Changes",
+	                    JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+	            if (result == JOptionPane.YES_OPTION) {
+	                saveFile();
+	            } else if (result == JOptionPane.NO_OPTION) {
+	                // Don't save
+	            } else {
+	                return;
+	            }
+	        }
+	    }
 
-		// Check if a file is already opened
-		if (openedFileAlreadyCheck() && MainFrame.textArea != null) {
-			if (OpenedFile.initialText == null && !MainFrame.textArea.getText().isEmpty()) {
-				int result = JOptionPane.showConfirmDialog(GrammifyApplication.mainFrame,
-						"You have unsaved changes. Do you want to save?", "Unsaved Changes",
-						JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
-				if (result == JOptionPane.YES_OPTION) {
-					saveFile();
-				} else if (result == JOptionPane.NO_OPTION) {
-					// Don't save
-				} else {
-					return;
-				}
-			}else if (!OpenedFile.initialText.equals(MainFrame.textArea.getText())) {
-				int result = JOptionPane.showConfirmDialog(GrammifyApplication.mainFrame,
-						"You have unsaved changes. Do you want to save?", "Unsaved Changes",
-						JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
-				if (result == JOptionPane.YES_OPTION) {
-					saveFile();
-				} else if (result == JOptionPane.NO_OPTION) {
-					// Don't save
-				} else {
-					return;
-				}
-			}
-		}
+	    // Setting the close operation - MOVE THIS HERE
+	    openConfirmationDialog();
 
-		String fileName = "untitled.txt";
-		MainFrame.textArea.setEditable(true);
-		MainFrame.textArea.setText("");
-		MainFrame.showCaret();
+	    String fileName = "untitled.txt";
+	    MainFrame.textArea.setEditable(true);
+	    MainFrame.textArea.setText("");
+	    MainFrame.showCaret();
 
-		// Changing the window title
-		GrammifyApplication.mainFrame.setTitle(Constants.APP_NAME + " - *" + fileName);
+	    // Changing the window title
+	    GrammifyApplication.mainFrame.setTitle(Constants.APP_NAME + " - *" + fileName);
 
-		// Saving false infos for later
-		OpenedFile.file = null;
-		OpenedFile.name = fileName;
-		OpenedFile.path = null;
-		OpenedFile.initialText = null;
+	    // Saving false infos for later
+	    OpenedFile.file = null;
+	    OpenedFile.name = fileName;
+	    OpenedFile.path = null;
+	    OpenedFile.initialText = "";
 
-		// Initialize Text Area functionalities (Check for unsaved, etc...)
-		CustomTextArea.init();
-
+	    // Initialize Text Area functionalities (Check for unsaved, etc...)
+	    CustomTextArea.init();
 	}
 
 	// Method that opens a file
 	public static String openFile() {
-		// A StringBuilder used to store the file content
-		StringBuilder text = new StringBuilder();
-		try {
-			// File Dialog to choose the file from the user's disk
-			FileDialog fileDialog = new FileDialog(GrammifyApplication.mainFrame, "Open File", FileDialog.LOAD);
-			fileDialog.setVisible(true);
+	    try {
+	        // Show file dialog and get selected file
+	        File file = selectFileFromDialog();
+	        if (file == null) {
+	            return null; // User cancelled
+	        }
 
-			String directory = fileDialog.getDirectory();
-			String fileName = fileDialog.getFile();
+	        // Check for unsaved changes before opening new file
+	        if (!handleUnsavedChanges()) {
+	            return null; // User cancelled
+	        }
 
-			File file;
-			// Check if the File Dialog got the full file path
-			if ((directory != null && !directory.isEmpty()) && (fileName != null && !fileName.isEmpty())) {
-				file = new File(directory, fileName);
-			} else {
-				throw new IOException("Unable to open the file");
-			}
+	        // Read file content
+	        String fileContent = readFileContent(file);
+	        // Show confirmation dialog
+	        openConfirmationDialog();
 
-			// Check if {file} points to an existing readable file instead of null
-			if (file != null && file.exists() && file.isFile() && file.canRead()) {
-				BufferedReader reader = new BufferedReader(new FileReader(file));
-				String line;
-				// Reading the first line
-				if ((line = reader.readLine()) != null) {
-					text.append(line);
-				}
+	        // Update UI and state
+	        updateUIWithOpenedFile(file, fileContent);
 
-				// Reading the rest of the file
-				while ((line = reader.readLine()) != null) {
-					text.append("\n");
-					text.append(line);
-				}
+	        // Initialize Text Area functionalities
+	        CustomTextArea.init();
 
-				reader.close();
+	        return fileContent;
 
-				// Check if a file is already opened
-				if (openedFileAlreadyCheck() && MainFrame.textArea != null) {
-					if (!OpenedFile.initialText.equals(MainFrame.textArea.getText())) {
-						int result = JOptionPane.showConfirmDialog(GrammifyApplication.mainFrame,
-								"You have unsaved changes. Do you want to save?", "Unsaved Changes",
-								JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
-						if (result == JOptionPane.YES_OPTION) {
-							saveFile();
-						} else if (result == JOptionPane.NO_OPTION) {
-							// Don't save
-						} else {
-							return null;
-						}
-					}
-				}
-				
-				openConfirmationDialog();
+	    } catch (IOException e) {
+	        showErrorDialog("Error Opening File", "Unable to open the file:\n" + e.getMessage());
+	        e.printStackTrace();
+	        return null;
+	    }
+	}
 
-				// Setting up the Text Area
-				MainFrame.textArea.setEditable(true);
-				MainFrame.textArea.setText(text.toString());
-				MainFrame.showCaret();
+	/**
+	 * Shows a file dialog and returns the selected file
+	 * @return Selected file or null if cancelled
+	 * @throws IOException if file selection fails
+	 */
+	private static File selectFileFromDialog() throws IOException {
+	    FileDialog fileDialog = new FileDialog(GrammifyApplication.mainFrame, "Open File", FileDialog.LOAD);
+	    fileDialog.setVisible(true);
 
-				// Changing the window title
-				GrammifyApplication.mainFrame.setTitle(Constants.APP_NAME + " - " + file.getName());
+	    String directory = fileDialog.getDirectory();
+	    String fileName = fileDialog.getFile();
 
-				// Saving false infos for later
-				OpenedFile.file = file;
-				OpenedFile.name = file.getName();
-				OpenedFile.path = file.getAbsolutePath();
-				OpenedFile.initialText = text.toString();
+	    // User cancelled the dialog
+	    if (directory == null || fileName == null) {
+	        return null;
+	    }
 
-				// Initialize Text Area functionalities (Check for unsaved, etc...)
-				CustomTextArea.init();
+	    File file = new File(directory, fileName);
 
-				return text.toString();
-			} else {
-				throw new IOException("Unable to open the file:\n\"" + OpenedFile.path + "\n");
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
+	    // Validate file
+	    if (!file.exists()) {
+	        throw new IOException("File does not exist: " + file.getAbsolutePath());
+	    }
+	    if (!file.isFile()) {
+	        throw new IOException("Not a file: " + file.getAbsolutePath());
+	    }
+	    if (!file.canRead()) {
+	        throw new IOException("Cannot read file: " + file.getAbsolutePath());
+	    }
+
+	    return file;
+	}
+
+	/**
+	 * Checks for unsaved changes and prompts user to save if needed
+	 * @return true if we should continue, false if user cancelled
+	 */
+	private static boolean handleUnsavedChanges() {
+	    if (!openedFileAlreadyCheck() || MainFrame.textArea == null) {
+	        return true; // No file open, continue
+	    }
+
+	    String currentText = MainFrame.textArea.getText();
+	    String savedText = OpenedFile.initialText != null ? OpenedFile.initialText : "";
+
+	    // No changes, continue
+	    if (savedText.equals(currentText)) {
+	        return true;
+	    }
+
+	    // Prompt user about unsaved changes
+	    int result = JOptionPane.showConfirmDialog(
+	            GrammifyApplication.mainFrame,
+	            "You have unsaved changes. Do you want to save?",
+	            "Unsaved Changes",
+	            JOptionPane.YES_NO_CANCEL_OPTION,
+	            JOptionPane.WARNING_MESSAGE
+	    );
+
+	    if (result == JOptionPane.YES_OPTION) {
+	        saveFile();
+	        return true;
+	    } else if (result == JOptionPane.NO_OPTION) {
+	        return true; // Don't save, continue
+	    } else {
+	        return false; // Cancel
+	    }
+	}
+
+	/**
+	 * Reads the entire content of a file
+	 * @param file File to read
+	 * @return File content as String
+	 * @throws IOException if reading fails
+	 */
+	private static String readFileContent(File file) throws IOException {
+	    StringBuilder content = new StringBuilder();
+	    
+	    try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+	        String line = reader.readLine();
+	        
+	        // Read first line without newline
+	        if (line != null) {
+	            content.append(line);
+	        }
+	        
+	        // Read remaining lines with newlines
+	        while ((line = reader.readLine()) != null) {
+	            content.append("\n").append(line);
+	        }
+	    }
+	    
+	    return content.toString();
+	}
+
+	/**
+	 * Updates the UI and OpenedFile state with the newly opened file
+	 * @param file Opened file
+	 * @param content File content
+	 */
+	private static void updateUIWithOpenedFile(File file, String content) {
+	    OpenedFile.file = file;
+	    OpenedFile.name = file.getName();
+	    OpenedFile.path = file.getAbsolutePath();
+	    OpenedFile.initialText = content;
+
+	    GrammifyApplication.mainFrame.setTitle(Constants.APP_NAME + " - " + file.getName());
+
+	    // Set loading flag
+	    CustomTextArea.isLoadingFile = true;
+	    
+	    try {
+	        MainFrame.textArea.setEditable(true);
+	        MainFrame.textArea.setText(content);
+	        MainFrame.showCaret();
+	    } finally {
+	        CustomTextArea.isLoadingFile = false;
+	    }
+	}
+
+	/**
+	 * Shows an error dialog to the user
+	 * @param title Dialog title
+	 * @param message Error message
+	 */
+	private static void showErrorDialog(String title, String message) {
+	    JOptionPane.showMessageDialog(
+	            GrammifyApplication.mainFrame,
+	            message,
+	            title,
+	            JOptionPane.ERROR_MESSAGE
+	    );
 	}
 
 	// Method that saves a file

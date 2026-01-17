@@ -23,6 +23,7 @@ import ma.supmti.grammify.io.OpenedFile;
 public class CustomTextArea extends JTextPane {
 
 	private static final long serialVersionUID = -690400514247574287L;
+	public static boolean isLoadingFile = false;
 
 	public CustomTextArea() {
 		super();
@@ -35,24 +36,27 @@ public class CustomTextArea extends JTextPane {
 
 	// Checks if there are changes in text
 	public static void init() {
-		// System.err.println("init");
+
 		
 		MainFrame.textArea.getDocument().addDocumentListener(new DocumentListener() {
 
 			@Override
 			public void removeUpdate(DocumentEvent e) {
+				if (CustomTextArea.isLoadingFile) return;
 				updateAll();
 
 			}
 
 			@Override
 			public void insertUpdate(DocumentEvent e) {
+				if (CustomTextArea.isLoadingFile) return;
 				updateAll();
 
 			}
 
 			@Override
 			public void changedUpdate(DocumentEvent e) {
+				if (CustomTextArea.isLoadingFile) return;
 				updateAll();
 
 			}
